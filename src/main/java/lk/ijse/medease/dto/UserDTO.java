@@ -3,9 +3,10 @@ package lk.ijse.medease.dto;
 public class UserDTO {
     private int authId;
     private String employeeId;
+    private String password;
+    private String username;
 
-    public UserDTO(int authId, String employeeId) {
-        this.authId = authId;
+    public UserDTO(String employeeId) {
         this.employeeId = employeeId;
     }
     public int getAuthId() {
@@ -19,5 +20,17 @@ public class UserDTO {
     }
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

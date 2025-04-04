@@ -1,0 +1,43 @@
+.left-box {
+    -fx-background-color: linear-gradient(to right bottom ,#312244, #4D194D);
+    -fx-background-radius: 30;
+}
+
+.login-anc {
+    -fx-background-color: linear-gradient(to right top ,#1A3B4B, #0F9EA5 );
+}
+
+.panel-buttons {
+    -fx-background-color: transparent;
+}
+
+.top-panel-box {
+    -fx-background-color: #272640;
+    -fx-background-radius: 30;
+}
+
+.appointment-fields {
+    -fx-background-color: transparent;
+    -fx-border-color: #3E1F47;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.add-btn {
+    -fx-background-color: #24c71c;
+    -fx-background-radius: 30;
+}
+
+.update-btn {
+    -fx-background-color: #e9d700;
+    -fx-background-radius: 30;
+}
+
+.delete-btn {
+    -fx-background-color: #f44336;
+    -fx-background-radius: 30;
+}
+
+.check-btn {
+    -fx-background-color: #555555;
+    -fx-background-radius: 30;
+}

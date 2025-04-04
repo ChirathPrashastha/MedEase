@@ -18,7 +18,7 @@ public class AuthenticationModel {
 
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            UserDTO userDto = new UserDTO(resultSet.getInt("auth_id"), resultSet.getString("employee_id"));
+            UserDTO userDto = new UserDTO(resultSet.getString("employee_id"));
             return userDto;
         }
         return null;
