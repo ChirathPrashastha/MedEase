@@ -1,0 +1,30 @@
+.left-box {
+    -fx-background-color: linear-gradient(to right bottom ,#312244, #4D194D);
+    -fx-background-radius: 30;
+}
+
+.login-anc {
+    -fx-background-color: linear-gradient(to right top ,#1A3B4B, #0F9EA5 );
+}
+
+.main-box {
+    -fx-background-color: rgba(208,198,198, 0.2);
+    -fx-background-radius: 35;
+}
+
+.username-txtBox {
+    -fx-background-color: transparent;
+    -fx-border-color: #3E1F47;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.password-txtBox {
+    -fx-background-color: transparent;
+    -fx-border-color: #3E1F47;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.login-btn {
+    -fx-background-color: #3E1F47;
+    -fx-background-radius: 20;
+}
