@@ -12,7 +12,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionPatientController">
    <children>
       <VBox layoutX="52.0" layoutY="15.0" prefHeight="247.0" prefWidth="151.0">
@@ -133,12 +132,12 @@
       </HBox>
       <TableView fx:id="tblPatient" layoutX="47.0" layoutY="335.0" prefHeight="245.0" prefWidth="677.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="PatientID" />
-          <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="75.0" text="BirthDate" />
-            <TableColumn prefWidth="75.0" text="Contact" />
-            <TableColumn prefWidth="75.0" text="Email" />
-            <TableColumn prefWidth="75.0" text="Allergies" />
+          <TableColumn fx:id="colPID" prefWidth="75.0" text="PatientID" />
+          <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="colDOB" prefWidth="75.0" text="BirthDate" />
+            <TableColumn fx:id="colContact" prefWidth="75.0" text="Contact" />
+            <TableColumn fx:id="colEmail" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="colAllergies" prefWidth="75.0" text="Allergies" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
