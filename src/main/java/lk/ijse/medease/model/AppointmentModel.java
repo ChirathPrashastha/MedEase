@@ -4,6 +4,7 @@ import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.AppointmentDTO;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class AppointmentModel {
 
@@ -55,4 +56,52 @@ public class AppointmentModel {
 
         return statement.executeUpdate() > 0 ? "Appointment Updated Successfully" : "Failed to Update the Appointment";
     }
+
+    public String deleteAppointment(int appointmentId) throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "DELETE FROM appointment WHERE appointment_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, appointmentId);
+
+        return statement.executeUpdate() > 0 ? "Appointment Deleted Successfully" : "Failed to Delete the Appointment";
+    }
+
+    public AppointmentDTO searchAppointment(int appointmentId) throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM appointment WHERE appointment_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, appointmentId);
+
+        ResultSet rst = statement.executeQuery();
+
+        if (rst.next()) {
+            AppointmentDTO appointmentDTO = new AppointmentDTO(rst.getInt("patient_id"), rst.getString("doctor_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getTime("time"));
+            return appointmentDTO;
+        }else {
+            return null;
+        }
+    }
+
+    public ArrayList<AppointmentDTO> getAllAppointments() throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM appointment";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<AppointmentDTO> appointmentDTOs = new ArrayList<>();
+
+        while (rst.next()) {
+            AppointmentDTO appDto = new AppointmentDTO(rst.getInt("patient_id"), rst.getString("doctor_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getTime("time"));
+            appointmentDTOs.add(appDto);
+        }
+        return appointmentDTOs;
+    }
+
+
 }
