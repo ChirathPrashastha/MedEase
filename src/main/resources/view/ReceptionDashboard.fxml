@@ -22,7 +22,7 @@
                   <Insets left="50.0" top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Label alignment="CENTER" prefHeight="52.0" prefWidth="256.0" text="Hello, " textFill="WHITE">
+            <Label alignment="CENTER" prefHeight="52.0" prefWidth="256.0" text="Hello Front Desk ! " textFill="WHITE">
                <font>
                   <Font name="Segoe Print Bold" size="18.0" />
                </font>

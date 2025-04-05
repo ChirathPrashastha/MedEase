@@ -34,6 +34,9 @@ public class ReceptionDashboardController implements Initializable {
     void btnAppointmentOnAction(ActionEvent event) {
         btnAppointment.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
         btnHome.setStyle("-fx-border-color: transparent;");
+        btnPatient.setStyle("-fx-border-color: transparent;");
+        btnPayment.setStyle("-fx-border-color: transparent;");
+
         navigateTo("/view/ReceptionAppointment.fxml");
     }
 
@@ -41,17 +44,30 @@ public class ReceptionDashboardController implements Initializable {
     void btnHomeOnAction(ActionEvent event) {
         btnHome.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
         btnAppointment.setStyle("-fx-border-color: transparent;");
+        btnPatient.setStyle("-fx-border-color: transparent;");
+        btnPayment.setStyle("-fx-border-color: transparent;");
+
         navigateTo("/view/ReceptionHome.fxml");
     }
 
     @FXML
     void btnPatientOnAction(ActionEvent event) {
+        btnPatient.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnAppointment.setStyle("-fx-border-color: transparent;");
+        btnHome.setStyle("-fx-border-color: transparent;");
+        btnPayment.setStyle("-fx-border-color: transparent;");
 
+        navigateTo("/view/ReceptionPatient.fxml");
     }
 
     @FXML
     void btnPaymentOnAction(ActionEvent event) {
+        btnPayment.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnAppointment.setStyle("-fx-border-color: transparent;");
+        btnHome.setStyle("-fx-border-color: transparent;");
+        btnPatient.setStyle("-fx-border-color: transparent;");
 
+        navigateTo("/view/ReceptionPayment.fxml");
     }
 
     private void navigateTo(String path) {

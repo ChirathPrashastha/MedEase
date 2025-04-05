@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="homeAnc" prefHeight="600.0" prefWidth="768.0" styleClass="login-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionHomeController">
+<AnchorPane fx:id="homeAnc" prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionHomeController">
    <children>
       <HBox layoutX="47.0" layoutY="33.0" prefHeight="103.0" prefWidth="702.0" spacing="14.0">
          <children>
@@ -27,7 +26,7 @@
                         <Font name="Consolas Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblAppointmentCount" alignment="CENTER" layoutX="11.0" layoutY="36.0" prefHeight="47.0" prefWidth="155.0" text="25" textFill="WHITE">
+                  <Label fx:id="lblAppointmentCount" alignment="CENTER" layoutX="40.0" layoutY="36.0" prefHeight="47.0" prefWidth="155.0" text="25" textFill="WHITE">
                      <font>
                         <Font name="Corbel Bold" size="30.0" />
                      </font>
@@ -74,7 +73,7 @@
             </Pane>
          </children>
       </HBox>
-      <TableView layoutX="93.0" layoutY="214.0" prefHeight="256.0" prefWidth="589.0">
+      <TableView layoutX="51.0" layoutY="166.0" prefHeight="199.0" prefWidth="405.0">
         <columns>
           <TableColumn prefWidth="75.0" text="Doctor" />
           <TableColumn prefWidth="75.0" text="Speaciality" />
@@ -84,5 +83,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <ImageView fitHeight="287.0" fitWidth="336.0" layoutX="458.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/reception.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionPatientController">
+   <children>
+      <VBox layoutX="52.0" layoutY="15.0" prefHeight="247.0" prefWidth="151.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="202.0" text="PATIENT ID" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="202.0" text="NAME" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="56.0" prefHeight="40.0" prefWidth="202.0" text="BIRTH DATE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="102.0" prefHeight="40.0" prefWidth="202.0" text="CONTACT" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="148.0" prefHeight="40.0" prefWidth="202.0" text="EMAIL" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="194.0" prefHeight="40.0" prefWidth="202.0" text="ALLERGIES" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="201.0" layoutY="11.0" prefHeight="248.0" prefWidth="357.0">
+         <children>
+            <TextField fx:id="txtPatientId" prefHeight="40.0" prefWidth="456.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtName" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="456.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtBirthDate" layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="456.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtContact" layoutX="10.0" layoutY="90.0" prefHeight="40.0" prefWidth="456.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtEmail" layoutX="10.0" layoutY="130.0" prefHeight="40.0" prefWidth="456.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtAllergies" layoutX="10.0" layoutY="170.0" prefHeight="40.0" prefWidth="456.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+         </children>
+      </VBox>
+      <Circle fx:id="contactValidate" fill="#d72a2a" layoutX="586.0" layoutY="150.0" radius="8.0" strokeType="INSIDE" />
+      <Circle fx:id="emailValidate" fill="#d72a2a" layoutX="586.0" layoutY="190.0" radius="8.0" strokeType="INSIDE" />
+      <HBox alignment="TOP_RIGHT" layoutX="303.0" layoutY="278.0" prefHeight="40.0" prefWidth="259.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="delete-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="DELETE">
+               <font>
+                  <Font name="Cambria Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="190.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="update-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="UPDATE">
+               <font>
+                  <Font name="Cambria Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="190.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="add-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="ADD">
+               <font>
+                  <Font name="Cambria Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+      <TableView fx:id="tblPatient" layoutX="47.0" layoutY="335.0" prefHeight="245.0" prefWidth="677.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="PatientID" />
+          <TableColumn prefWidth="75.0" text="Name" />
+            <TableColumn prefWidth="75.0" text="BirthDate" />
+            <TableColumn prefWidth="75.0" text="Contact" />
+            <TableColumn prefWidth="75.0" text="Email" />
+            <TableColumn prefWidth="75.0" text="Allergies" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>
