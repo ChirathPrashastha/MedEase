@@ -2,10 +2,19 @@ package lk.ijse.medease.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class ReceptionAppointmentController {
+import java.net.URL;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+
+public class ReceptionAppointmentController implements Initializable {
+    private AppointmentController appointmentController;
 
     @FXML
     private TableView<?> tblAppointment;
@@ -32,7 +41,7 @@ public class ReceptionAppointmentController {
 
     @FXML
     void btnAppCheckOnAction(ActionEvent event) {
-
+        checkNumber();
     }
 
     @FXML
@@ -45,4 +54,31 @@ public class ReceptionAppointmentController {
 
     }
 
+    private void checkNumber() {
+        try {
+            int num = appointmentController.checkNo(txtDoctorId.getText(), Date.valueOf(txtDate.getText()));
+            num++;
+
+            if (num > 60) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Limit Reached");
+                alert.setContentText("You have reached the limit of 60 appointments");
+                alert.showAndWait();
+            } else{
+                txtCheckInNo.setText(String.valueOf(num));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        appointmentController = new AppointmentController();
+    }
 }

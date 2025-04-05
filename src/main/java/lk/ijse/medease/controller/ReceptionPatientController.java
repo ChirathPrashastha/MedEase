@@ -42,12 +42,6 @@ public class ReceptionPatientController implements Initializable {
     private TableColumn<?, ?> colPID;
 
     @FXML
-    private Circle contactValidate;
-
-    @FXML
-    private Circle emailValidate;
-
-    @FXML
     private TableView<?> tblPatient;
 
     @FXML

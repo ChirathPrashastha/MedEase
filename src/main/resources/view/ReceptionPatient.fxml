@@ -6,10 +6,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionPatientController">
@@ -48,7 +49,7 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="201.0" layoutY="11.0" prefHeight="248.0" prefWidth="357.0">
+      <VBox layoutX="201.0" layoutY="11.0" prefHeight="248.0" prefWidth="344.0">
          <children>
             <TextField fx:id="txtPatientId" prefHeight="40.0" prefWidth="456.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
@@ -66,7 +67,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtBirthDate" layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="456.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtBirthDate" layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="456.0" promptText="YYYY-MM-DD" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
@@ -100,8 +101,6 @@
             </TextField>
          </children>
       </VBox>
-      <Circle fx:id="contactValidate" fill="#d72a2a" layoutX="586.0" layoutY="150.0" radius="8.0" strokeType="INSIDE" />
-      <Circle fx:id="emailValidate" fill="#d72a2a" layoutX="586.0" layoutY="190.0" radius="8.0" strokeType="INSIDE" />
       <HBox alignment="TOP_RIGHT" layoutX="303.0" layoutY="278.0" prefHeight="40.0" prefWidth="259.0" spacing="10.0">
          <children>
             <Button mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="delete-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="DELETE">
@@ -130,6 +129,11 @@
             </Button>
          </children>
       </HBox>
+      <ImageView fitHeight="248.0" fitWidth="226.0" layoutX="536.0" layoutY="23.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/patientDetails.png" />
+         </image>
+      </ImageView>
       <TableView fx:id="tblPatient" layoutX="47.0" layoutY="335.0" prefHeight="245.0" prefWidth="677.0">
         <columns>
           <TableColumn fx:id="colPID" prefWidth="75.0" text="PatientID" />
