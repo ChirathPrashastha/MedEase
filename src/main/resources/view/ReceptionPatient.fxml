@@ -134,7 +134,7 @@
             <Image url="@../images/patientDetails.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblPatient" layoutX="47.0" layoutY="335.0" prefHeight="245.0" prefWidth="677.0">
+      <TableView fx:id="tblPatient" layoutX="47.0" layoutY="335.0" prefHeight="245.0" prefWidth="677.0" styleClass="colName-column" stylesheets="@../css/ReceptionDashboardStyle.css">
         <columns>
           <TableColumn fx:id="colPID" prefWidth="75.0" text="PatientID" />
           <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />

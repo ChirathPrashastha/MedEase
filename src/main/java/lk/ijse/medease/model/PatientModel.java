@@ -82,7 +82,7 @@ public class PatientModel {
         ArrayList<PatientDTO> patientDTOs = new ArrayList<>();
 
         while (rst.next()) {
-            PatientDTO patientDTO = new PatientDTO(rst.getString("name"), rst.getDate("birth_date"), rst.getString("contact"), rst.getString("email"), rst.getString("allergies") );
+            PatientDTO patientDTO = new PatientDTO(rst.getInt("patient_id"),rst.getString("name"), rst.getDate("birth_date"), rst.getString("contact"), rst.getString("email"), rst.getString("allergies") );
             patientDTOs.add(patientDTO);
         }
         return patientDTOs;

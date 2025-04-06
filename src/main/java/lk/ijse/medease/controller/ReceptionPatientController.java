@@ -10,39 +10,37 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.shape.Circle;
 import lk.ijse.medease.dto.PatientDTO;
 
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReceptionPatientController implements Initializable {
 
-    private ObservableList<PatientDTO> allPatients = FXCollections.observableArrayList();
-
     private PatientController patientController;
 
     @FXML
-    private TableColumn<?, ?> colAllergies;
+    private TableColumn<PatientDTO, String> colAllergies;
 
     @FXML
-    private TableColumn<?, ?> colContact;
+    private TableColumn<PatientDTO, String> colContact;
 
     @FXML
-    private TableColumn<?, ?> colDOB;
+    private TableColumn<PatientDTO, Date> colDOB;
 
     @FXML
-    private TableColumn<?, ?> colEmail;
+    private TableColumn<PatientDTO, String> colEmail;
 
     @FXML
-    private TableColumn<?, ?> colName;
+    private TableColumn<PatientDTO, String> colName;
 
     @FXML
-    private TableColumn<?, ?> colPID;
+    private TableColumn<PatientDTO, Integer> colPID;
 
     @FXML
-    private TableView<?> tblPatient;
+    private TableView<PatientDTO> tblPatient;
 
     @FXML
     private TextField txtAllergies;
@@ -83,6 +81,8 @@ public class ReceptionPatientController implements Initializable {
 
         try {
             String response = patientController.addPatient(patientDTO);
+            loadData();
+            clearFields();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Add Patient");
             alert.setContentText(response);
@@ -92,6 +92,7 @@ public class ReceptionPatientController implements Initializable {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Add Patient");
+            alert.setHeaderText("ADD PATIENT FAILED");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -100,8 +101,11 @@ public class ReceptionPatientController implements Initializable {
     private void deletePatient() {
         try {
             String response = patientController.deletePatient(txtPatientId.getText());
+            loadData();
+            clearFields();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Delete Patient");
+            alert.setHeaderText("DELETE PATIENT");
             alert.setContentText(response);
             alert.showAndWait();
 
@@ -119,6 +123,8 @@ public class ReceptionPatientController implements Initializable {
 
         try {
             String response = patientController.updatePatient(patientDTO);
+            loadData();
+            clearFields();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Update Patient");
             alert.setContentText(response);
@@ -137,5 +143,34 @@ public class ReceptionPatientController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         patientController = new PatientController();
 
+        colPID.setCellValueFactory(new PropertyValueFactory<>("patientId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDOB.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colAllergies.setCellValueFactory(new PropertyValueFactory<>("allergies"));
+
+        loadData();
+    }
+
+    private void loadData() {
+        try {
+            ArrayList<PatientDTO> patientDTOs = patientController.getAllPatients();
+            //System.out.println(patientDTOs);
+            ObservableList<PatientDTO> allPatients = FXCollections.observableArrayList(patientDTOs);
+            tblPatient.setItems(allPatients);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void clearFields(){
+        txtPatientId.clear();
+        txtName.clear();
+        txtBirthDate.clear();
+        txtContact.clear();
+        txtEmail.clear();
+        txtAllergies.clear();
     }
 }

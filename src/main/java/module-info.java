@@ -5,5 +5,6 @@ module lk.ijse.medease {
 
 
     opens lk.ijse.medease.controller to javafx.fxml;
+    opens lk.ijse.medease.dto to javafx.base;
     exports lk.ijse.medease;
 }

@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionAppointmentController">
    <children>
-      <VBox alignment="CENTER" layoutX="38.0" layoutY="40.0" prefHeight="196.0" prefWidth="169.0" spacing="10.0">
+      <VBox alignment="CENTER" layoutX="38.0" layoutY="40.0" prefHeight="230.0" prefWidth="169.0" spacing="10.0">
          <children>
             <Label prefHeight="46.0" prefWidth="127.0" text="PATIENT ID" textFill="WHITE">
                <font>
@@ -40,9 +40,14 @@
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </Label>
+            <Label layoutX="27.0" layoutY="207.0" prefHeight="46.0" prefWidth="135.0" text="TIME" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
-      <VBox layoutX="219.0" layoutY="29.0" prefHeight="205.0" prefWidth="319.0" spacing="5.0">
+      <VBox layoutX="219.0" layoutY="37.0" prefHeight="230.0" prefWidth="319.0" spacing="10.0">
          <children>
             <TextField fx:id="txtPatientId" prefHeight="40.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
@@ -84,6 +89,14 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
+            <TextField fx:id="txtTime" layoutX="10.0" layoutY="190.0" prefHeight="40.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
          </children>
       </VBox>
       <Button layoutX="562.0" layoutY="116.0" mnemonicParsing="false" onAction="#btnAppCheckOnAction" prefHeight="25.0" prefWidth="81.0" styleClass="check-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="CHECK" textFill="WHITE">
@@ -94,19 +107,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="tblAppointment" layoutX="53.0" layoutY="331.0" prefHeight="236.0" prefWidth="663.0">
+      <TableView fx:id="tblAppointment" layoutX="53.0" layoutY="368.0" prefHeight="203.0" prefWidth="663.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="AppointmentID" />
-          <TableColumn prefWidth="75.0" text="PatientID" />
-            <TableColumn prefWidth="75.0" text="DoctorID" />
-            <TableColumn prefWidth="75.0" text="Date" />
-            <TableColumn prefWidth="75.0" text="CheckInNo" />
+          <TableColumn fx:id="colAppId" prefWidth="75.0" text="AppointmentID" />
+          <TableColumn fx:id="colPatientId" prefWidth="75.0" text="PatientID" />
+            <TableColumn fx:id="colDocId" prefWidth="75.0" text="DoctorID" />
+            <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="colNum" prefWidth="75.0" text="CheckInNo" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox alignment="TOP_RIGHT" layoutX="241.0" layoutY="267.0" prefHeight="53.0" prefWidth="301.0" spacing="10.0">
+      <HBox alignment="TOP_RIGHT" layoutX="241.0" layoutY="304.0" prefHeight="53.0" prefWidth="301.0" spacing="10.0">
          <children>
             <Button layoutX="213.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="delete-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="DELETE">
                <font>

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AppointmentModel {
 
-    public int checkNo(String doctorId, Date date) throws ClassNotFoundException, SQLException {
+    public Integer checkNo(String doctorId, Date date) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT MAX(check_in.check_in_no) AS number FROM check_in WHERE doctor_id = ? AND date = ?";
@@ -97,7 +97,7 @@ public class AppointmentModel {
         ArrayList<AppointmentDTO> appointmentDTOs = new ArrayList<>();
 
         while (rst.next()) {
-            AppointmentDTO appDto = new AppointmentDTO(rst.getInt("patient_id"), rst.getString("doctor_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getTime("time"));
+            AppointmentDTO appDto = new AppointmentDTO(rst.getInt("appointment_id"),rst.getInt("patient_id"), rst.getString("doctor_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getTime("time"));
             appointmentDTOs.add(appDto);
         }
         return appointmentDTOs;
