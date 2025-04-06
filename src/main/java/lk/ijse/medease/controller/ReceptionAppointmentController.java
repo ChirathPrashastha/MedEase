@@ -24,7 +24,7 @@ public class ReceptionAppointmentController implements Initializable {
     private AppointmentController appointmentController;
 
     @FXML
-    private TableColumn<AppointmentDTO, Integer> colAppId;
+    private TableColumn<AppointmentDTO, Number> colAppId;
 
     @FXML
     private TableColumn<AppointmentDTO, Date> colDate;
@@ -33,10 +33,10 @@ public class ReceptionAppointmentController implements Initializable {
     private TableColumn<AppointmentDTO, String> colDocId;
 
     @FXML
-    private TableColumn<AppointmentDTO, Integer> colNum;
+    private TableColumn<AppointmentDTO, Number> colNum;
 
     @FXML
-    private TableColumn<AppointmentDTO, Integer> colPatientId;
+    private TableColumn<AppointmentDTO, Number> colPatientId;
 
 
 
@@ -83,7 +83,7 @@ public class ReceptionAppointmentController implements Initializable {
 
     private void checkNumber() {
         try {
-            Integer num = appointmentController.checkNo(txtDoctorId.getText(), Date.valueOf(txtDate.getText()));
+            int num = appointmentController.checkNo(txtDoctorId.getText(), Date.valueOf(txtDate.getText()));
             num++;
 
             if (num > 60) {

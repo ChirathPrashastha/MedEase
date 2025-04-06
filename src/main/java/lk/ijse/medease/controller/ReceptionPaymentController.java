@@ -1,14 +1,49 @@
 package lk.ijse.medease.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.medease.dto.PaymentDTO;
 
-public class ReceptionPaymentController {
+import java.net.URL;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class ReceptionPaymentController implements Initializable {
+
+    private PaymentController paymentController;
+    private String paymentMethod;
 
     @FXML
-    private TableView<?> tblPayment;
+    private CheckBox checkCard;
+
+    @FXML
+    private CheckBox checkCash;
+
+    @FXML
+    private TableColumn<PaymentDTO, Double> colAmount;
+
+    @FXML
+    private TableColumn<PaymentDTO, Number> colAppId;
+
+    @FXML
+    private TableColumn<PaymentDTO, Date> colPaidDate;
+
+    @FXML
+    private TableColumn<PaymentDTO, Number> colPayId;
+
+    @FXML
+    private TableColumn<PaymentDTO, String> colPayMethod;
+
+
+    @FXML
+    private TableView<PaymentDTO> tblPayment;
 
     @FXML
     private TextField txtAmount;
@@ -21,17 +56,73 @@ public class ReceptionPaymentController {
 
     @FXML
     void btnProceedOnAction(ActionEvent event) {
-
+        addPayment();
     }
 
     @FXML
     void cardOnAction(ActionEvent event) {
-
+        paymentMethod = "Card";
     }
 
     @FXML
     void cashOnAction(ActionEvent event) {
-
+        paymentMethod = "Cash";
     }
 
+    private void addPayment() {
+        PaymentDTO paymentDTO = new PaymentDTO(Integer.parseInt(txtAppointmentId.getText()), Double.parseDouble(txtAmount.getText()), paymentMethod);
+
+        try {
+            String response = paymentController.addPayment(paymentDTO);
+            loadData();
+            clearFields();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Add Payment");
+            alert.setHeaderText("PAYMENT");
+            alert.setContentText(response);
+            alert.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Add Payment");
+            alert.setHeaderText("PAYMENT");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        paymentController = new PaymentController();
+
+        colPayId.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
+        colAppId.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colPaidDate.setCellValueFactory(new PropertyValueFactory<>("paidDate"));
+        colPayMethod.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
+
+        loadData();
+    }
+
+    private void loadData() {
+
+        try {
+            ArrayList<PaymentDTO> paymentDTOs = paymentController.getAllPayments();
+            ObservableList<PaymentDTO> allPayments = FXCollections.observableArrayList(paymentDTOs);
+            tblPayment.setItems(allPayments);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearFields(){
+        txtPaymentId.clear();
+        txtAmount.clear();
+        txtAppointmentId.clear();
+        checkCard.setSelected(false);
+        checkCash.setSelected(false);
+    }
 }

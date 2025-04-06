@@ -14,13 +14,12 @@ public class PaymentModel {
     public String addPayment(PaymentDTO paymentDTO) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO payment (appointment_id, amount, paid_date, payment_method) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO payment (appointment_id, amount, payment_method) VALUES (?,?,?)";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, paymentDTO.getAppointmentId());
         statement.setDouble(2, paymentDTO.getAmount());
-        statement.setDate(3, paymentDTO.getPaidDate());
-        statement.setString(4, paymentDTO.getPaymentMethod());
+        statement.setString(3, paymentDTO.getPaymentMethod());
 
         return statement.executeUpdate() > 0 ? "Payment Proceed Successfully" : "Payment Failed";
     }
@@ -28,14 +27,13 @@ public class PaymentModel {
     public String updatePayment(PaymentDTO paymentDTO) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "UPDATE payment SET appointment_id = ?, amount = ?, paid_date = ?, payment_method = ? WHERE payment_id = ?";
+        String sql = "UPDATE payment SET appointment_id = ?, amount = ?, payment_method = ? WHERE payment_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, paymentDTO.getAppointmentId());
         statement.setDouble(2, paymentDTO.getAmount());
-        statement.setDate(3, paymentDTO.getPaidDate());
-        statement.setString(4, paymentDTO.getPaymentMethod());
-        statement.setInt(5, paymentDTO.getPaymentId());
+        statement.setString(3, paymentDTO.getPaymentMethod());
+        statement.setInt(4, paymentDTO.getPaymentId());
 
         return statement.executeUpdate() > 0 ? "Payment Updated Successfully" : "Failed to Update the Payment";
     }
@@ -62,7 +60,7 @@ public class PaymentModel {
         ResultSet rst = statement.executeQuery();
 
         if (rst.next()) {
-            PaymentDTO paymentDTO = new PaymentDTO(rst.getInt("appointment_id"), rst.getDouble("amount"), rst.getDate("paid_date"), rst.getString("payment_method"));
+            PaymentDTO paymentDTO = new PaymentDTO(rst.getInt("payment_id"),rst.getInt("appointment_id"), rst.getDouble("amount"), rst.getDate("paid_date") ,rst.getString("payment_method"));
             return paymentDTO;
         } else {
             return null;
@@ -80,7 +78,7 @@ public class PaymentModel {
         ArrayList<PaymentDTO> paymentDTOs = new ArrayList<>();
 
         while (rst.next()) {
-            PaymentDTO paymentDTO = new PaymentDTO(rst.getInt("appointment_id"), rst.getDouble("amount"), rst.getDate("paid_date"), rst.getString("payment_method"));
+            PaymentDTO paymentDTO = new PaymentDTO(rst.getInt("payment_id"), rst.getInt("appointment_id"), rst.getDouble("amount"), rst.getDate("paid_date"), rst.getString("payment_method"));
             paymentDTOs.add(paymentDTO);
         }
         return paymentDTOs;

@@ -23,12 +23,12 @@ public class PatientController {
         return response;
     }
 
-    public String deletePatient(String patientId) throws ClassNotFoundException, SQLException {
+    public String deletePatient(int patientId) throws ClassNotFoundException, SQLException {
         String response = patientModel.deletePatient(patientId);
         return response;
     }
 
-    public PatientDTO searchPatient(String patientId) throws ClassNotFoundException, SQLException {
+    public PatientDTO searchPatient(int patientId) throws ClassNotFoundException, SQLException {
         PatientDTO patientDTO = patientModel.searchPatient(patientId);
         return patientDTO;
     }

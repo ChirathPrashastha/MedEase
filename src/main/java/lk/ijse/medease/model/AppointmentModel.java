@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AppointmentModel {
 
-    public Integer checkNo(String doctorId, Date date) throws ClassNotFoundException, SQLException {
+    public int checkNo(String doctorId, Date date) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT MAX(check_in.check_in_no) AS number FROM check_in WHERE doctor_id = ? AND date = ?";

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionPaymentController">
    <children>
       <VBox layoutX="49.0" layoutY="27.0" prefHeight="139.0" prefWidth="166.0" spacing="5.0">
@@ -63,7 +62,7 @@
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </Label>
-            <CheckBox mnemonicParsing="false" onAction="#cashOnAction" prefHeight="44.0" prefWidth="19.0">
+            <CheckBox fx:id="checkCash" mnemonicParsing="false" onAction="#cashOnAction" prefHeight="44.0" prefWidth="19.0">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
@@ -73,7 +72,7 @@
                   <Image url="@../images/cash.png" />
                </image>
             </ImageView>
-            <CheckBox layoutX="168.0" layoutY="15.0" mnemonicParsing="false" onAction="#cardOnAction" prefHeight="44.0" prefWidth="31.0">
+            <CheckBox fx:id="checkCard" layoutX="168.0" layoutY="15.0" mnemonicParsing="false" onAction="#cardOnAction" prefHeight="44.0" prefWidth="31.0">
                <padding>
                   <Insets left="30.0" />
                </padding>
@@ -101,11 +100,11 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <TableView fx:id="tblPayment" layoutX="42.0" layoutY="287.0" prefHeight="283.0" prefWidth="689.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="PaymentId" />
-          <TableColumn prefWidth="75.0" text="AppointmentId" />
-            <TableColumn prefWidth="75.0" text="Amount" />
-            <TableColumn prefWidth="75.0" text="PaidDate" />
-            <TableColumn prefWidth="75.0" text="PaymentMethod" />
+          <TableColumn fx:id="colPayId" prefWidth="75.0" text="PaymentId" />
+          <TableColumn fx:id="colAppId" prefWidth="75.0" text="AppointmentId" />
+            <TableColumn fx:id="colAmount" prefWidth="75.0" text="Amount" />
+            <TableColumn fx:id="colPaidDate" prefWidth="75.0" text="PaidDate" />
+            <TableColumn fx:id="colPayMethod" prefWidth="75.0" text="PaymentMethod" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

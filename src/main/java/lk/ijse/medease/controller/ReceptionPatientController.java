@@ -37,7 +37,7 @@ public class ReceptionPatientController implements Initializable {
     private TableColumn<PatientDTO, String> colName;
 
     @FXML
-    private TableColumn<PatientDTO, Integer> colPID;
+    private TableColumn<PatientDTO, Number> colPID;
 
     @FXML
     private TableView<PatientDTO> tblPatient;
@@ -100,7 +100,7 @@ public class ReceptionPatientController implements Initializable {
 
     private void deletePatient() {
         try {
-            String response = patientController.deletePatient(txtPatientId.getText());
+            String response = patientController.deletePatient(Integer.parseInt(txtPatientId.getText()));
             loadData();
             clearFields();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

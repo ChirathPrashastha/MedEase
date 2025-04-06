@@ -9,11 +9,19 @@ public class PaymentDTO {
    private Date paidDate;
    private String paymentMethod;
 
-    public PaymentDTO(int appointmentId, double amount, Date paidDate, String paymentStatus) {
+    public PaymentDTO(int appointmentId, double amount, String paymentStatus) {
+        this.appointmentId = appointmentId;
+        this.amount = amount;
+        this.paymentMethod = paymentStatus;
+    }
+
+
+    public PaymentDTO(int paymentId, int appointmentId, double amount, Date paidDate, String paymentMethod) {
+        this.paymentId = paymentId;
         this.appointmentId = appointmentId;
         this.amount = amount;
         this.paidDate = paidDate;
-        this.paymentMethod = paymentStatus;
+        this.paymentMethod = paymentMethod;
     }
 
     public int getPaymentId() {
@@ -38,10 +46,6 @@ public class PaymentDTO {
 
     public Date getPaidDate() {
         return paidDate;
-    }
-
-    public void setPaidDate(Date paidDate) {
-        this.paidDate = paidDate;
     }
 
     public String getPaymentMethod() {

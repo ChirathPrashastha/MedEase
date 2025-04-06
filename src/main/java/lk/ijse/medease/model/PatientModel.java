@@ -42,24 +42,24 @@ public class PatientModel {
         return statement.executeUpdate() > 0 ? "Patient Updated Successfully" : "Failed to Update Patient";
     }
 
-    public String deletePatient(String patientId) throws ClassNotFoundException, SQLException {
+    public String deletePatient(int patientId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM patient WHERE patient_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, patientId);
+        statement.setInt(1, patientId);
 
         return statement.executeUpdate() > 0 ? "Patient Deleted Successfully" : "Failed to Delete Patient";
     }
 
-    public PatientDTO searchPatient(String patientId) throws ClassNotFoundException, SQLException {
+    public PatientDTO searchPatient(int patientId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM patient WHERE patient_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, patientId);
+        statement.setInt(1, patientId);
 
         ResultSet rst = statement.executeQuery();
 
