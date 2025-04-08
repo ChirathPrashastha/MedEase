@@ -38,6 +38,9 @@ public class ReceptionAppointmentController implements Initializable {
     @FXML
     private TableColumn<AppointmentDTO, Number> colPatientId;
 
+    @FXML
+    private TableColumn<AppointmentDTO, String> colTime;
+
 
 
     @FXML
@@ -93,6 +96,8 @@ public class ReceptionAppointmentController implements Initializable {
                 alert.showAndWait();
             } else{
                 txtCheckInNo.setText(String.valueOf(num));
+                String time = appointmentController.getTime(txtDoctorId.getText());
+                txtTime.setText(time);
             }
 
         } catch (Exception e) {
@@ -105,7 +110,7 @@ public class ReceptionAppointmentController implements Initializable {
     }
 
     private void addAppointment() {
-        AppointmentDTO appointmentDTO = new AppointmentDTO(Integer.parseInt(txtPatientId.getText()),txtDoctorId.getText(), Date.valueOf(txtDate.getText()), Integer.parseInt(txtCheckInNo.getText()), Time.valueOf(txtTime.getText()));
+        AppointmentDTO appointmentDTO = new AppointmentDTO(Integer.parseInt(txtPatientId.getText()),txtDoctorId.getText(), Date.valueOf(txtDate.getText()), Integer.parseInt(txtCheckInNo.getText()), txtTime.getText());
 
         try {
             String response = appointmentController.addAppointment(appointmentDTO);
@@ -127,7 +132,7 @@ public class ReceptionAppointmentController implements Initializable {
     }
 
     private void updateAppointment() {
-        AppointmentDTO appointmentDTO = new AppointmentDTO(Integer.parseInt(txtPatientId.getText()),txtDoctorId.getText(), Date.valueOf(txtDate.getText()), Integer.parseInt(txtCheckInNo.getText()), Time.valueOf(txtTime.getText()));
+        AppointmentDTO appointmentDTO = new AppointmentDTO(Integer.parseInt(txtPatientId.getText()),txtDoctorId.getText(), Date.valueOf(txtDate.getText()), Integer.parseInt(txtCheckInNo.getText()), txtTime.getText());
 
         try {
             String response = appointmentController.updateAppointment(appointmentDTO);
@@ -179,6 +184,7 @@ public class ReceptionAppointmentController implements Initializable {
         colDocId.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colNum.setCellValueFactory(new PropertyValueFactory<>("checkInNo"));
+        colTime.setCellValueFactory(new PropertyValueFactory<>("time"));
 
         loadData();
     }

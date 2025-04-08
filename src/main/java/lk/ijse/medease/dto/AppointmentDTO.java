@@ -9,9 +9,9 @@ public class AppointmentDTO {
     private String doctorId;
     private Date date;
     private int checkInNo;
-    private Time time;
+    private String time;
 
-    public AppointmentDTO(int patientId, String doctorId, Date date, int checkInNo, Time time) {
+    public AppointmentDTO(int patientId, String doctorId, Date date, int checkInNo, String time) {
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.date = date;
@@ -19,7 +19,7 @@ public class AppointmentDTO {
         this.time = time;
     }
 
-    public AppointmentDTO(int appointmentId, int patientId, String doctorId, Date date, int checkInNo, Time time) {
+    public AppointmentDTO(int appointmentId, int patientId, String doctorId, Date date, int checkInNo, String time) {
         this.appointmentId = appointmentId;
         this.patientId = patientId;
         this.doctorId = doctorId;
@@ -28,11 +28,11 @@ public class AppointmentDTO {
         this.time = time;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

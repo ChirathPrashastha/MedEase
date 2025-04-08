@@ -26,6 +26,23 @@ public class AppointmentModel {
         }
     }
 
+    public String getTime(String doctorId) throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT doctor.shift AS time FROM doctor WHERE doctor_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setString(1, doctorId);
+        ResultSet rst = statement.executeQuery();
+
+        if (rst.next()) {
+            return rst.getString("time");
+        }else {
+            return "Unknown";
+        }
+    }
+
     public String addAppointment(AppointmentDTO appointmentDTO) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
@@ -36,7 +53,7 @@ public class AppointmentModel {
         statement.setString(2, appointmentDTO.getDoctorId());
         statement.setDate(3, appointmentDTO.getDate());
         statement.setInt(4, appointmentDTO.getCheckInNo());
-        statement.setTime(5, appointmentDTO.getTime());
+        statement.setString(5, appointmentDTO.getTime());
 
         return statement.executeUpdate() > 0 ? "Appointment Scheduled Successfully" : "Failed to Schedule the Appointment";
     }
@@ -51,7 +68,7 @@ public class AppointmentModel {
         statement.setString(2, appointmentDTO.getDoctorId());
         statement.setDate(3, appointmentDTO.getDate());
         statement.setInt(4, appointmentDTO.getCheckInNo());
-        statement.setTime(5, appointmentDTO.getTime());
+        statement.setString(5, appointmentDTO.getTime());
         statement.setInt(6, appointmentDTO.getAppointmentId());
 
         return statement.executeUpdate() > 0 ? "Appointment Updated Successfully" : "Failed to Update the Appointment";
@@ -79,7 +96,7 @@ public class AppointmentModel {
         ResultSet rst = statement.executeQuery();
 
         if (rst.next()) {
-            AppointmentDTO appointmentDTO = new AppointmentDTO(rst.getInt("patient_id"), rst.getString("doctor_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getTime("time"));
+            AppointmentDTO appointmentDTO = new AppointmentDTO(rst.getInt("patient_id"), rst.getString("doctor_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getString("time"));
             return appointmentDTO;
         }else {
             return null;
@@ -97,7 +114,7 @@ public class AppointmentModel {
         ArrayList<AppointmentDTO> appointmentDTOs = new ArrayList<>();
 
         while (rst.next()) {
-            AppointmentDTO appDto = new AppointmentDTO(rst.getInt("appointment_id"),rst.getInt("patient_id"), rst.getString("doctor_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getTime("time"));
+            AppointmentDTO appDto = new AppointmentDTO(rst.getInt("appointment_id"),rst.getInt("patient_id"), rst.getString("doctor_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getString("time"));
             appointmentDTOs.add(appDto);
         }
         return appointmentDTOs;

@@ -20,6 +20,11 @@ public class AppointmentController {
         return num;
     }
 
+    public String getTime(String doctorId) throws ClassNotFoundException, SQLException {
+        String response = appointmentModel.getTime(doctorId);
+        return response;
+    }
+
     public String addAppointment(AppointmentDTO appointmentDTO) throws ClassNotFoundException, SQLException {
         String response = appointmentModel.addAppointment(appointmentDTO);
         return response;

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -64,7 +62,7 @@
                         <Font name="Consolas Bold" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblNurseCount" alignment="CENTER" layoutX="39.0" layoutY="39.0" prefHeight="47.0" prefWidth="155.0" text="12" textFill="WHITE">
+                  <Label fx:id="lblNurseCount" alignment="CENTER" layoutX="39.0" layoutY="40.0" prefHeight="47.0" prefWidth="155.0" text="12" textFill="WHITE">
                      <font>
                         <Font name="Corbel Bold" size="30.0" />
                      </font>
@@ -73,17 +71,7 @@
             </Pane>
          </children>
       </HBox>
-      <TableView layoutX="51.0" layoutY="166.0" prefHeight="199.0" prefWidth="405.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Doctor" />
-          <TableColumn prefWidth="75.0" text="Speaciality" />
-            <TableColumn prefWidth="75.0" text="Appointment" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <ImageView fitHeight="287.0" fitWidth="336.0" layoutX="458.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="287.0" fitWidth="336.0" layoutX="458.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/reception.png" />
          </image>
