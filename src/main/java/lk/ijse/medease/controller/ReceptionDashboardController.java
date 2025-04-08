@@ -4,13 +4,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ReceptionDashboardController implements Initializable {
+
+    @FXML
+    private Button btnLogout;
 
     @FXML
     private Button btnAppointment;
@@ -68,6 +74,14 @@ public class ReceptionDashboardController implements Initializable {
         btnPatient.setStyle("-fx-border-color: transparent;");
 
         navigateTo("/view/ReceptionPayment.fxml");
+    }
+
+    public void btnLogoutOnAction(ActionEvent actionEvent) throws IOException {
+        recepDashAnc.getChildren().clear();
+
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
+        Scene scene = new Scene(parent);
+        recepDashAnc.getChildren().add(parent);
     }
 
     private void navigateTo(String path) {
