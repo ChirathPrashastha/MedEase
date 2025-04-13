@@ -1,0 +1,31 @@
+.container-anc {
+    -fx-background-color: linear-gradient(to right top ,#1A3B4B, #0F9EA5 );
+}
+
+.right-box {
+    -fx-background-color: #1234;
+}
+
+.input-fields {
+    -fx-background-color: #1234;
+    -fx-border-color: #3E1F47;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-text-fill: white;
+}
+
+.input-fields-notes{
+    -fx-control-inner-background: #1234;
+    -fx-border-color: #3E1F47;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-text-fill: white;
+}
+
+.add-btn {
+    -fx-background-color: #78e510;
+    -fx-background-radius: 30;
+}
+
+.details-panel {
+    -fx-background-color: #272640;
+    -fx-background-radius: 30;
+}

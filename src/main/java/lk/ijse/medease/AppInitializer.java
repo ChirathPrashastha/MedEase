@@ -18,7 +18,7 @@ public class AppInitializer extends Application {
 
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        stage.setTitle("Login Page");
+        stage.setTitle("MedEase");
         stage.show();
     }
 }
