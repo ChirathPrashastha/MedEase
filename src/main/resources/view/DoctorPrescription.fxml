@@ -71,7 +71,7 @@
       </VBox>
       <VBox layoutX="166.0" layoutY="22.0" prefHeight="218.0" prefWidth="369.0" spacing="3.0">
          <children>
-            <TextField fx:id="txtAID" layoutX="10.0" layoutY="10.0" onAction="#checkHistoryOnAction" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtAID" layoutX="10.0" layoutY="10.0" onAction="#checkHistoryOnAction" prefHeight="26.0" prefWidth="281.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -126,7 +126,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="tblPresMed" layoutX="32.0" layoutY="383.0" prefHeight="200.0" prefWidth="614.0">
+      <TableView fx:id="tblPresMed" layoutX="32.0" layoutY="374.0" prefHeight="200.0" prefWidth="614.0">
         <columns>
           <TableColumn fx:id="colPresId" prefWidth="75.0" text="Prescription ID" />
           <TableColumn fx:id="colMedId" prefWidth="75.0" text="Medicine ID" />
@@ -138,14 +138,14 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Pane layoutX="32.0" layoutY="258.0" prefHeight="104.0" prefWidth="614.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
+      <Pane layoutX="32.0" layoutY="252.0" prefHeight="104.0" prefWidth="614.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
          <children>
             <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="21.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/examination.png" />
                </image>
             </ImageView>
-            <Label fx:id="txtPatientName" layoutX="90.0" layoutY="29.0" prefHeight="28.0" prefWidth="216.0" text="PATIENT NAME" textFill="WHITE">
+            <Label fx:id="txtPatientName" layoutX="90.0" layoutY="29.0" prefHeight="28.0" prefWidth="204.0" text="PATIENT NAME" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="13.0" />
                </font>
@@ -160,7 +160,7 @@
                   <Font name="System Bold Italic" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="txtAllergies" layoutX="405.0" layoutY="35.0" prefHeight="28.0" prefWidth="191.0" text="Allergies" textFill="WHITE">
+            <Label fx:id="txtAllergies" layoutX="405.0" layoutY="35.0" prefHeight="28.0" prefWidth="181.0" text="Allergies" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="13.0" />
                </font>

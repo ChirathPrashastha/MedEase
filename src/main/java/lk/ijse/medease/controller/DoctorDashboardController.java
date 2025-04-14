@@ -20,9 +20,6 @@ public class DoctorDashboardController implements Initializable {
     private Button btnAppointment;
 
     @FXML
-    private Button btnInventory;
-
-    @FXML
     private Button btnLogout;
 
     @FXML
@@ -39,17 +36,16 @@ public class DoctorDashboardController implements Initializable {
 
     @FXML
     void btnAppointmentOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnInventoryOnAction(ActionEvent event) {
-
+        navigateTo("/view/DoctorAppointment.fxml");
+        btnAppointment.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnPrescription.setStyle("-fx-border-color: transparent");
+        btnPatient.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) {
-
+        navigateTo("/view/LoginPage.fxml");
     }
 
     @FXML
@@ -59,7 +55,12 @@ public class DoctorDashboardController implements Initializable {
 
     @FXML
     void btnPrescriptionOnAction(ActionEvent event) {
-
+        navigateTo("/view/DoctorPrescription.fxml");
+        btnPrescription.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnPatient.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
+        btnAppointment.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     private void navigateTo(String path) {
