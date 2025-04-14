@@ -49,4 +49,9 @@ public class AppointmentController {
         ArrayList<AppointmentDTO> appointmentDTOs = appointmentModel.getAllAppointments();
         return appointmentDTOs;
     }
+
+    public ArrayList<AppointmentDTO> getAppointmentsByDoctor(String doctorId) throws ClassNotFoundException, SQLException {
+        ArrayList<AppointmentDTO> appointmentDTOs = appointmentModel.getAppointmentsByDoctor(doctorId);
+        return appointmentDTOs;
+    }
 }

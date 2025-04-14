@@ -11,13 +11,8 @@ import java.util.ArrayList;
 
 public class DoctorModel {
 
-    private Connection connection;
-
-    public DoctorModel() throws SQLException {
-        connection = DBConnection.getInstance().getConnection();
-    }
-
     public String addDoctor(DoctorDTO doctorDTO) throws ClassNotFoundException , SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO doctor VALUES (?,?,?,?,?,?)";
 
@@ -33,6 +28,7 @@ public class DoctorModel {
     }
 
     public String updateDoctor(DoctorDTO doctorDTO) throws ClassNotFoundException , SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql ="UPDATE doctor SET employee_id = ?, speciality = ?, registration_no = ?, hospital = ?, shift = ? WHERE doctor_id = ?";
 
@@ -48,6 +44,7 @@ public class DoctorModel {
     }
 
     public String deleteDoctor(String doctorId) throws ClassNotFoundException , SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM doctor WHERE doctor_id = ?";
 
@@ -58,6 +55,7 @@ public class DoctorModel {
     }
 
     public DoctorDTO searchDoctor(String doctorId) throws ClassNotFoundException , SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM doctor WHERE doctor_id = ?";
 
@@ -73,7 +71,23 @@ public class DoctorModel {
         }
     }
 
+    public String getDoctorId(String employeeId) throws ClassNotFoundException , SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT doctor_id FROM doctor WHERE employee_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, employeeId);
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return rst.getString("doctor_id");
+        }else {
+            return null;
+        }
+    }
+
     public ArrayList<DoctorDTO> getAllDoctors() throws ClassNotFoundException , SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM doctor";
 

@@ -18,6 +18,7 @@ import java.sql.SQLException;
 public class LogInPageController {
     private String jobRole;
     private String username, password;
+    public static UserDTO userDTO;
 
     @FXML
     private AnchorPane ancLoginPage;
@@ -34,7 +35,7 @@ public class LogInPageController {
         password = txtPassword.getText();
 
 
-        UserDTO userDTO = AuthenticationModel.checkCredentials(username, password);
+         userDTO = AuthenticationModel.checkCredentials(username, password);
 
         if (userDTO != null) {
            jobRole = AuthenticationModel.getJobRole(userDTO.getEmployeeId());

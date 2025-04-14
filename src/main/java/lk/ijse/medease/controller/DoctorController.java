@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class DoctorController {
     private DoctorModel doctorModel;
 
-    DoctorController() throws SQLException {
+    DoctorController()  {
         doctorModel = new DoctorModel();
     }
 
@@ -30,6 +30,11 @@ public class DoctorController {
 
     public DoctorDTO searchDoctor(String doctorId) throws ClassNotFoundException, SQLException {
         DoctorDTO response = doctorModel.searchDoctor(doctorId);
+        return response;
+    }
+
+    public String getDoctorId(String employeeId) throws ClassNotFoundException, SQLException {
+        String response = doctorModel.getDoctorId(employeeId);
         return response;
     }
 

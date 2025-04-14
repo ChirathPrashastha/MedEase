@@ -30,8 +30,13 @@
             </ImageView>
          </children>
       </Pane>
-      <VBox layoutX="32.0" layoutY="32.0" prefHeight="187.0" prefWidth="127.0" spacing="5.0">
+      <VBox layoutX="32.0" layoutY="26.0" prefHeight="206.0" prefWidth="127.0" spacing="5.0">
          <children>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="135.0" text="APPOINTMENT ID" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
             <Label prefHeight="25.0" prefWidth="135.0" text="PATIENT ID" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="14.0" />
@@ -64,51 +69,56 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="166.0" layoutY="27.0" prefHeight="193.0" prefWidth="369.0" spacing="3.0">
+      <VBox layoutX="166.0" layoutY="22.0" prefHeight="218.0" prefWidth="369.0" spacing="3.0">
          <children>
-            <TextField onAction="#checkHistoryOnAction" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtAID" layoutX="10.0" layoutY="10.0" onAction="#checkHistoryOnAction" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField layoutX="10.0" layoutY="52.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtPID" onAction="#checkHistoryOnAction" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField layoutX="10.0" layoutY="94.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtDiagnosis" layoutX="10.0" layoutY="52.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField layoutX="10.0" layoutY="136.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtName" layoutX="10.0" layoutY="94.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField layoutX="10.0" layoutY="178.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtDosage" layoutX="10.0" layoutY="136.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField layoutX="10.0" layoutY="165.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtFrequency" layoutX="10.0" layoutY="178.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtNotes" layoutX="10.0" layoutY="165.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
          </children>
       </VBox>
-      <Label fx:id="txtAvailability" layoutX="571.0" layoutY="90.0" prefHeight="25.0" prefWidth="77.0" text="Unavailable" textFill="#ab0000">
+      <Label fx:id="txtAvailability" layoutX="571.0" layoutY="116.0" prefHeight="25.0" prefWidth="77.0" text="Unavailable" textFill="#ab0000">
          <font>
             <Font name="Yu Gothic UI Semibold" size="13.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgAvailability" fitHeight="20.0" fitWidth="20.0" layoutX="546.0" layoutY="93.0" pickOnBounds="true">
+      <ImageView fx:id="imgAvailability" fitHeight="20.0" fitWidth="20.0" layoutX="546.0" layoutY="119.0" pickOnBounds="true">
          <image>
             <Image url="@../images/no.png" />
          </image>
       </ImageView>
-      <Button layoutX="548.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnAddMedOnAction" prefHeight="0.0" prefWidth="65.0" styleClass="add-btn" stylesheets="@../css/DoctorDashboardStyle.css" text="ADD">
+      <Button layoutX="549.0" layoutY="178.0" mnemonicParsing="false" onAction="#btnAddMedOnAction" prefHeight="0.0" prefWidth="65.0" styleClass="add-btn" stylesheets="@../css/DoctorDashboardStyle.css" text="ADD">
          <font>
             <Font name="Cambria Bold" size="12.0" />
          </font>
@@ -116,7 +126,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="tblPresMed" layoutX="32.0" layoutY="349.0" prefHeight="200.0" prefWidth="614.0">
+      <TableView fx:id="tblPresMed" layoutX="32.0" layoutY="383.0" prefHeight="200.0" prefWidth="614.0">
         <columns>
           <TableColumn fx:id="colPresId" prefWidth="75.0" text="Prescription ID" />
           <TableColumn fx:id="colMedId" prefWidth="75.0" text="Medicine ID" />
@@ -128,7 +138,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Pane layoutX="32.0" layoutY="226.0" prefHeight="104.0" prefWidth="614.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
+      <Pane layoutX="32.0" layoutY="258.0" prefHeight="104.0" prefWidth="614.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
          <children>
             <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="21.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -120,5 +120,24 @@ public class AppointmentModel {
         return appointmentDTOs;
     }
 
+    public ArrayList<AppointmentDTO> getAppointmentsByDoctor(String doctorId) throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT appointment_id, patient_id, date, check_in_no, time FROM appointment WHERE date = CURDATE() AND doctor_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, doctorId);
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<AppointmentDTO> appointmentDTOs = new ArrayList<>();
+
+        while (rst.next()) {
+            AppointmentDTO appDto = new AppointmentDTO(rst.getInt("appointment_id"), rst.getInt("patient_id"), rst.getDate("date"), rst.getInt("check_in_no"), rst.getString("time"));
+
+            appointmentDTOs.add(appDto);
+        }
+        return appointmentDTOs;
+    }
+
 
 }

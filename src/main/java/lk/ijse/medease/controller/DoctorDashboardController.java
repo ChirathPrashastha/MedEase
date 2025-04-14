@@ -5,12 +5,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.medease.dto.DoctorDTO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DoctorDashboardController implements Initializable {
+
+    public static DoctorDashboardController controller;
 
     @FXML
     private Button btnAppointment;
@@ -76,5 +80,12 @@ public class DoctorDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         navigateTo("/view/DoctorAppointment.fxml");
         btnAppointment.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+
+        controller = this;
+    }
+
+    public void setBtnPrescription() {
+        btnPrescription.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnAppointment.setStyle("-fx-border-color: transparent");
     }
 }

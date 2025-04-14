@@ -22,7 +22,7 @@
                   <Image url="@../images/doctor.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" prefHeight="52.0" prefWidth="256.0" text="Hello Doctor" textFill="WHITE">
+            <Label fx:id="lblID" alignment="CENTER" prefHeight="38.0" prefWidth="255.0" text="Hello Doctor" textFill="WHITE">
                <font>
                   <Font name="Segoe Print Bold" size="18.0" />
                </font>

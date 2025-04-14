@@ -1,5 +1,7 @@
 package lk.ijse.medease.dto;
 
+import javafx.scene.control.Button;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -10,6 +12,14 @@ public class AppointmentDTO {
     private Date date;
     private int checkInNo;
     private String time;
+
+    public AppointmentDTO(int appointmentId, int patientId, Date date, int checkInNo, String time) {
+        this.appointmentId = appointmentId;
+        this.patientId = patientId;
+        this.date = date;
+        this.checkInNo = checkInNo;
+        this.time = time;
+    }
 
     public AppointmentDTO(int patientId, String doctorId, Date date, int checkInNo, String time) {
         this.patientId = patientId;
@@ -71,5 +81,4 @@ public class AppointmentDTO {
     public int getAppointmentId() {
         return appointmentId;
     }
-
 }

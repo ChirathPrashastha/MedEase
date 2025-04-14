@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/DoctorDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.DoctorAppointmentController">
+<AnchorPane fx:id="mainContainerAnc" prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/DoctorDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.DoctorAppointmentController">
    <children>
       <Pane layoutX="32.0" layoutY="30.0" prefHeight="50.0" prefWidth="260.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
          <children>
@@ -32,7 +31,6 @@
           <TableColumn fx:id="colPID" prefWidth="75.0" text="Patient ID" />
             <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
             <TableColumn fx:id="colNo" prefWidth="75.0" text="Check-in No" />
-            <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
