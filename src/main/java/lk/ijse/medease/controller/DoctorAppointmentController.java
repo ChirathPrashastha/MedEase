@@ -25,10 +25,12 @@ import java.util.ResourceBundle;
 
 public class DoctorAppointmentController implements Initializable {
 
+    public static DoctorAppointmentController doctorAppointmentController; // for DoctorPrescription
+
     private int appointmentId;
     private int patientId;
     private String employeeId = LogInPageController.userDTO.getEmployeeId();
-    private String doctorId;
+    public String doctorId;
 
     private AppointmentController appointmentController;
     private  DoctorController doctorController;
@@ -55,6 +57,7 @@ public class DoctorAppointmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        doctorAppointmentController = this;
         appointmentController = new AppointmentController();
         doctorController = new DoctorController();
         patientController = new PatientController();

@@ -17,17 +17,40 @@
    <children>
       <Pane layoutX="678.0" layoutY="-1.0" prefHeight="600.0" prefWidth="90.0" styleClass="right-box" stylesheets="@../css/DoctorDashboardStyle.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
          <children>
-            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="23.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Rx.png" />
                </image>
             </ImageView>
-            <Button layoutX="23.0" layoutY="36.0" mnemonicParsing="false" onAction="#btnRXOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;" />
-            <ImageView fx:id="imgAlert" fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="33.0" pickOnBounds="true">
+            <Button layoutX="29.0" layoutY="181.0" mnemonicParsing="false" onAction="#btnRXOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <ImageView fx:id="imgAlert" fitHeight="20.0" fitWidth="20.0" layoutX="17.0" layoutY="178.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@../images/alert.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/drugs.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="29.0" layoutY="259.0" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/save.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="29.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
       <VBox layoutX="32.0" layoutY="26.0" prefHeight="206.0" prefWidth="127.0" spacing="5.0">
@@ -71,7 +94,7 @@
       </VBox>
       <VBox layoutX="166.0" layoutY="22.0" prefHeight="218.0" prefWidth="369.0" spacing="3.0">
          <children>
-            <TextField fx:id="txtAID" layoutX="10.0" layoutY="10.0" onAction="#checkHistoryOnAction" prefHeight="26.0" prefWidth="281.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtAID" layoutX="10.0" layoutY="10.0" onAction="#checkHistoryOnAction" prefHeight="26.0" prefWidth="281.0" styleClass="app-id-field" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -118,7 +141,7 @@
             <Image url="@../images/no.png" />
          </image>
       </ImageView>
-      <Button layoutX="549.0" layoutY="178.0" mnemonicParsing="false" onAction="#btnAddMedOnAction" prefHeight="0.0" prefWidth="65.0" styleClass="add-btn" stylesheets="@../css/DoctorDashboardStyle.css" text="ADD">
+      <Button layoutX="549.0" layoutY="176.0" mnemonicParsing="false" onAction="#btnAddMedOnAction" prefHeight="0.0" prefWidth="65.0" styleClass="add-btn" stylesheets="@../css/DoctorDashboardStyle.css" text="ADD">
          <font>
             <Font name="Cambria Bold" size="12.0" />
          </font>

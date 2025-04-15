@@ -29,3 +29,9 @@
     -fx-background-color: #272640;
     -fx-background-radius: 30;
 }
+
+.app-id-field {
+    -fx-background-color: #272640;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+}

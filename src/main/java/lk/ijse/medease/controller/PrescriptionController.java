@@ -1,40 +1,26 @@
 package lk.ijse.medease.controller;
 
 import lk.ijse.medease.dto.PrescriptionDTO;
+import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 import lk.ijse.medease.model.PrescriptionModel;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PrescriptionController {
-    PrescriptionModel prescriptionModel;
+    private PrescriptionModel prescriptionModel;
 
-    public PrescriptionController () {
+    public PrescriptionController() {
         prescriptionModel = new PrescriptionModel();
     }
 
-    public String addPrescription(PrescriptionDTO prescriptionDTO) throws ClassNotFoundException, SQLException {
-        String response = prescriptionModel.addPrescription(prescriptionDTO);
+    public String addPrescription(PrescriptionDTO prescriptionDTO, ArrayList<PrescriptionMedicineDTO> presMedArray) throws Exception {
+        String response = prescriptionModel.addPrescription(prescriptionDTO, presMedArray);
         return response;
     }
 
-    public String updatePrescription(PrescriptionDTO prescriptionDTO) throws ClassNotFoundException, SQLException {
-        String response = prescriptionModel.updatePrescription(prescriptionDTO);
+    public ArrayList<PrescriptionDTO> getPatientHistory(int patientId) throws ClassNotFoundException, SQLException {
+        ArrayList<PrescriptionDTO> response = prescriptionModel.getPatientHistory(patientId);
         return response;
-    }
-
-    public String deletePrescription(int prescriptionId) throws ClassNotFoundException, SQLException {
-        String response = prescriptionModel.deletePrescription(prescriptionId);
-        return response;
-    }
-
-    public PrescriptionDTO searchPrescription(int prescriptionId) throws ClassNotFoundException, SQLException {
-        PrescriptionDTO response = prescriptionModel.searchPrescription(prescriptionId);
-        return response;
-    }
-
-    public ArrayList<PrescriptionDTO> getAllPrescription() throws ClassNotFoundException, SQLException {
-        ArrayList<PrescriptionDTO> prescriptionDTOs = prescriptionModel.getAllPrescription();
-        return prescriptionDTOs;
     }
 }
