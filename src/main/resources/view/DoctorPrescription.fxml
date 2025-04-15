@@ -17,36 +17,46 @@
    <children>
       <Pane layoutX="678.0" layoutY="-1.0" prefHeight="600.0" prefWidth="90.0" styleClass="right-box" stylesheets="@../css/DoctorDashboardStyle.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
          <children>
-            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Rx.png" />
                </image>
             </ImageView>
-            <Button layoutX="29.0" layoutY="181.0" mnemonicParsing="false" onAction="#btnRXOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button layoutX="29.0" layoutY="149.0" mnemonicParsing="false" onAction="#btnRXOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <ImageView fx:id="imgAlert" fitHeight="20.0" fitWidth="20.0" layoutX="17.0" layoutY="178.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="imgAlert" fitHeight="20.0" fitWidth="20.0" layoutX="17.0" layoutY="146.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@../images/alert.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/drugs.png" />
                </image>
             </ImageView>
-            <Button layoutX="29.0" layoutY="259.0" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button layoutX="29.0" layoutY="227.0" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/save.png" />
                </image>
             </ImageView>
-            <Button layoutX="29.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button layoutX="29.0" layoutY="307.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/delete.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="29.0" layoutY="387.0" mnemonicParsing="false" onAction="#btnDeleteRowOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -109,7 +119,7 @@
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtName" layoutX="10.0" layoutY="94.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtName" layoutX="10.0" layoutY="94.0" onAction="#checkAvailabilityOnAction" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -131,16 +141,12 @@
             </TextField>
          </children>
       </VBox>
-      <Label fx:id="txtAvailability" layoutX="571.0" layoutY="116.0" prefHeight="25.0" prefWidth="77.0" text="Unavailable" textFill="#ab0000">
+      <Label fx:id="txtAvailability" layoutX="571.0" layoutY="116.0" prefHeight="25.0" prefWidth="77.0" textFill="#ab0000">
          <font>
             <Font name="Yu Gothic UI Semibold" size="13.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgAvailability" fitHeight="20.0" fitWidth="20.0" layoutX="546.0" layoutY="119.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/no.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="imgAvailability" fitHeight="20.0" fitWidth="20.0" layoutX="546.0" layoutY="119.0" pickOnBounds="true" />
       <Button layoutX="549.0" layoutY="176.0" mnemonicParsing="false" onAction="#btnAddMedOnAction" prefHeight="0.0" prefWidth="65.0" styleClass="add-btn" stylesheets="@../css/DoctorDashboardStyle.css" text="ADD">
          <font>
             <Font name="Cambria Bold" size="12.0" />

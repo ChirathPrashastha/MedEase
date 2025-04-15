@@ -4,13 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -94,21 +100,32 @@ public class DoctorPrescriptionController implements Initializable {
             e.printStackTrace();
         }
 
-        if (!txtName.getText().equals("")) {
+        if (medicineId != -1) {
             PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPID.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText());
             presMedList.add(presMedDTO); //for the table
 
             addToTable();
 
             presMedDtoArray.add(presMedDTO); // for the database
+            clearFields();
+        } else {
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPID.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText());
+            presMedList.add(presMedDTO);
+
+            addToTable();
+
+            presMedDtoArray.add(presMedDTO);
+            clearFields();
         }
     }
 
     @FXML
     void checkHistoryOnAction(ActionEvent event) {
         try {
-            if (prescriptionController.getPatientHistory(Integer.parseInt(txtPID.getText())) != null ) {
+            if (!(prescriptionController.getPatientHistory(Integer.parseInt(txtPID.getText())).isEmpty()) ) {
                 imgAlert.setVisible(true);
+            } else {
+                imgAlert.setVisible(false);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,18 +133,64 @@ public class DoctorPrescriptionController implements Initializable {
     }
 
     @FXML
-    void btnRXOnAction(ActionEvent event) {
+    void checkAvailabilityOnAction(ActionEvent event) {
 
+        try {
+            int medId = medicineController.getMedicineIdByMedicineName(txtName.getText());
+
+            if (medId != -1){
+                txtAvailability.setText("Available");
+                txtAvailability.setStyle("-fx-text-fill: green");
+                Image availableImg = new Image(getClass().getResourceAsStream("/images/yes.png"));
+                imgAvailability.setImage(availableImg);
+            } else {
+                txtAvailability.setText("Unavailable");
+                txtAvailability.setStyle("-fx-text-fill: red");
+                Image unavailableImg = new Image(getClass().getResourceAsStream("/images/no.png"));
+                imgAvailability.setImage(unavailableImg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void btnRXOnAction(ActionEvent event) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/PatientHistory.fxml"));
+        Stage stage = new Stage();
+
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle("Patient History");
+        stage.show();
     }
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
         addPrescription();
+        fullyClearFields();
     }
 
     @FXML
     void btnInventoryOnAction(ActionEvent event) {
 
+    }
+
+    @FXML
+    void btnDeleteRowOnAction(ActionEvent event) {
+        PrescriptionMedicineDTO selectedDTO = tblPresMed.getSelectionModel().getSelectedItem();
+
+        if (selectedDTO != null) {
+            presMedList.remove(selectedDTO); // removes from table view
+            presMedDtoArray.remove(selectedDTO); // removes from database
+        }else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("FAILED");
+            alert.setContentText("Please select a row to delete");
+            alert.showAndWait();
+        }
     }
 
     @Override
@@ -172,5 +235,31 @@ public class DoctorPrescriptionController implements Initializable {
         }
     }
 
+    private void clearFields(){
+        txtName.clear();
+        txtDosage.clear();
+        txtFrequency.clear();
+        txtNotes.clear();
+        txtAvailability.setText("");
+        imgAvailability.setImage(null);
+    }
+
+    private void fullyClearFields() {
+        txtAID.clear();
+        txtPID.clear();
+        txtDiagnosis.clear();
+        txtName.clear();
+        txtDosage.clear();
+        txtFrequency.clear();
+        txtNotes.clear();
+        txtPatientName.setText("Empty");
+        txtAge.setText("Empty");
+        txtAllergies.setText("Empty");
+        imgAlert.setVisible(false);
+        txtAvailability.setText("");
+        imgAvailability.setImage(null);
+        presMedList.clear();
+        presMedDtoArray.clear();
+    }
 
 }

@@ -15,6 +15,13 @@ public class PrescriptionMedicineDTO {
         this.frequency = frequency;
     }
 
+    public PrescriptionMedicineDTO(int prescriptionId, String name, String dosage, String frequency) {
+        this.prescriptionId = prescriptionId;
+        this.name = name;
+        this.dosage = dosage;
+        this.frequency = frequency;
+    }
+
     public int getPrescriptionId() {
         return prescriptionId;
     }
