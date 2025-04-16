@@ -215,10 +215,12 @@ public class DoctorPrescriptionController implements Initializable {
 
     private void addPrescription() {
         String doctorId = DoctorAppointmentController.doctorAppointmentController.doctorId;
+        int checkInNo = DoctorAppointmentController.doctorAppointmentController.checkInNo;
+
         PrescriptionDTO prescriptionDTO = new PrescriptionDTO(doctorId, Integer.parseInt(txtPID.getText()), Integer.parseInt(txtAge.getText()), txtDiagnosis.getText(), txtNotes.getText());
 
         try {
-            String response = prescriptionController.addPrescription(prescriptionDTO, presMedDtoArray);
+            String response = prescriptionController.addPrescription(prescriptionDTO, presMedDtoArray, checkInNo, doctorId);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Add Prescription");
             alert.setHeaderText("SUCCESS");

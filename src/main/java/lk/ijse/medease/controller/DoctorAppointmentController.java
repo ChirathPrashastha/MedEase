@@ -31,6 +31,7 @@ public class DoctorAppointmentController implements Initializable {
     private int patientId;
     private String employeeId = LogInPageController.userDTO.getEmployeeId();
     public String doctorId;
+    public int checkInNo;
 
     private AppointmentController appointmentController;
     private  DoctorController doctorController;
@@ -79,6 +80,7 @@ public class DoctorAppointmentController implements Initializable {
                 if (!row.isEmpty() && event.getClickCount() == 1) {
                     appointmentId = row.getItem().getAppointmentId();
                     patientId = row.getItem().getPatientId();
+                    checkInNo = row.getItem().getCheckInNo();
 
                     checkIn();
                 }

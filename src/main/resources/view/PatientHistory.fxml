@@ -34,7 +34,6 @@
       <TableView fx:id="tblPresMed" layoutX="23.0" layoutY="259.0" prefHeight="133.0" prefWidth="553.0">
         <columns>
           <TableColumn fx:id="colPrescriptionId" prefWidth="75.0" text="Prescription ID" />
-          <TableColumn fx:id="colMedId" prefWidth="75.0" text="Medicine ID" />
             <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="colDosage" prefWidth="75.0" text="Dosage" />
             <TableColumn fx:id="colFrequency" prefWidth="75.0" text="Frequency" />

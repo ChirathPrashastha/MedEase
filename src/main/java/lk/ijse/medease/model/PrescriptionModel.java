@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class PrescriptionModel {
 
-    public String addPrescription(PrescriptionDTO prescriptionDTO, ArrayList<PrescriptionMedicineDTO> presMedArray) throws Exception {
+    public String addPrescription(PrescriptionDTO prescriptionDTO, ArrayList<PrescriptionMedicineDTO> presMedArray, int checkInNo, String doctorId) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
 
         try {
@@ -48,7 +48,22 @@ public class PrescriptionModel {
                 }
 
                 if (isPrescriptionMedicineSaved) {
-                    return "Prescription Added Successfully";
+
+                    String checkInStatusUpdatingSql = "UPDATE check_in SET status = 'OUT' WHERE check_in_no = ? AND doctor_id = ?";
+
+                    PreparedStatement checkInStatusUpdatingStatement = connection.prepareStatement(checkInStatusUpdatingSql);
+                    checkInStatusUpdatingStatement.setInt(1, checkInNo);
+                    checkInStatusUpdatingStatement.setString(2, doctorId);
+
+                    boolean isCheckInTableUpdated = checkInStatusUpdatingStatement.executeUpdate() > 0 ? true : false;
+
+                    if (isCheckInTableUpdated) {
+                        return "Prescription Updated Successfully and Patient Checked Out";
+                    } else {
+                        connection.rollback();
+                        return "Failed to Update Check-in Status";
+                    }
+
                 } else {
                     connection.rollback();
                     return "Failed to add Prescription_Medicine";

@@ -14,8 +14,8 @@ public class PrescriptionController {
         prescriptionModel = new PrescriptionModel();
     }
 
-    public String addPrescription(PrescriptionDTO prescriptionDTO, ArrayList<PrescriptionMedicineDTO> presMedArray) throws Exception {
-        String response = prescriptionModel.addPrescription(prescriptionDTO, presMedArray);
+    public String addPrescription(PrescriptionDTO prescriptionDTO, ArrayList<PrescriptionMedicineDTO> presMedArray, int checkInNo, String doctorId) throws Exception {
+        String response = prescriptionModel.addPrescription(prescriptionDTO, presMedArray, checkInNo, doctorId);
         return response;
     }
 
