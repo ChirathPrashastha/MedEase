@@ -36,7 +36,7 @@
                   <Image url="@../images/drugs.png" />
                </image>
             </ImageView>
-            <Button layoutX="29.0" layoutY="227.0" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
+            <Button layoutX="29.0" layoutY="227.0" mnemonicParsing="false" onAction="#btnMedicineOnAction" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -4,11 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.medease.dto.DoctorDTO;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,9 +21,6 @@ public class DoctorDashboardController implements Initializable {
 
     @FXML
     private Button btnLogout;
-
-    @FXML
-    private Button btnPatient;
 
     @FXML
     private Button btnPrescription;
@@ -39,25 +36,21 @@ public class DoctorDashboardController implements Initializable {
         navigateTo("/view/DoctorAppointment.fxml");
         btnAppointment.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
         btnPrescription.setStyle("-fx-border-color: transparent");
-        btnPatient.setStyle("-fx-border-color: transparent");
         btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     @FXML
-    void btnLogoutOnAction(ActionEvent event) {
-        navigateTo("/view/LoginPage.fxml");
+    void btnLogoutOnAction(ActionEvent event) throws IOException {
+        doctorDashAnc.getChildren().clear();
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
+        doctorDashAnc.getChildren().add(parent);
     }
 
-    @FXML
-    void btnPatientOnAction(ActionEvent event) {
-
-    }
 
     @FXML
     void btnPrescriptionOnAction(ActionEvent event) {
         navigateTo("/view/DoctorPrescription.fxml");
         btnPrescription.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
-        btnPatient.setStyle("-fx-border-color: transparent");
         btnLogout.setStyle("-fx-border-color: transparent");
         btnAppointment.setStyle("-fx-border-color: transparent");
         btnLogout.setStyle("-fx-border-color: transparent");

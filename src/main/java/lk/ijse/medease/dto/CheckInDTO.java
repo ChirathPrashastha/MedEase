@@ -17,6 +17,11 @@ public class CheckInDTO {
         this.status = status;
     }
 
+    public CheckInDTO(int checkInNo, String status) {
+        this.checkInNo = checkInNo;
+        this.status = status;
+    }
+
     public int getCheckInId() {
         return checkInId;
     }

@@ -1,11 +1,13 @@
 package lk.ijse.medease.model;
 
 import lk.ijse.medease.db.DBConnection;
+import lk.ijse.medease.dto.MedicineDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MedicineModel {
 
@@ -24,5 +26,21 @@ public class MedicineModel {
         }else {
             return -1;
         }
+    }
+
+    public ArrayList<MedicineDTO> getMedicineList() throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT generic_name, brand, category FROM medicine";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<MedicineDTO> medicineList = new ArrayList<>();
+        while (rst.next()) {
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"));
+            medicineList.add(medicineDTO);
+        }
+        return medicineList;
     }
 }

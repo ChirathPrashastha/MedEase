@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import lk.ijse.medease.dto.CheckInDTO;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 
@@ -173,8 +174,13 @@ public class DoctorPrescriptionController implements Initializable {
     }
 
     @FXML
-    void btnInventoryOnAction(ActionEvent event) {
-
+    void btnMedicineOnAction(ActionEvent event) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/MedicineList.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle("Medicine List");
+        stage.show();
     }
 
     @FXML
@@ -207,6 +213,7 @@ public class DoctorPrescriptionController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colDosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
         colFrequency.setCellValueFactory(new PropertyValueFactory<>("frequency"));
+
     }
 
     private void addToTable(){

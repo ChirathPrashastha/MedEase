@@ -30,6 +30,12 @@ public class MedicineDTO {
         this.inventoryId = inventoryId;
     }
 
+    public MedicineDTO(String genericName, String brand, String category) {
+        this.genericName = genericName;
+        this.brand = brand;
+        this.category = category;
+    }
+
     public int getMedicineId() {
         return medicineId;
     }

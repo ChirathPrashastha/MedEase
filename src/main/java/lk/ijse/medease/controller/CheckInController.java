@@ -17,9 +17,4 @@ public class CheckInController {
         ArrayList<CheckInDTO> doctorCheckInList = checkInModel.getDoctorCheckInList(doctorId);
         return doctorCheckInList;
     }
-
-    public ArrayList<CheckInDTO> getAllCheckIn() throws ClassNotFoundException, SQLException {
-        ArrayList<CheckInDTO> checkInList = checkInModel.getAllCheckIn();
-        return checkInList;
-    }
 }

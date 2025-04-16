@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.medease.dto.AppointmentDTO;
+import lk.ijse.medease.dto.CheckInDTO;
 import lk.ijse.medease.dto.DoctorDTO;
 import lk.ijse.medease.dto.PatientDTO;
 
@@ -36,9 +37,19 @@ public class DoctorAppointmentController implements Initializable {
     private AppointmentController appointmentController;
     private  DoctorController doctorController;
     private PatientController patientController;
+    private CheckInController checkInController;
 
     @FXML
     private AnchorPane mainContainerAnc;
+
+    @FXML
+    private TableColumn<CheckInDTO, Number> colNum;
+
+    @FXML
+    private TableColumn<CheckInDTO, String> colStatus;
+
+    @FXML
+    private TableView<CheckInDTO> tblCheckIn;
 
     @FXML
     private TableColumn<AppointmentDTO, Number> colAID;
@@ -62,6 +73,7 @@ public class DoctorAppointmentController implements Initializable {
         appointmentController = new AppointmentController();
         doctorController = new DoctorController();
         patientController = new PatientController();
+        checkInController = new CheckInController();
 
         try {
             doctorId = doctorController.getDoctorId(employeeId);
@@ -87,8 +99,11 @@ public class DoctorAppointmentController implements Initializable {
             });
             return row;
         });
-
         loadData();
+
+        colNum.setCellValueFactory(new PropertyValueFactory<>("checkInNo"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        loadCheckInTable();
     }
 
     private void loadData() {
@@ -138,6 +153,16 @@ public class DoctorAppointmentController implements Initializable {
             Period period = Period.between(localBirthDate, currentDate);
             DoctorPrescriptionController.controller.txtAge.setText(String.valueOf(period.getYears()));
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadCheckInTable() {
+        try {
+            ArrayList<CheckInDTO> checkInDTOs = checkInController.getDoctorCheckInList(doctorId);
+            ObservableList<CheckInDTO> checkInList = FXCollections.observableArrayList(checkInDTOs);
+            tblCheckIn.setItems(checkInList);
         } catch (Exception e) {
             e.printStackTrace();
         }
