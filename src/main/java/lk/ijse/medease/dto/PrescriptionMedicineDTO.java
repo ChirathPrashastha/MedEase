@@ -6,20 +6,23 @@ public class PrescriptionMedicineDTO {
     private String name;
     private String dosage;
     private String frequency;
+    private String duration;
 
-    public PrescriptionMedicineDTO(int prescriptionId, int medicineId, String name, String dosage, String frequency) {
+    public PrescriptionMedicineDTO(int prescriptionId, int medicineId, String name, String dosage, String frequency, String duration) {
         this.prescriptionId = prescriptionId;
         this.medicineId = medicineId;
         this.name = name;
         this.dosage = dosage;
         this.frequency = frequency;
+        this.duration = duration;
     }
 
-    public PrescriptionMedicineDTO(int prescriptionId, String name, String dosage, String frequency) {
+    public PrescriptionMedicineDTO(int prescriptionId, String name, String dosage, String frequency, String duration) {
         this.prescriptionId = prescriptionId;
         this.name = name;
         this.dosage = dosage;
         this.frequency = frequency;
+        this.duration = duration;
     }
 
     public int getPrescriptionId() {
@@ -60,5 +63,13 @@ public class PrescriptionMedicineDTO {
 
     public void setFrequency(String frequency) {
         this.frequency = frequency;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }

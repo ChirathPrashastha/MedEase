@@ -32,7 +32,7 @@ public class PrescriptionModel {
             if (isPrescriptionSaved) {
                 boolean isPrescriptionMedicineSaved = true;
 
-                String presMedAddSql = "INSERT INTO prescription_medicine VALUES (?,?,?,?,?)";
+                String presMedAddSql = "INSERT INTO prescription_medicine VALUES (?,?,?,?,?,?)";
 
                 for (PrescriptionMedicineDTO dto : presMedArray) {
                     PreparedStatement presMedAddingStatement = connection.prepareStatement(presMedAddSql);
@@ -41,6 +41,7 @@ public class PrescriptionModel {
                     presMedAddingStatement.setString(3, dto.getName());
                     presMedAddingStatement.setString(4, dto.getDosage());
                     presMedAddingStatement.setString(5, dto.getFrequency());
+                    presMedAddingStatement.setString(6, dto.getDuration());
 
                     if (!(presMedAddingStatement.executeUpdate() > 0)) {
                         isPrescriptionMedicineSaved = false;
@@ -103,7 +104,7 @@ public class PrescriptionModel {
     public ArrayList<PrescriptionMedicineDTO> getPrescriptionHistory(int patientId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "SELECT prescription_medicine.prescription_id, prescription_medicine.name, prescription_medicine.dosage, prescription_medicine.frequency FROM prescription_medicine INNER JOIN prescription ON prescription_medicine.prescription_id = prescription.prescription_id WHERE prescription.patient_id = ?";
+        String sql = "SELECT prescription_medicine.prescription_id, prescription_medicine.name, prescription_medicine.dosage, prescription_medicine.frequency, prescription_medicine.duration FROM prescription_medicine INNER JOIN prescription ON prescription_medicine.prescription_id = prescription.prescription_id WHERE prescription.patient_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, patientId);
@@ -112,7 +113,7 @@ public class PrescriptionModel {
 
         ArrayList<PrescriptionMedicineDTO> prescriptionMedicineDTOs = new ArrayList<>();
         while (rst.next()){
-            PrescriptionMedicineDTO presMedDto = new PrescriptionMedicineDTO(rst.getInt("prescription_id"), rst.getString("name"), rst.getString("dosage"), rst.getString("frequency"));
+            PrescriptionMedicineDTO presMedDto = new PrescriptionMedicineDTO(rst.getInt("prescription_id"), rst.getString("name"), rst.getString("dosage"), rst.getString("frequency"), rst.getString("duration"));
             prescriptionMedicineDTOs.add(presMedDto);
         }
         return prescriptionMedicineDTOs;

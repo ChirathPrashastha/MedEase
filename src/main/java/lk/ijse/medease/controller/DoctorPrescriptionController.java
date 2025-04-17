@@ -43,6 +43,10 @@ public class DoctorPrescriptionController implements Initializable {
     private TableColumn<PrescriptionMedicineDTO, String> colFrequency;
 
     @FXML
+    private TableColumn<PrescriptionMedicineDTO, String> colDuration;
+
+
+    @FXML
     private TableColumn<PrescriptionMedicineDTO, Number> colMedId;
 
     @FXML
@@ -82,6 +86,10 @@ public class DoctorPrescriptionController implements Initializable {
     private TextField txtFrequency;
 
     @FXML
+    private TextField txtDuration;
+
+
+    @FXML
     private TextField txtName;
 
     @FXML
@@ -101,16 +109,16 @@ public class DoctorPrescriptionController implements Initializable {
             e.printStackTrace();
         }
 
-        if (medicineId != -1) {
-            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPID.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText());
+        if (medicineId != -1) { // adding medicine that are available at inventory
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPID.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText()); // here
             presMedList.add(presMedDTO); //for the table
 
             addToTable();
 
             presMedDtoArray.add(presMedDTO); // for the database
             clearFields();
-        } else {
-            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPID.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText());
+        } else { // adding medicine that unavailable at inventory
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPID.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
             presMedList.add(presMedDTO);
 
             addToTable();
@@ -141,7 +149,7 @@ public class DoctorPrescriptionController implements Initializable {
 
             if (medId != -1){
                 txtAvailability.setText("Available");
-                txtAvailability.setStyle("-fx-text-fill: green");
+                txtAvailability.setStyle("-fx-text-fill: #8fce00");
                 Image availableImg = new Image(getClass().getResourceAsStream("/images/yes.png"));
                 imgAvailability.setImage(availableImg);
             } else {
@@ -213,6 +221,7 @@ public class DoctorPrescriptionController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colDosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
         colFrequency.setCellValueFactory(new PropertyValueFactory<>("frequency"));
+        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
 
     }
 
@@ -248,6 +257,7 @@ public class DoctorPrescriptionController implements Initializable {
         txtName.clear();
         txtDosage.clear();
         txtFrequency.clear();
+        txtDuration.clear();
         txtNotes.clear();
         txtAvailability.setText("");
         imgAvailability.setImage(null);
@@ -260,6 +270,7 @@ public class DoctorPrescriptionController implements Initializable {
         txtName.clear();
         txtDosage.clear();
         txtFrequency.clear();
+        txtDuration.clear();
         txtNotes.clear();
         txtPatientName.setText("Empty");
         txtAge.setText("Empty");

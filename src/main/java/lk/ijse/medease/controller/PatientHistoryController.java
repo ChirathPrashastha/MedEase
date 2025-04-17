@@ -31,6 +31,9 @@ public class PatientHistoryController implements Initializable {
     private TableColumn<PrescriptionMedicineDTO, String> colName;
 
     @FXML
+    private TableColumn<?, ?> colDuration;
+
+    @FXML
     private TableView<PrescriptionMedicineDTO> tblPresMed;
 
 
@@ -73,6 +76,7 @@ public class PatientHistoryController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colDosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
         colFrequency.setCellValueFactory(new PropertyValueFactory<>("frequency"));
+        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
 
         try {
             ArrayList<PrescriptionMedicineDTO> prescriptionMedicineDTOs = prescriptionController.getPrescriptionHistory(patientId);
