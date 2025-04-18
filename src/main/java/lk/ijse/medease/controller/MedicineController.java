@@ -27,4 +27,9 @@ public class MedicineController {
         int response = medicineModel.getInventoryIdByMedicineId(medicineId);
         return response;
     }
+
+    public MedicineDTO checkExpiration(int medicineId, int duration, String period) throws SQLException, ClassNotFoundException {
+        MedicineDTO response = medicineModel.checkExpiration( medicineId, duration, period);
+        return response;
+    }
 }

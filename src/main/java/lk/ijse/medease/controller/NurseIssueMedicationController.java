@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.medease.dto.MedicineDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 
 import java.net.URL;
@@ -112,6 +113,7 @@ public class NurseIssueMedicationController implements Initializable {
         forDays = true;
         duration = Integer.parseInt(txtDuration.getText());
 
+        checkExpiration();
         checkStockAvailability();
     }
 
@@ -219,6 +221,24 @@ public class NurseIssueMedicationController implements Initializable {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void checkExpiration() {
+        if (forDays) {
+            try {
+                MedicineDTO medicineDTO = medicineController.checkExpiration(Integer.parseInt(lblMedId.getText()), Integer.parseInt(txtDuration.getText()), "days");
+                if (medicineDTO != null) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("EXPIRATION");
+                    alert.setContentText( medicineDTO.getBrand() +" is about to be expired between the duration \n" + medicineDTO.getExpirationDate());
+                    alert.showAndWait();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
