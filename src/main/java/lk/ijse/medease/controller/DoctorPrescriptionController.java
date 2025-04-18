@@ -98,6 +98,10 @@ public class DoctorPrescriptionController implements Initializable {
     @FXML
     public TextField txtPID;
 
+
+    @FXML
+    private TextField txtPrescriptionId;
+
     @FXML
     public Label txtPatientName;
 
@@ -110,7 +114,7 @@ public class DoctorPrescriptionController implements Initializable {
         }
 
         if (medicineId != -1) { // adding medicine that are available at inventory
-            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPID.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText()); // here
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPrescriptionId.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText()); // here
             presMedList.add(presMedDTO); //for the table
 
             addToTable();
@@ -118,7 +122,7 @@ public class DoctorPrescriptionController implements Initializable {
             presMedDtoArray.add(presMedDTO); // for the database
             clearFields();
         } else { // adding medicine that unavailable at inventory
-            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPID.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPrescriptionId.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
             presMedList.add(presMedDTO);
 
             addToTable();
@@ -265,6 +269,7 @@ public class DoctorPrescriptionController implements Initializable {
 
     private void fullyClearFields() {
         txtAID.clear();
+        txtPrescriptionId.clear();
         txtPID.clear();
         txtDiagnosis.clear();
         txtName.clear();

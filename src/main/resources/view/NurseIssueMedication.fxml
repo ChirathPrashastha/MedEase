@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/NurseDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.NurseIssueMedicationController">
+   <children>
+      <Pane layoutX="484.0" layoutY="474.0" prefHeight="45.0" prefWidth="164.0" styleClass="order-btn" stylesheets="@../css/NurseDashboardStyle.css" />
+      <Label alignment="CENTER" layoutX="182.0" layoutY="50.0" prefHeight="44.0" prefWidth="239.0" styleClass="header" stylesheets="@../css/NurseDashboardStyle.css" text="ISSUE MEDICATION" textFill="WHITE">
+         <font>
+            <Font name="Cambria Math" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="139.0" fitWidth="148.0" layoutX="21.0" layoutY="10.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/pharmacy.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER_LEFT" layoutX="37.0" layoutY="148.0" prefHeight="34.0" prefWidth="294.0" spacing="10.0">
+         <children>
+            <Label prefHeight="25.0" prefWidth="121.0" text="PRESCRIPTION ID" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPrescriptionId" prefHeight="27.0" prefWidth="160.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css" />
+         </children>
+      </HBox>
+      <TableView fx:id="tblPresMed" layoutX="362.0" layoutY="215.0" prefHeight="228.0" prefWidth="387.0">
+        <columns>
+          <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="colDosage" prefWidth="75.0" text="Dosage" />
+            <TableColumn fx:id="colFrequency" prefWidth="75.0" text="Frequency" />
+            <TableColumn fx:id="colDuration" prefWidth="75.0" text="Duration" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Pane layoutX="23.0" layoutY="209.0" prefHeight="240.0" prefWidth="324.0" styleClass="header" stylesheets="@../css/NurseDashboardStyle.css">
+         <children>
+            <VBox layoutX="28.0" layoutY="16.0" prefHeight="55.0" prefWidth="103.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="121.0" text="MEDICINE ID" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Math" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="121.0" text="NAME" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Math" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="141.0" layoutY="17.0" prefHeight="55.0" prefWidth="164.0">
+               <children>
+                  <Label fx:id="lblMedId" prefHeight="24.0" prefWidth="165.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblMedName" layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="167.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="214.0" layoutY="93.0" prefHeight="55.0" prefWidth="103.0" spacing="7.0" />
+            <HBox layoutX="28.0" layoutY="79.0" prefHeight="25.0" prefWidth="177.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="121.0" text="FREQUENCY" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Math" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtFrequency" prefHeight="25.0" prefWidth="102.0" styleClass="medicine-input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="28.0" layoutY="160.0" prefHeight="25.0" prefWidth="177.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="121.0" text="DURATION" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Math" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtDuration" prefHeight="24.0" prefWidth="102.0" styleClass="medicine-input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="14.0" layoutY="115.0" prefHeight="29.0" prefWidth="300.0" spacing="10.0" styleClass="radioBtn-fields" stylesheets="@../css/NurseDashboardStyle.css">
+               <children>
+                  <RadioButton fx:id="radioBtnPerDay" mnemonicParsing="false" onAction="#frequnecyPerDayOnAction" prefHeight="16.0" prefWidth="72.0" text="per day" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Italic" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioBtnPerWeek" mnemonicParsing="false" onAction="#frequencyPerWeekOnAction" prefHeight="16.0" prefWidth="72.0" text="per week" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Italic" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioBtnPerMonth" mnemonicParsing="false" onAction="#frequencyPerMonthOnAction" prefHeight="15.0" prefWidth="77.0" text="per month" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Italic" size="12.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="15.0" layoutY="196.0" prefHeight="29.0" prefWidth="300.0" spacing="10.0" styleClass="radioBtn-fields" stylesheets="@../css/NurseDashboardStyle.css">
+               <children>
+                  <RadioButton fx:id="radioBtnForDays" mnemonicParsing="false" onAction="#durationDaysOnAction" prefHeight="16.0" prefWidth="72.0" text="days" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Italic" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioBtnForWeeks" mnemonicParsing="false" onAction="#durationWeeksOnAction" prefHeight="16.0" prefWidth="72.0" text="weeks" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Italic" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioBtnForMonths" mnemonicParsing="false" onAction="#durationMonthsOnAction" prefHeight="15.0" prefWidth="77.0" text="months" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Italic" size="12.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </RadioButton>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <HBox alignment="CENTER_LEFT" layoutX="395.0" layoutY="148.0" prefHeight="34.0" prefWidth="251.0" spacing="10.0">
+         <children>
+            <Label prefHeight="25.0" prefWidth="71.0" text="ORDER ID" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtOrderId" prefHeight="27.0" prefWidth="160.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css" />
+         </children>
+      </HBox>
+      <Button layoutX="121.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnAddToOrderOnAction" prefHeight="29.0" prefWidth="129.0" styleClass="add-btn" stylesheets="@../css/NurseDashboardStyle.css" text="ADD TO LIST">
+         <font>
+            <Font name="Cambria Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <VBox layoutX="50.0" layoutY="516.0" prefHeight="55.0" prefWidth="103.0">
+         <children>
+            <Label prefHeight="25.0" prefWidth="98.0" text="ITEM COUNT" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="98.0" text="SUB TOTAL" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="161.0" layoutY="516.0" prefHeight="55.0" prefWidth="103.0">
+         <children>
+            <Label fx:id="lblItemCount" prefHeight="25.0" prefWidth="98.0" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSubTotal" prefHeight="25.0" prefWidth="98.0" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold Italic" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="503.0" layoutY="478.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/box.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="547.0" layoutY="484.0" prefHeight="25.0" prefWidth="79.0" text="VIEW ORDER" textFill="WHITE">
+         <font>
+            <Font name="Cambria Math" size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="484.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnViewOrderOnAction" prefHeight="45.0" prefWidth="164.0" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Pane layoutX="486.0" layoutY="533.0" prefHeight="45.0" prefWidth="164.0" styleClass="order-btn" stylesheets="@../css/NurseDashboardStyle.css" />
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="503.0" layoutY="540.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/placeOrder.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="548.0" layoutY="543.0" prefHeight="25.0" prefWidth="88.0" text="PLACE ORDER" textFill="WHITE">
+         <font>
+            <Font name="Cambria Math" size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="486.0" layoutY="533.0" mnemonicParsing="false" onAction="#btnPlaceOrderOnAction" prefHeight="45.0" prefWidth="164.0" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="338.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/search.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="338.0" layoutY="149.0" mnemonicParsing="false" onAction="#searchPrescriptionOnAction" prefHeight="34.0" prefWidth="35.0" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

@@ -25,6 +25,13 @@ public class PrescriptionMedicineDTO {
         this.duration = duration;
     }
 
+    public PrescriptionMedicineDTO(String name, String dosage, String frequency, String duration) {
+        this.name = name;
+        this.dosage = dosage;
+        this.frequency = frequency;
+        this.duration = duration;
+    }
+
     public int getPrescriptionId() {
         return prescriptionId;
     }

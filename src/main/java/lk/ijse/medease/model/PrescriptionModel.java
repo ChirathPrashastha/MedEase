@@ -119,6 +119,24 @@ public class PrescriptionModel {
         return prescriptionMedicineDTOs;
     }
 
+    public ArrayList<PrescriptionMedicineDTO> getPrescriptionById(int prescriptionId) throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT name, dosage, frequency, duration FROM prescription_medicine WHERE prescription_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, prescriptionId);
+
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<PrescriptionMedicineDTO> prescriptionMedicineDTOs = new ArrayList<>();
+        while (rst.next()){
+            PrescriptionMedicineDTO presMedDto = new PrescriptionMedicineDTO(rst.getString("name"), rst.getString("dosage"), rst.getString("frequency"), rst.getString("duration"));
+            prescriptionMedicineDTOs.add(presMedDto);
+        }
+        return prescriptionMedicineDTOs;
+    }
+
 //    public String updatePrescription(PrescriptionDTO prescriptionDTO) throws ClassNotFoundException, SQLException {
 //        Connection connection = DBConnection.getInstance().getConnection();
 //

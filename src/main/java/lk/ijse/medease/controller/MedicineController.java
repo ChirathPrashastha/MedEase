@@ -22,4 +22,9 @@ public class MedicineController {
         ArrayList<MedicineDTO> medicineList = medicineModel.getMedicineList();
         return medicineList;
     }
+
+    public int getInventoryIdByMedicineId(int medicineId) throws SQLException, ClassNotFoundException {
+        int response = medicineModel.getInventoryIdByMedicineId(medicineId);
+        return response;
+    }
 }

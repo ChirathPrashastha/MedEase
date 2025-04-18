@@ -43,4 +43,20 @@ public class MedicineModel {
         }
         return medicineList;
     }
+
+    public int getInventoryIdByMedicineId(int medicineId) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT inventory_id FROM medicine WHERE medicine_id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setInt(1, medicineId);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return rst.getInt("inventory_id");
+        }else {
+            return -1;
+        }
+    }
 }

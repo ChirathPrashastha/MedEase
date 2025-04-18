@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.NurseDashboardController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="255.0" styleClass="left-box" stylesheets="@../css/ReceptionDashboardStyle.css">
+      <VBox prefHeight="600.0" prefWidth="255.0" styleClass="left-box" stylesheets="@../css/ReceptionDashboardStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="154.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
@@ -32,7 +32,7 @@
             </Label>
             <VBox prefHeight="389.0" prefWidth="255.0">
                <children>
-                  <Button fx:id="btnAppointment" mnemonicParsing="false" onAction="#btnAppointmentOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Issue Medication" textFill="WHITE">
+                  <Button fx:id="btnIssueMedication" mnemonicParsing="false" onAction="#btnIssueMedicationOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Issue Medication" textFill="WHITE">
                      <font>
                         <Font name="Corbel" size="17.0" />
                      </font>
@@ -40,7 +40,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnPrescription" mnemonicParsing="false" onAction="#btnPrescriptionOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Prescription" textFill="WHITE">
+                  <Button fx:id="btnRequestStocks" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnRequestStocksOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Request Stocks" textFill="WHITE">
                      <font>
                         <Font name="Corbel" size="17.0" />
                      </font>
@@ -63,5 +63,6 @@
             </VBox>
          </children>
       </VBox>
+      <AnchorPane fx:id="mainContainerAnc" layoutX="255.0" prefHeight="600.0" prefWidth="768.0" />
    </children>
 </AnchorPane>

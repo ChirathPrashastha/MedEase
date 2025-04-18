@@ -1,0 +1,37 @@
+.container-anc {
+    -fx-background-color: linear-gradient(to right top ,#1A3B4B, #0F9EA5 );
+}
+
+.header {
+    -fx-background-color: #272640;
+    -fx-background-radius: 30;
+}
+
+.input-fields {
+    -fx-background-color: #1234;
+    -fx-border-color: #3E1F47;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-text-fill: white;
+}
+
+.medicine-input-fields {
+    -fx-background-color: #cbcbcb;
+    -fx-border-color: #3E1F47;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-text-fill: black;
+}
+
+.radioBtn-fields {
+    -fx-background-color: #340034;
+    -fx-background-radius: 30;
+}
+
+.add-btn {
+    -fx-background-color: #78e510;
+    -fx-background-radius: 30;
+}
+
+.order-btn {
+    -fx-background-color: #1234;
+    -fx-background-radius: 30;
+}

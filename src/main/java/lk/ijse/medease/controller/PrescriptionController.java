@@ -28,4 +28,9 @@ public class PrescriptionController {
         ArrayList<PrescriptionMedicineDTO> response = prescriptionModel.getPrescriptionHistory(patientId);
         return response;
     }
+
+    public ArrayList<PrescriptionMedicineDTO> getPrescriptionById(int prescriptionId) throws ClassNotFoundException, SQLException {
+        ArrayList<PrescriptionMedicineDTO> response = prescriptionModel.getPrescriptionById(prescriptionId);
+        return response;
+    }
 }
