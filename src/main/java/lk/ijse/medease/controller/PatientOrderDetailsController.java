@@ -5,10 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.medease.dto.PatientOrderDetailsDTO;
+import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 
 import java.net.URL;
 import java.util.ResourceBundle;

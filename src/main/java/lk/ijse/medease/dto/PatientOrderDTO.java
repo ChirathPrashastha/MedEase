@@ -8,11 +8,10 @@ public class PatientOrderDTO {
     private double subTotal;
     private Date issuedDate;
 
-    public PatientOrderDTO(int orderId, int prescriptionId, double subTotal, Date issuedDate) {
+    public PatientOrderDTO(int orderId, int prescriptionId, double subTotal) {
         this.orderId = orderId;
         this.prescriptionId = prescriptionId;
         this.subTotal = subTotal;
-        this.issuedDate = issuedDate;
     }
 
     public int getOrderId() {

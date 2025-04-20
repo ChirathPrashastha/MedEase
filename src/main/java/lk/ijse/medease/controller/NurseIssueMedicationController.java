@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lk.ijse.medease.dto.MedicineDTO;
+import lk.ijse.medease.dto.PatientOrderDTO;
 import lk.ijse.medease.dto.PatientOrderDetailsDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 
@@ -43,7 +44,6 @@ public class NurseIssueMedicationController implements Initializable {
 
     private int frequency = 0;
     private int duration = 0;
-    private int qtyWanted = 0;
 
     @FXML
     private TableColumn<PrescriptionMedicineDTO, String> colDosage;
@@ -125,6 +125,7 @@ public class NurseIssueMedicationController implements Initializable {
         lblItemCount.setText(String.valueOf(itemCount));
 
         double subTotal = 0.0;
+
         for (PatientOrderDetailsDTO dto : orderDetailsList) {
             subTotal += dto.getTotalPrice();
         }
@@ -139,12 +140,14 @@ public class NurseIssueMedicationController implements Initializable {
             alert.setHeaderText("SUCCESS");
             alert.setContentText("Medicine Added Successfully to the Order");
             alert.showAndWait();
+
+            fullyClearFields();
         }
     }
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
-
+        placeOrder();
     }
 
     @FXML
@@ -401,6 +404,22 @@ public class NurseIssueMedicationController implements Initializable {
         }
     }
 
+    private void placeOrder() {
+        PatientOrderDTO orderDTO = new PatientOrderDTO(Integer.parseInt(txtOrderId.getText()), Integer.parseInt(txtPrescriptionId.getText()), Double.parseDouble(lblSubTotal.getText()));
+        try {
+            String response = patientOrderController.placeOrder(orderDTO, orderDetailsArray);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ORDER PLACING");
+            alert.setHeaderText("ORDER");
+            alert.setContentText(response);
+            alert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        format();
+    }
+
     private void clearFields(){
         txtDuration.clear();
         txtFrequency.clear();
@@ -428,5 +447,26 @@ public class NurseIssueMedicationController implements Initializable {
         radioBtnForDays.setDisable(false);
         radioBtnForWeeks.setDisable(false);
         radioBtnForMonths.setDisable(false);
+    }
+
+    private void fullyClearFields(){
+        lblMedId.setText("");
+        lblMedName.setText("");
+
+        clearFields();
+    }
+
+    private void format(){
+        orderDetailsList.clear();
+        orderDetailsArray.clear();
+
+        tblPresMed.getItems().clear();
+
+        fullyClearFields();
+        txtOrderId.clear();
+        txtPrescriptionId.clear();
+
+        lblItemCount.setText("");
+        lblSubTotal.setText("");
     }
 }

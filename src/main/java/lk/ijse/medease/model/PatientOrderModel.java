@@ -1,5 +1,6 @@
 package lk.ijse.medease.model;
 
+import lk.ijse.medease.controller.MedicineController;
 import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.PatientOrderDTO;
 import lk.ijse.medease.dto.PatientOrderDetailsDTO;
@@ -12,18 +13,24 @@ import java.util.ArrayList;
 
 public class PatientOrderModel {
 
+    private MedicineController medicineController;
+
+    public PatientOrderModel(){
+        medicineController = new MedicineController();
+    }
+
     public String placeOrder(PatientOrderDTO orderDTO, ArrayList<PatientOrderDetailsDTO> orderDetailsArray) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         try {
             connection.setAutoCommit(false);
 
-            double subTotal = 0.0;
-            for (PatientOrderDetailsDTO dto : orderDetailsArray) {
-                subTotal += dto.getTotalPrice();
-            }
+//            double subTotal = 0.0;
+//            for (PatientOrderDetailsDTO dto : orderDetailsArray) {
+//                subTotal += dto.getTotalPrice();
+//            }
 
-            orderDTO.setSubTotal(subTotal);
+//            orderDTO.setSubTotal(subTotal);
 
             String orderAddingSql = "INSERT INTO patient_order (order_id, prescription_id, sub_total) VALUES (?,?,?)";
 
@@ -37,14 +44,15 @@ public class PatientOrderModel {
             if (isOrderAdded) {
                 boolean isOrderDetailsAdded = true;
 
-                String orderDetailsAddingSql = "INSERT INTO patient_order_details VALUES (?,?,?,?)";
+                String orderDetailsAddingSql = "INSERT INTO patient_order_details VALUES (?,?,?,?,?)";
 
                 for (PatientOrderDetailsDTO dto : orderDetailsArray) {
                     PreparedStatement orderDetailsAddingStatement = connection.prepareStatement(orderDetailsAddingSql);
                     orderDetailsAddingStatement.setInt(1, dto.getOrderId());
                     orderDetailsAddingStatement.setInt(2, dto.getMedicineId());
-                    orderDetailsAddingStatement.setInt(3, dto.getQuantity());
-                    orderDetailsAddingStatement.setDouble(4, dto.getTotalPrice());
+                    orderDetailsAddingStatement.setDouble(3, dto.getUnitPrice());
+                    orderDetailsAddingStatement.setInt(4, dto.getQuantity());
+                    orderDetailsAddingStatement.setDouble(5, dto.getTotalPrice());
 
                     if (!(orderDetailsAddingStatement.executeUpdate() > 0)) {
                         isOrderDetailsAdded = false;
@@ -52,7 +60,30 @@ public class PatientOrderModel {
                 }
 
                 if (isOrderDetailsAdded) {
-                    return "Order Placed Successfully";
+
+                    boolean isQuantityUpdated = true;
+
+                    String updateQuantitySql = "UPDATE inventory SET quantity = quantity - ? WHERE inventory_id = ?";
+
+                    for (PatientOrderDetailsDTO dto : orderDetailsArray) {
+                        int inventoryId = medicineController.getInventoryIdByMedicineId(dto.getMedicineId());
+
+                        PreparedStatement updateQuantityStatement = connection.prepareStatement(updateQuantitySql);
+                        updateQuantityStatement.setInt(1, dto.getQuantity());
+                        updateQuantityStatement.setInt(2, inventoryId);
+
+                        if (!(updateQuantityStatement.executeUpdate() > 0)) {
+                            isQuantityUpdated = false;
+                        }
+                    }
+
+                    if (isQuantityUpdated) {
+                        return "Order Added Successfully";
+                    }else {
+                        connection.rollback();
+                        return "Failed to Update Quantity";
+                    }
+
                 }else {
                     connection.rollback();
                     return "Failed to Add Patient Order Details";
