@@ -4,22 +4,34 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import lk.ijse.medease.dto.MedicineDTO;
+import lk.ijse.medease.dto.PatientOrderDetailsDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NurseIssueMedicationController implements Initializable {
+    public static NurseIssueMedicationController nurseIssueMedicationController;
 
     private PrescriptionController prescriptionController;
     private MedicineController medicineController;
     private InventoryController inventoryController;
+    private PatientOrderController patientOrderController;
+
+    public ObservableList<PatientOrderDetailsDTO> orderDetailsList; // for the table
+    private ArrayList<PatientOrderDetailsDTO> orderDetailsArray; // for the database
+
+    private int qty;
 
     private boolean perDay = false;
     private boolean perWeek = false;
@@ -31,6 +43,7 @@ public class NurseIssueMedicationController implements Initializable {
 
     private int frequency = 0;
     private int duration = 0;
+    private int qtyWanted = 0;
 
     @FXML
     private TableColumn<PrescriptionMedicineDTO, String> colDosage;
@@ -93,6 +106,40 @@ public class NurseIssueMedicationController implements Initializable {
     @FXML
     void btnAddToOrderOnAction(ActionEvent event) {
 
+        double totalPrice = 0.0;
+        double unitPrice = 0.0;
+        try {
+            totalPrice = patientOrderController.calculateTotalPrice(Integer.parseInt(lblMedId.getText()), qty);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        unitPrice = totalPrice / qty;
+
+        PatientOrderDetailsDTO orderDetailsDTO = new PatientOrderDetailsDTO(Integer.parseInt(txtOrderId.getText()), Integer.parseInt(lblMedId.getText()), unitPrice, qty, totalPrice);
+
+        orderDetailsList.add(orderDetailsDTO); // for the table
+
+        int itemCount = orderDetailsList.size();
+
+        lblItemCount.setText(String.valueOf(itemCount));
+
+        double subTotal = 0.0;
+        for (PatientOrderDetailsDTO dto : orderDetailsList) {
+            subTotal += dto.getTotalPrice();
+        }
+
+        lblSubTotal.setText(String.valueOf(subTotal));
+
+        orderDetailsArray.add(orderDetailsDTO); // for the db
+
+        if (itemCount > 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ADDING TO ORDER");
+            alert.setHeaderText("SUCCESS");
+            alert.setContentText("Medicine Added Successfully to the Order");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -101,8 +148,20 @@ public class NurseIssueMedicationController implements Initializable {
     }
 
     @FXML
-    void btnViewOrderOnAction(ActionEvent event) {
+    void btnViewOrderOnAction(ActionEvent event) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/PatientOrderDetails.fxml"));
+        Stage stage = new Stage();
 
+        Scene scene = new Scene(parent);
+
+        stage.setScene(scene);
+        stage.setTitle("Order Details");
+        stage.show();
+    }
+
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
+        clearFields();
     }
 
     @FXML
@@ -125,6 +184,7 @@ public class NurseIssueMedicationController implements Initializable {
         forMonths = true;
         duration = Integer.parseInt(txtDuration.getText());
 
+        checkExpiration();
         checkStockAvailability();
     }
 
@@ -136,6 +196,7 @@ public class NurseIssueMedicationController implements Initializable {
         forWeeks = true;
         duration = Integer.parseInt(txtDuration.getText());
 
+        checkExpiration();
         checkStockAvailability();
     }
 
@@ -173,9 +234,15 @@ public class NurseIssueMedicationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        nurseIssueMedicationController = this;
+
+        orderDetailsList = FXCollections.observableArrayList();
+        orderDetailsArray = new ArrayList<>();
+
         prescriptionController = new PrescriptionController();
         medicineController = new MedicineController();
         inventoryController = new InventoryController();
+        patientOrderController = new PatientOrderController();
 
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colDosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
@@ -235,15 +302,41 @@ public class NurseIssueMedicationController implements Initializable {
                     alert.setContentText( medicineDTO.getBrand() +" is about to be expired between the duration \n" + medicineDTO.getExpirationDate());
                     alert.showAndWait();
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (forWeeks) {
+            try {
+                MedicineDTO medicineDTO = medicineController.checkExpiration(Integer.parseInt(lblMedId.getText()), Integer.parseInt(txtDuration.getText()), "weeks");
+                if (medicineDTO != null) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("EXPIRATION");
+                    alert.setContentText( medicineDTO.getBrand() +" is about to be expired between the duration \n" + medicineDTO.getExpirationDate());
+                    alert.showAndWait();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (forMonths) {
+            try {
+                MedicineDTO medicineDTO = medicineController.checkExpiration(Integer.parseInt(lblMedId.getText()), Integer.parseInt(txtDuration.getText()), "months");
+                if (medicineDTO != null) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("EXPIRATION");
+                    alert.setContentText( medicineDTO.getBrand() +" is about to be expired between the duration \n" + medicineDTO.getExpirationDate());
+                    alert.showAndWait();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
     private void checkStockAvailability() {
-        int qty = 0;
+        qty = 0;
         int inventoryId;
         int availableQty = 0;
 
@@ -306,5 +399,34 @@ public class NurseIssueMedicationController implements Initializable {
             alert.setContentText("Please check your information");
             alert.showAndWait();
         }
+    }
+
+    private void clearFields(){
+        txtDuration.clear();
+        txtFrequency.clear();
+
+        radioBtnPerDay.setSelected(false);
+        radioBtnPerMonth.setSelected(false);
+        radioBtnPerWeek.setSelected(false);
+
+        perDay = false;
+        perMonth = false;
+        perWeek = false;
+
+        radioBtnPerDay.setDisable(false);
+        radioBtnPerMonth.setDisable(false);
+        radioBtnPerWeek.setDisable(false);
+
+        radioBtnForDays.setSelected(false);
+        radioBtnForMonths.setSelected(false);
+        radioBtnForWeeks.setSelected(false);
+
+        forDays = false;
+        forWeeks = false;
+        forMonths = false;
+
+        radioBtnForDays.setDisable(false);
+        radioBtnForWeeks.setDisable(false);
+        radioBtnForMonths.setDisable(false);
     }
 }

@@ -13,13 +13,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import lk.ijse.medease.dto.CheckInDTO;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
