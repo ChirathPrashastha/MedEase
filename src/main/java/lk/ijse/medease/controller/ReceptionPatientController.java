@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.medease.dto.PatientDTO;
+import lk.ijse.medease.dto.tm.PatientTM;
 
 import java.net.URL;
 import java.sql.Date;
@@ -22,25 +23,25 @@ public class ReceptionPatientController implements Initializable {
     private PatientController patientController;
 
     @FXML
-    private TableColumn<PatientDTO, String> colAllergies;
+    private TableColumn<PatientTM, String> colAllergies;
 
     @FXML
-    private TableColumn<PatientDTO, String> colContact;
+    private TableColumn<PatientTM, String> colContact;
 
     @FXML
-    private TableColumn<PatientDTO, Date> colDOB;
+    private TableColumn<PatientTM, Date> colDOB;
 
     @FXML
-    private TableColumn<PatientDTO, String> colEmail;
+    private TableColumn<PatientTM, String> colEmail;
 
     @FXML
-    private TableColumn<PatientDTO, String> colName;
+    private TableColumn<PatientTM, String> colName;
 
     @FXML
-    private TableColumn<PatientDTO, Number> colPID;
+    private TableColumn<PatientTM, Number> colPID;
 
     @FXML
-    private TableView<PatientDTO> tblPatient;
+    private TableView<PatientTM> tblPatient;
 
     @FXML
     private TextField txtAllergies;
@@ -156,9 +157,15 @@ public class ReceptionPatientController implements Initializable {
     private void loadData() {
         try {
             ArrayList<PatientDTO> patientDTOs = patientController.getAllPatients();
-            //System.out.println(patientDTOs);
-            ObservableList<PatientDTO> allPatients = FXCollections.observableArrayList(patientDTOs);
-            tblPatient.setItems(allPatients);
+
+            ObservableList<PatientTM> patientTMObList = FXCollections.observableArrayList();
+
+            for (PatientDTO dto : patientDTOs) {
+                PatientTM patientTM = new PatientTM(dto.getPatientId(), dto.getName(), dto.getBirthDate(), dto.getContact(), dto.getEmail(), dto.getAllergies());
+                patientTMObList.add(patientTM);
+            }
+
+            tblPatient.setItems(patientTMObList);
 
         }catch (Exception e){
             e.printStackTrace();

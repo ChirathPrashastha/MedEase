@@ -15,6 +15,8 @@ import lk.ijse.medease.dto.AppointmentDTO;
 import lk.ijse.medease.dto.CheckInDTO;
 import lk.ijse.medease.dto.DoctorDTO;
 import lk.ijse.medease.dto.PatientDTO;
+import lk.ijse.medease.dto.tm.AppointmentTM;
+import lk.ijse.medease.dto.tm.CheckInTM;
 
 import java.net.URL;
 import java.sql.Date;
@@ -43,28 +45,28 @@ public class DoctorAppointmentController implements Initializable {
     private AnchorPane mainContainerAnc;
 
     @FXML
-    private TableColumn<CheckInDTO, Number> colNum;
+    private TableColumn<CheckInTM, Number> colNum;
 
     @FXML
-    private TableColumn<CheckInDTO, String> colStatus;
+    private TableColumn<CheckInTM, String> colStatus;
 
     @FXML
-    private TableView<CheckInDTO> tblCheckIn;
+    private TableView<CheckInTM> tblCheckIn;
 
     @FXML
-    private TableColumn<AppointmentDTO, Number> colAID;
+    private TableColumn<AppointmentTM, Number> colAID;
 
     @FXML
-    private TableColumn<AppointmentDTO, Date> colDate;
+    private TableColumn<AppointmentTM, Date> colDate;
 
     @FXML
-    private TableColumn<AppointmentDTO, Number> colNo;
+    private TableColumn<AppointmentTM, Number> colNo;
 
     @FXML
-    private TableColumn<AppointmentDTO, Number> colPID;
+    private TableColumn<AppointmentTM, Number> colPID;
 
     @FXML
-    private TableView<AppointmentDTO> tblAppointment;
+    private TableView<AppointmentTM> tblAppointment;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,7 +89,7 @@ public class DoctorAppointmentController implements Initializable {
         colNo.setCellValueFactory(new PropertyValueFactory<>("checkInNo"));
 
         tblAppointment.setRowFactory(tv -> {
-            TableRow<AppointmentDTO> row = new TableRow<>();
+            TableRow<AppointmentTM> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getClickCount() == 1) {
                     appointmentId = row.getItem().getAppointmentId();
@@ -110,8 +112,14 @@ public class DoctorAppointmentController implements Initializable {
 
         try {
             ArrayList<AppointmentDTO> appointmentDTOs = appointmentController.getAppointmentsByDoctor(doctorId);
-            ObservableList<AppointmentDTO> allAppointments = FXCollections.observableArrayList(appointmentDTOs);
-            tblAppointment.setItems(allAppointments);
+            ObservableList<AppointmentTM> appointmentTMObList = FXCollections.observableArrayList();
+
+            for (AppointmentDTO dto : appointmentDTOs){
+                AppointmentTM appointmentTM = new AppointmentTM(dto.getAppointmentId(), dto.getPatientId(), dto.getDate(), dto.getCheckInNo(), dto.getTime());
+                appointmentTMObList.add(appointmentTM);
+            }
+
+            tblAppointment.setItems(appointmentTMObList);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,8 +169,14 @@ public class DoctorAppointmentController implements Initializable {
     private void loadCheckInTable() {
         try {
             ArrayList<CheckInDTO> checkInDTOs = checkInController.getDoctorCheckInList(doctorId);
-            ObservableList<CheckInDTO> checkInList = FXCollections.observableArrayList(checkInDTOs);
-            tblCheckIn.setItems(checkInList);
+            ObservableList<CheckInTM> checkInObList = FXCollections.observableArrayList();
+
+            for (CheckInDTO dto : checkInDTOs){
+                CheckInTM checkInTM = new CheckInTM(dto.getCheckInNo(), dto.getStatus());
+                checkInObList.add(checkInTM);
+            }
+
+            tblCheckIn.setItems(checkInObList);
         } catch (Exception e) {
             e.printStackTrace();
         }

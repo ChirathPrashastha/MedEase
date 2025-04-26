@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
+import lk.ijse.medease.dto.tm.PrescriptionMedicineTM;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,26 +33,26 @@ public class DoctorPrescriptionController implements Initializable {
 
     private ArrayList<PrescriptionMedicineDTO> presMedDtoArray;
 
-    private ObservableList<PrescriptionMedicineDTO> presMedList ;
+    private ObservableList<PrescriptionMedicineTM> presMedList ;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colDosage;
+    private TableColumn<PrescriptionMedicineTM, String> colDosage;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colFrequency;
+    private TableColumn<PrescriptionMedicineTM, String> colFrequency;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colDuration;
+    private TableColumn<PrescriptionMedicineTM, String> colDuration;
 
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, Number> colMedId;
+    private TableColumn<PrescriptionMedicineTM, Number> colMedId;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colName;
+    private TableColumn<PrescriptionMedicineTM, String> colName;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, Number> colPresId;
+    private TableColumn<PrescriptionMedicineTM, Number> colPresId;
 
     @FXML
     private ImageView imgAlert;
@@ -60,7 +61,7 @@ public class DoctorPrescriptionController implements Initializable {
     private ImageView imgAvailability;
 
     @FXML
-    private TableView<PrescriptionMedicineDTO> tblPresMed;
+    private TableView<PrescriptionMedicineTM> tblPresMed;
 
     @FXML
     public TextField txtAID;
@@ -112,19 +113,21 @@ public class DoctorPrescriptionController implements Initializable {
         }
 
         if (medicineId != -1) { // adding medicine that are available at inventory
-            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPrescriptionId.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText()); // here
-            presMedList.add(presMedDTO); //for the table
+            PrescriptionMedicineTM prescriptionMedicineTM = new PrescriptionMedicineTM(Integer.parseInt(txtPrescriptionId.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText()); // here
+            presMedList.add(prescriptionMedicineTM); //for the table
 
             addToTable();
 
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPrescriptionId.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
             presMedDtoArray.add(presMedDTO); // for the database
             clearFields();
         } else { // adding medicine that unavailable at inventory
-            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPrescriptionId.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
-            presMedList.add(presMedDTO);
+            PrescriptionMedicineTM prescriptionMedicineTM = new PrescriptionMedicineTM(Integer.parseInt(txtPrescriptionId.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
+            presMedList.add(prescriptionMedicineTM);
 
             addToTable();
 
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPrescriptionId.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
             presMedDtoArray.add(presMedDTO);
             clearFields();
         }
@@ -195,11 +198,19 @@ public class DoctorPrescriptionController implements Initializable {
 
     @FXML
     void btnDeleteRowOnAction(ActionEvent event) {
-        PrescriptionMedicineDTO selectedDTO = tblPresMed.getSelectionModel().getSelectedItem();
+        PrescriptionMedicineTM selectedTM = tblPresMed.getSelectionModel().getSelectedItem();
 
-        if (selectedDTO != null) {
-            presMedList.remove(selectedDTO); // removes from table view
-            presMedDtoArray.remove(selectedDTO); // removes from database
+        if (selectedTM != null) {
+            presMedList.remove(selectedTM); // removes from table view
+
+            for (int i = 0; i < presMedDtoArray.size(); i++) {
+                PrescriptionMedicineDTO dto = presMedDtoArray.get(i);
+                if ((selectedTM.getPrescriptionId() == dto.getPrescriptionId()) && (selectedTM.getMedicineId() == dto.getMedicineId())) {
+                    presMedDtoArray.remove(i);
+                    break;
+                }
+            }
+
         }else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");

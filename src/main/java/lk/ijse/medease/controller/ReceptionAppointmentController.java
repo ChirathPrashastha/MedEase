@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.medease.dto.AppointmentDTO;
+import lk.ijse.medease.dto.tm.AppointmentTM;
 
 import java.net.URL;
 import java.sql.Date;
@@ -24,27 +25,27 @@ public class ReceptionAppointmentController implements Initializable {
     private AppointmentController appointmentController;
 
     @FXML
-    private TableColumn<AppointmentDTO, Number> colAppId;
+    private TableColumn<AppointmentTM, Number> colAppId;
 
     @FXML
-    private TableColumn<AppointmentDTO, Date> colDate;
+    private TableColumn<AppointmentTM, Date> colDate;
 
     @FXML
-    private TableColumn<AppointmentDTO, String> colDocId;
+    private TableColumn<AppointmentTM, String> colDocId;
 
     @FXML
-    private TableColumn<AppointmentDTO, Number> colNum;
+    private TableColumn<AppointmentTM, Number> colNum;
 
     @FXML
-    private TableColumn<AppointmentDTO, Number> colPatientId;
+    private TableColumn<AppointmentTM, Number> colPatientId;
 
     @FXML
-    private TableColumn<AppointmentDTO, String> colTime;
+    private TableColumn<AppointmentTM, String> colTime;
 
 
 
     @FXML
-    private TableView<AppointmentDTO> tblAppointment;
+    private TableView<AppointmentTM> tblAppointment;
 
     @FXML
     private TextField txtAppointmentId;
@@ -192,8 +193,15 @@ public class ReceptionAppointmentController implements Initializable {
     private void loadData() {
         try {
             ArrayList<AppointmentDTO> appointmentDTOs = appointmentController.getAllAppointments();
-            ObservableList<AppointmentDTO> allAppointments = FXCollections.observableArrayList(appointmentDTOs);
-            tblAppointment.setItems(allAppointments);
+
+            ObservableList<AppointmentTM> appointmentObList = FXCollections.observableArrayList();
+
+            for (AppointmentDTO dto: appointmentDTOs){
+                AppointmentTM appointmentTM = new AppointmentTM(dto.getAppointmentId(), dto.getPatientId(), dto.getDoctorId(), dto.getDate(), dto.getCheckInNo(), dto.getTime());
+                appointmentObList.add(appointmentTM);
+            }
+
+            tblAppointment.setItems(appointmentObList);
 
         } catch (Exception e) {
             e.printStackTrace();

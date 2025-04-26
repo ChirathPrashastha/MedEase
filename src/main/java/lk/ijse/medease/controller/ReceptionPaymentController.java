@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.medease.dto.PaymentDTO;
+import lk.ijse.medease.dto.tm.PaymentTM;
 
 import java.net.URL;
 import java.sql.Date;
@@ -27,23 +28,23 @@ public class ReceptionPaymentController implements Initializable {
     private CheckBox checkCash;
 
     @FXML
-    private TableColumn<PaymentDTO, Double> colAmount;
+    private TableColumn<PaymentTM, Double> colAmount;
 
     @FXML
-    private TableColumn<PaymentDTO, Number> colAppId;
+    private TableColumn<PaymentTM, Number> colAppId;
 
     @FXML
-    private TableColumn<PaymentDTO, Date> colPaidDate;
+    private TableColumn<PaymentTM, Date> colPaidDate;
 
     @FXML
-    private TableColumn<PaymentDTO, Number> colPayId;
+    private TableColumn<PaymentTM, Number> colPayId;
 
     @FXML
-    private TableColumn<PaymentDTO, String> colPayMethod;
+    private TableColumn<PaymentTM, String> colPayMethod;
 
 
     @FXML
-    private TableView<PaymentDTO> tblPayment;
+    private TableView<PaymentTM> tblPayment;
 
     @FXML
     private TextField txtAmount;
@@ -110,8 +111,14 @@ public class ReceptionPaymentController implements Initializable {
 
         try {
             ArrayList<PaymentDTO> paymentDTOs = paymentController.getAllPayments();
-            ObservableList<PaymentDTO> allPayments = FXCollections.observableArrayList(paymentDTOs);
-            tblPayment.setItems(allPayments);
+            ObservableList<PaymentTM> paymentTMObList = FXCollections.observableArrayList();
+
+            for (PaymentDTO dto : paymentDTOs){
+                PaymentTM paymentTM = new PaymentTM(dto.getPaymentId(), dto.getAppointmentId(), dto.getAmount(), dto.getPaidDate(), dto.getPaymentMethod());
+                paymentTMObList.add(paymentTM);
+            }
+
+            tblPayment.setItems(paymentTMObList);
 
         } catch (Exception e) {
             e.printStackTrace();
