@@ -20,6 +20,7 @@ import lk.ijse.medease.dto.tm.PrescriptionMedicineTM;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -118,7 +119,7 @@ public class NurseIssueMedicationController implements Initializable {
 
         unitPrice = totalPrice / qty;
 
-        PatientOrderDetailsDTO orderDetailsDTO = new PatientOrderDetailsDTO(Integer.parseInt(txtOrderId.getText()), lblMedId.getText(), unitPrice, qty, totalPrice);
+        PatientOrderDetailsDTO orderDetailsDTO = new PatientOrderDetailsDTO(txtOrderId.getText(), lblMedId.getText(), unitPrice, qty, totalPrice);
         PatientOrderDetailsTM patientOrderDetailsTM = new PatientOrderDetailsTM(orderDetailsDTO.getOrderId(), orderDetailsDTO.getMedicineId(), orderDetailsDTO.getUnitPrice(), orderDetailsDTO.getQuantity(), orderDetailsDTO.getTotalPrice());
 
         orderDetailsList.add(patientOrderDetailsTM); // for the table
@@ -250,6 +251,13 @@ public class NurseIssueMedicationController implements Initializable {
         inventoryController = new InventoryController();
         patientOrderController = new PatientOrderController();
 
+        try {
+            String orderId = patientOrderController.getNextId();
+            txtOrderId.setText(orderId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colDosage.setCellValueFactory(new PropertyValueFactory<>("dosage"));
         colFrequency.setCellValueFactory(new PropertyValueFactory<>("frequency"));
@@ -349,7 +357,7 @@ public class NurseIssueMedicationController implements Initializable {
 
     private void checkStockAvailability() {
         qty = 0;
-        int inventoryId;
+        String inventoryId;
         int availableQty = 0;
 
         if ((perDay == true && forDays == true) || (perWeek == true && forWeeks == true) || (perMonth == true && forMonths == true)) {
@@ -414,7 +422,7 @@ public class NurseIssueMedicationController implements Initializable {
     }
 
     private void placeOrder() {
-        PatientOrderDTO orderDTO = new PatientOrderDTO(Integer.parseInt(txtOrderId.getText()), txtPrescriptionId.getText(), Double.parseDouble(lblSubTotal.getText()));
+        PatientOrderDTO orderDTO = new PatientOrderDTO(txtOrderId.getText(), txtPrescriptionId.getText(), Double.parseDouble(lblSubTotal.getText()));
         try {
             String response = patientOrderController.placeOrder(orderDTO, orderDetailsArray);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

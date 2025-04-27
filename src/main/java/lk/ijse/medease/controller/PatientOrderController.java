@@ -24,4 +24,8 @@ public class PatientOrderController {
         double totalPrice = patientOrderModel.calculateTotalPrice(medicineId, quantity);
         return totalPrice;
     }
+
+    public String getNextId() throws SQLException, ClassNotFoundException {
+        return patientOrderModel.getNextId();
+    }
 }

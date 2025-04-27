@@ -11,7 +11,7 @@ public class InventoryController {
         inventoryModel = new InventoryModel();
     }
 
-    public int getQuantityByInventoryId(int inventoryId) throws SQLException, ClassNotFoundException {
+    public int getQuantityByInventoryId(String inventoryId) throws SQLException, ClassNotFoundException {
         int response = inventoryModel.getQuantityByInventoryId(inventoryId);
         return response;
     }

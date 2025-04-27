@@ -1,23 +1,23 @@
 package lk.ijse.medease.dto;
 
 public class InventoryDTO {
-    private int inventoryId;
+    private String inventoryId;
     private int quantity;
     private String supplierId;
     private String section;
 
-    public InventoryDTO(int inventoryId, int quantity, String supplierId, String section) {
+    public InventoryDTO(String inventoryId, int quantity, String supplierId, String section) {
         this.inventoryId = inventoryId;
         this.quantity = quantity;
         this.supplierId = supplierId;
         this.section = section;
     }
 
-    public int getInventoryId() {
+    public String getInventoryId() {
         return inventoryId;
     }
 
-    public void setInventoryId(int inventoryId) {
+    public void setInventoryId(String inventoryId) {
         this.inventoryId = inventoryId;
     }
 

@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public class InventoryModel {
 
-    public int getQuantityByInventoryId(int inventoryId) throws ClassNotFoundException, SQLException {
+    public int getQuantityByInventoryId(String inventoryId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT quantity FROM inventory WHERE inventory_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, inventoryId);
+        statement.setString(1, inventoryId);
 
         ResultSet rst = statement.executeQuery();
 
@@ -38,7 +38,7 @@ public class InventoryModel {
 
         ArrayList<InventoryDTO> inventoryDTOs = new ArrayList<>();
         while (rst.next()) {
-            InventoryDTO inventoryDTO = new InventoryDTO(rst.getInt("inventory_id"), rst.getInt("quantity"), rst.getString("supplier_id"), rst.getString("section"));
+            InventoryDTO inventoryDTO = new InventoryDTO(rst.getString("inventory_id"), rst.getInt("quantity"), rst.getString("supplier_id"), rst.getString("section"));
             inventoryDTOs.add(inventoryDTO);
         }
         return inventoryDTOs;

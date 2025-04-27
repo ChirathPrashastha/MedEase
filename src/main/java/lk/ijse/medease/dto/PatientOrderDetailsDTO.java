@@ -1,13 +1,13 @@
 package lk.ijse.medease.dto;
 
 public class PatientOrderDetailsDTO {
-    private int orderId;
+    private String orderId;
     private String medicineId;
     private double unitPrice;
     private int quantity;
     private double totalPrice;
 
-    public PatientOrderDetailsDTO(int orderId, String medicineId,double unitPrice, int quantity, double totalPrice) {
+    public PatientOrderDetailsDTO(String orderId, String medicineId,double unitPrice, int quantity, double totalPrice) {
         this.orderId = orderId;
         this.medicineId = medicineId;
         this.unitPrice = unitPrice;
@@ -15,11 +15,11 @@ public class PatientOrderDetailsDTO {
         this.totalPrice = totalPrice;
     }
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

@@ -43,7 +43,7 @@ public class MedicineModel {
         return medicineList;
     }
 
-    public int getInventoryIdByMedicineId(String medicineId) throws SQLException, ClassNotFoundException {
+    public String getInventoryIdByMedicineId(String medicineId) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT inventory_id FROM medicine WHERE medicine_id = ?";
@@ -53,9 +53,9 @@ public class MedicineModel {
 
         ResultSet rst = statement.executeQuery();
         if (rst.next()) {
-            return rst.getInt("inventory_id");
+            return rst.getString("inventory_id");
         }
-        return -1;
+        return null;
     }
 
     public MedicineDTO checkExpiration(String medicineId, int duration, String period) throws SQLException, ClassNotFoundException {
@@ -80,7 +80,7 @@ public class MedicineModel {
         MedicineDTO medicineDTO = null;
 
         while (rst.next()){
-            medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getInt("inventory_id"));
+            medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id"));
         }
 
         if (medicineDTO != null){

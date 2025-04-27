@@ -21,10 +21,10 @@ public class PatientOrderDetailsController implements Initializable {
     private ObservableList<PatientOrderDetailsTM> orderDetailsList;
 
     @FXML
-    private TableColumn<PatientOrderDetailsTM, Number> colMedicineId;
+    private TableColumn<PatientOrderDetailsTM, String> colMedicineId;
 
     @FXML
-    private TableColumn<PatientOrderDetailsTM, Number> colOrderId;
+    private TableColumn<PatientOrderDetailsTM, String> colOrderId;
 
     @FXML
     private TableColumn<PatientOrderDetailsTM, Number> colUnitPrice;

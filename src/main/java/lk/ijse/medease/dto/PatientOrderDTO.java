@@ -3,22 +3,22 @@ package lk.ijse.medease.dto;
 import java.sql.Date;
 
 public class PatientOrderDTO {
-    private int orderId;
+    private String orderId;
     private String prescriptionId;
     private double subTotal;
     private Date issuedDate;
 
-    public PatientOrderDTO(int orderId, String prescriptionId, double subTotal) {
+    public PatientOrderDTO(String orderId, String prescriptionId, double subTotal) {
         this.orderId = orderId;
         this.prescriptionId = prescriptionId;
         this.subTotal = subTotal;
     }
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

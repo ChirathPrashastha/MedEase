@@ -35,7 +35,7 @@ public class PatientOrderModel {
             String orderAddingSql = "INSERT INTO patient_order (order_id, prescription_id, sub_total) VALUES (?,?,?)";
 
             PreparedStatement orderAddingStatement = connection.prepareStatement(orderAddingSql);
-            orderAddingStatement.setInt(1, orderDTO.getOrderId());
+            orderAddingStatement.setString(1, orderDTO.getOrderId());
             orderAddingStatement.setString(2, orderDTO.getPrescriptionId());
             orderAddingStatement.setDouble(3, orderDTO.getSubTotal());
 
@@ -48,7 +48,7 @@ public class PatientOrderModel {
 
                 for (PatientOrderDetailsDTO dto : orderDetailsArray) {
                     PreparedStatement orderDetailsAddingStatement = connection.prepareStatement(orderDetailsAddingSql);
-                    orderDetailsAddingStatement.setInt(1, dto.getOrderId());
+                    orderDetailsAddingStatement.setString(1, dto.getOrderId());
                     orderDetailsAddingStatement.setString(2, dto.getMedicineId());
                     orderDetailsAddingStatement.setDouble(3, dto.getUnitPrice());
                     orderDetailsAddingStatement.setInt(4, dto.getQuantity());
@@ -66,11 +66,11 @@ public class PatientOrderModel {
                     String updateQuantitySql = "UPDATE inventory SET quantity = quantity - ? WHERE inventory_id = ?";
 
                     for (PatientOrderDetailsDTO dto : orderDetailsArray) {
-                        int inventoryId = medicineController.getInventoryIdByMedicineId(dto.getMedicineId());
+                        String inventoryId = medicineController.getInventoryIdByMedicineId(dto.getMedicineId());
 
                         PreparedStatement updateQuantityStatement = connection.prepareStatement(updateQuantitySql);
                         updateQuantityStatement.setInt(1, dto.getQuantity());
-                        updateQuantityStatement.setInt(2, inventoryId);
+                        updateQuantityStatement.setString(2, inventoryId);
 
                         if (!(updateQuantityStatement.executeUpdate() > 0)) {
                             isQuantityUpdated = false;
@@ -121,5 +121,23 @@ public class PatientOrderModel {
 
         totalPrice = unitPrice * quantity;
         return totalPrice;
+    }
+
+    public String getNextId() throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT order_id FROM patient_order ORDER BY order_id DESC LIMIT 1";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            String lastAppId = rst.getString("order_id");
+            String lastIdNumberString = lastAppId.substring(1);
+            int lastIdNumber = Integer.parseInt(lastIdNumberString);
+            int nextIdNumber = lastIdNumber + 1;
+            String nextIdString = String.format("O"+"%04d", nextIdNumber);
+            return nextIdString;
+        }
+        return "O0001";
     }
 }

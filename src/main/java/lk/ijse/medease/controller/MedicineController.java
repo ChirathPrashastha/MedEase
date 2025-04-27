@@ -23,8 +23,8 @@ public class MedicineController {
         return medicineList;
     }
 
-    public int getInventoryIdByMedicineId(String medicineId) throws SQLException, ClassNotFoundException {
-        int response = medicineModel.getInventoryIdByMedicineId(medicineId);
+    public String getInventoryIdByMedicineId(String medicineId) throws SQLException, ClassNotFoundException {
+        String response = medicineModel.getInventoryIdByMedicineId(medicineId);
         return response;
     }
 
