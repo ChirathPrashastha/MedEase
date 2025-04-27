@@ -30,8 +30,8 @@ public class DoctorAppointmentController implements Initializable {
 
     public static DoctorAppointmentController doctorAppointmentController; // for DoctorPrescription
 
-    private int appointmentId;
-    private int patientId;
+    private String appointmentId;
+    private String patientId;
     private String employeeId = LogInPageController.userDTO.getEmployeeId();
     public String doctorId;
     public int checkInNo;
@@ -54,7 +54,7 @@ public class DoctorAppointmentController implements Initializable {
     private TableView<CheckInTM> tblCheckIn;
 
     @FXML
-    private TableColumn<AppointmentTM, Number> colAID;
+    private TableColumn<AppointmentTM, String> colAID;
 
     @FXML
     private TableColumn<AppointmentTM, Date> colDate;
@@ -63,7 +63,7 @@ public class DoctorAppointmentController implements Initializable {
     private TableColumn<AppointmentTM, Number> colNo;
 
     @FXML
-    private TableColumn<AppointmentTM, Number> colPID;
+    private TableColumn<AppointmentTM, String> colPID;
 
     @FXML
     private TableView<AppointmentTM> tblAppointment;
@@ -147,7 +147,7 @@ public class DoctorAppointmentController implements Initializable {
 
     private void updatePrescription() {
         try {
-            DoctorPrescriptionController.controller.txtAID.setText(String.valueOf(appointmentId));
+            DoctorPrescriptionController.controller.txtAID.setText(appointmentId);
             DoctorPrescriptionController.controller.txtPID.setText(String.valueOf(patientId));
 
             PatientDTO patientDTO = patientController.searchPatient(patientId);

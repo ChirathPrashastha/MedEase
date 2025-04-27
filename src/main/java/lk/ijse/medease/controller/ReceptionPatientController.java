@@ -15,6 +15,7 @@ import lk.ijse.medease.dto.tm.PatientTM;
 
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -38,7 +39,7 @@ public class ReceptionPatientController implements Initializable {
     private TableColumn<PatientTM, String> colName;
 
     @FXML
-    private TableColumn<PatientTM, Number> colPID;
+    private TableColumn<PatientTM, String> colPID;
 
     @FXML
     private TableView<PatientTM> tblPatient;
@@ -78,7 +79,7 @@ public class ReceptionPatientController implements Initializable {
 
     private void addPatient() {
 
-        PatientDTO patientDTO = new PatientDTO(txtName.getText(), Date.valueOf(txtBirthDate.getText()),txtContact.getText(),txtEmail.getText(),txtAllergies.getText());
+        PatientDTO patientDTO = new PatientDTO(txtPatientId.getText(), txtName.getText(), Date.valueOf(txtBirthDate.getText()),txtContact.getText(),txtEmail.getText(),txtAllergies.getText());
 
         try {
             String response = patientController.addPatient(patientDTO);
@@ -101,7 +102,7 @@ public class ReceptionPatientController implements Initializable {
 
     private void deletePatient() {
         try {
-            String response = patientController.deletePatient(Integer.parseInt(txtPatientId.getText()));
+            String response = patientController.deletePatient(txtPatientId.getText());
             loadData();
             clearFields();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -120,7 +121,7 @@ public class ReceptionPatientController implements Initializable {
     }
 
     private void updatePatient() {
-        PatientDTO patientDTO = new PatientDTO(txtName.getText(), Date.valueOf(txtBirthDate.getText()),txtContact.getText(),txtEmail.getText(),txtAllergies.getText());
+        PatientDTO patientDTO = new PatientDTO(txtPatientId.getText(), txtName.getText(), Date.valueOf(txtBirthDate.getText()),txtContact.getText(),txtEmail.getText(),txtAllergies.getText());
 
         try {
             String response = patientController.updatePatient(patientDTO);
@@ -143,6 +144,13 @@ public class ReceptionPatientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         patientController = new PatientController();
+
+        try {
+            String patientId = patientController.getNextId();
+            txtPatientId.setText(patientId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         colPID.setCellValueFactory(new PropertyValueFactory<>("patientId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));

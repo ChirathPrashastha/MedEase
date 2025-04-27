@@ -31,6 +31,16 @@
     -fx-background-radius: 30;
 }
 
+.update-btn {
+    -fx-background-color: #e9d700;
+    -fx-background-radius: 30;
+}
+
+.delete-btn {
+    -fx-background-color: #f44336;
+    -fx-background-radius: 30;
+}
+
 .order-btn {
     -fx-background-color: #1234;
     -fx-background-radius: 30;

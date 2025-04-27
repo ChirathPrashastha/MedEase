@@ -24,8 +24,10 @@ import java.util.ResourceBundle;
 public class ReceptionAppointmentController implements Initializable {
     private AppointmentController appointmentController;
 
+    private String appointmentId;
+
     @FXML
-    private TableColumn<AppointmentTM, Number> colAppId;
+    private TableColumn<AppointmentTM, String> colAppId;
 
     @FXML
     private TableColumn<AppointmentTM, Date> colDate;
@@ -37,7 +39,7 @@ public class ReceptionAppointmentController implements Initializable {
     private TableColumn<AppointmentTM, Number> colNum;
 
     @FXML
-    private TableColumn<AppointmentTM, Number> colPatientId;
+    private TableColumn<AppointmentTM, String> colPatientId;
 
     @FXML
     private TableColumn<AppointmentTM, String> colTime;
@@ -111,9 +113,11 @@ public class ReceptionAppointmentController implements Initializable {
     }
 
     private void addAppointment() {
-        AppointmentDTO appointmentDTO = new AppointmentDTO(Integer.parseInt(txtPatientId.getText()),txtDoctorId.getText(), Date.valueOf(txtDate.getText()), Integer.parseInt(txtCheckInNo.getText()), txtTime.getText());
 
         try {
+
+            AppointmentDTO appointmentDTO = new AppointmentDTO(appointmentId, txtPatientId.getText(), txtDoctorId.getText(), Date.valueOf(txtDate.getText()), Integer.parseInt(txtCheckInNo.getText()), txtTime.getText());
+
             String response = appointmentController.addAppointment(appointmentDTO);
             loadData();
             clearFields();
@@ -133,7 +137,7 @@ public class ReceptionAppointmentController implements Initializable {
     }
 
     private void updateAppointment() {
-        AppointmentDTO appointmentDTO = new AppointmentDTO(Integer.parseInt(txtPatientId.getText()),txtDoctorId.getText(), Date.valueOf(txtDate.getText()), Integer.parseInt(txtCheckInNo.getText()), txtTime.getText());
+        AppointmentDTO appointmentDTO = new AppointmentDTO(txtPatientId.getText(), txtDoctorId.getText(), Date.valueOf(txtDate.getText()), Integer.parseInt(txtCheckInNo.getText()), txtTime.getText());
 
         try {
             String response = appointmentController.updateAppointment(appointmentDTO);
@@ -157,7 +161,7 @@ public class ReceptionAppointmentController implements Initializable {
 
     private void deleteAppointment() {
         try {
-            String response = appointmentController.deleteAppointment(Integer.parseInt(txtAppointmentId.getText()));
+            String response = appointmentController.deleteAppointment(txtAppointmentId.getText());
             loadData();
             clearFields();
 
@@ -179,6 +183,12 @@ public class ReceptionAppointmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appointmentController = new AppointmentController();
+        try {
+            appointmentId = appointmentController.getNextId();
+            txtAppointmentId.setText(appointmentId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         colAppId.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         colPatientId.setCellValueFactory(new PropertyValueFactory<>("patientId"));

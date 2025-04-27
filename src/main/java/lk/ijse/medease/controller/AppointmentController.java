@@ -35,14 +35,18 @@ public class AppointmentController {
         return response;
     }
 
-    public String deleteAppointment(int appointmentId) throws ClassNotFoundException, SQLException {
+    public String deleteAppointment(String appointmentId) throws ClassNotFoundException, SQLException {
         String response = appointmentModel.deleteAppointment(appointmentId);
         return response;
     }
 
-    public AppointmentDTO searchAppointment(int appointmentId) throws ClassNotFoundException, SQLException {
+    public AppointmentDTO searchAppointment(String appointmentId) throws ClassNotFoundException, SQLException {
         AppointmentDTO appointmentDTO = appointmentModel.searchAppointment(appointmentId);
         return appointmentDTO;
+    }
+
+    public String getNextId() throws ClassNotFoundException, SQLException {
+        return appointmentModel.getNextId();
     }
 
     public ArrayList<AppointmentDTO> getAllAppointments() throws ClassNotFoundException, SQLException {

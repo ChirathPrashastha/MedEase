@@ -19,6 +19,7 @@ import lk.ijse.medease.dto.tm.PrescriptionMedicineTM;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -27,7 +28,7 @@ public class DoctorPrescriptionController implements Initializable {
     public static DoctorPrescriptionController controller;
 
     private MedicineController medicineController;
-    private int medicineId;
+    private String medicineId;
 
     private PrescriptionController prescriptionController;
 
@@ -46,13 +47,13 @@ public class DoctorPrescriptionController implements Initializable {
 
 
     @FXML
-    private TableColumn<PrescriptionMedicineTM, Number> colMedId;
+    private TableColumn<PrescriptionMedicineTM, String> colMedId;
 
     @FXML
     private TableColumn<PrescriptionMedicineTM, String> colName;
 
     @FXML
-    private TableColumn<PrescriptionMedicineTM, Number> colPresId;
+    private TableColumn<PrescriptionMedicineTM, String> colPresId;
 
     @FXML
     private ImageView imgAlert;
@@ -112,22 +113,22 @@ public class DoctorPrescriptionController implements Initializable {
             e.printStackTrace();
         }
 
-        if (medicineId != -1) { // adding medicine that are available at inventory
-            PrescriptionMedicineTM prescriptionMedicineTM = new PrescriptionMedicineTM(Integer.parseInt(txtPrescriptionId.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText()); // here
+        if (medicineId != null) { // adding medicine that are available at inventory
+            PrescriptionMedicineTM prescriptionMedicineTM = new PrescriptionMedicineTM(txtPrescriptionId.getText(), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText()); // here
             presMedList.add(prescriptionMedicineTM); //for the table
 
             addToTable();
 
-            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPrescriptionId.getText()), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(txtPrescriptionId.getText(), medicineId, txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
             presMedDtoArray.add(presMedDTO); // for the database
             clearFields();
         } else { // adding medicine that unavailable at inventory
-            PrescriptionMedicineTM prescriptionMedicineTM = new PrescriptionMedicineTM(Integer.parseInt(txtPrescriptionId.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
+            PrescriptionMedicineTM prescriptionMedicineTM = new PrescriptionMedicineTM(txtPrescriptionId.getText(), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
             presMedList.add(prescriptionMedicineTM);
 
             addToTable();
 
-            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(Integer.parseInt(txtPrescriptionId.getText()), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
+            PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(txtPrescriptionId.getText(), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
             presMedDtoArray.add(presMedDTO);
             clearFields();
         }
@@ -136,7 +137,7 @@ public class DoctorPrescriptionController implements Initializable {
     @FXML
     void checkHistoryOnAction(ActionEvent event) {
         try {
-            if (!(prescriptionController.getPatientHistory(Integer.parseInt(txtPID.getText())).isEmpty()) ) {
+            if (!(prescriptionController.getPatientHistory(txtPID.getText()).isEmpty()) ) {
                 imgAlert.setVisible(true);
             } else {
                 imgAlert.setVisible(false);
@@ -150,9 +151,9 @@ public class DoctorPrescriptionController implements Initializable {
     void checkAvailabilityOnAction(ActionEvent event) {
 
         try {
-            int medId = medicineController.getMedicineIdByMedicineName(txtName.getText());
+            String medId = medicineController.getMedicineIdByMedicineName(txtName.getText());
 
-            if (medId != -1){
+            if (medId != null){
                 txtAvailability.setText("Available");
                 txtAvailability.setStyle("-fx-text-fill: #8fce00");
                 Image availableImg = new Image(getClass().getResourceAsStream("/images/yes.png"));
@@ -205,7 +206,7 @@ public class DoctorPrescriptionController implements Initializable {
 
             for (int i = 0; i < presMedDtoArray.size(); i++) {
                 PrescriptionMedicineDTO dto = presMedDtoArray.get(i);
-                if ((selectedTM.getPrescriptionId() == dto.getPrescriptionId()) && (selectedTM.getMedicineId() == dto.getMedicineId())) {
+                if ((selectedTM.getPrescriptionId().equals(dto.getPrescriptionId())) && (selectedTM.getMedicineId().equals(dto.getMedicineId()))) {
                     presMedDtoArray.remove(i);
                     break;
                 }
@@ -224,6 +225,14 @@ public class DoctorPrescriptionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         controller = this;
         prescriptionController = new PrescriptionController();
+
+        try {
+            String prescriptionId = prescriptionController.getNextId();
+            txtPrescriptionId.setText(prescriptionId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         medicineController = new MedicineController();
 
         presMedList = FXCollections.observableArrayList();
@@ -246,7 +255,7 @@ public class DoctorPrescriptionController implements Initializable {
         String doctorId = DoctorAppointmentController.doctorAppointmentController.doctorId;
         int checkInNo = DoctorAppointmentController.doctorAppointmentController.checkInNo;
 
-        PrescriptionDTO prescriptionDTO = new PrescriptionDTO(doctorId, Integer.parseInt(txtPID.getText()), Integer.parseInt(txtAge.getText()), txtDiagnosis.getText(), txtNotes.getText());
+        PrescriptionDTO prescriptionDTO = new PrescriptionDTO(txtPrescriptionId.getText(), doctorId, txtPID.getText(), Integer.parseInt(txtAge.getText()), txtDiagnosis.getText(), txtNotes.getText());
 
         try {
             String response = prescriptionController.addPrescription(prescriptionDTO, presMedDtoArray, checkInNo, doctorId);

@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class PatientOrderDTO {
     private int orderId;
-    private int prescriptionId;
+    private String prescriptionId;
     private double subTotal;
     private Date issuedDate;
 
-    public PatientOrderDTO(int orderId, int prescriptionId, double subTotal) {
+    public PatientOrderDTO(int orderId, String prescriptionId, double subTotal) {
         this.orderId = orderId;
         this.prescriptionId = prescriptionId;
         this.subTotal = subTotal;
@@ -22,11 +22,11 @@ public class PatientOrderDTO {
         this.orderId = orderId;
     }
 
-    public int getPrescriptionId() {
+    public String getPrescriptionId() {
         return prescriptionId;
     }
 
-    public void setPrescriptionId(int prescriptionId) {
+    public void setPrescriptionId(String prescriptionId) {
         this.prescriptionId = prescriptionId;
     }
 

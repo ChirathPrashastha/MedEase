@@ -40,6 +40,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Button fx:id="btnManageInventory" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnManageInventoryOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Manage Inventory" textFill="WHITE">
+                     <font>
+                        <Font name="Corbel" size="17.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                   <Button fx:id="btnRequestStocks" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnRequestStocksOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Request Stocks" textFill="WHITE">
                      <font>
                         <Font name="Corbel" size="17.0" />

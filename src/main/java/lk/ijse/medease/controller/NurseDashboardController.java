@@ -23,6 +23,9 @@ public class NurseDashboardController implements Initializable {
     private Button btnRequestStocks;
 
     @FXML
+    private Button btnManageInventory;
+
+    @FXML
     private Label lblID;
 
     @FXML
@@ -35,6 +38,11 @@ public class NurseDashboardController implements Initializable {
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnManageInventoryOnAction(ActionEvent event) {
 
     }
 

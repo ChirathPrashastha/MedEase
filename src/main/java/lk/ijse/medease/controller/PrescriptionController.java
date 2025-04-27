@@ -19,18 +19,22 @@ public class PrescriptionController {
         return response;
     }
 
-    public ArrayList<PrescriptionDTO> getPatientHistory(int patientId) throws ClassNotFoundException, SQLException {
+    public ArrayList<PrescriptionDTO> getPatientHistory(String patientId) throws ClassNotFoundException, SQLException {
         ArrayList<PrescriptionDTO> response = prescriptionModel.getPatientHistory(patientId);
         return response;
     }
 
-    public ArrayList<PrescriptionMedicineDTO> getPrescriptionHistory(int patientId) throws ClassNotFoundException, SQLException {
+    public ArrayList<PrescriptionMedicineDTO> getPrescriptionHistory(String patientId) throws ClassNotFoundException, SQLException {
         ArrayList<PrescriptionMedicineDTO> response = prescriptionModel.getPrescriptionHistory(patientId);
         return response;
     }
 
-    public ArrayList<PrescriptionMedicineDTO> getPrescriptionById(int prescriptionId) throws ClassNotFoundException, SQLException {
+    public ArrayList<PrescriptionMedicineDTO> getPrescriptionById(String prescriptionId) throws ClassNotFoundException, SQLException {
         ArrayList<PrescriptionMedicineDTO> response = prescriptionModel.getPrescriptionById(prescriptionId);
         return response;
+    }
+
+    public String getNextId() throws ClassNotFoundException, SQLException {
+        return prescriptionModel.getNextId();
     }
 }

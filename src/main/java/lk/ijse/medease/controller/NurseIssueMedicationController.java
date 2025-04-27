@@ -111,14 +111,14 @@ public class NurseIssueMedicationController implements Initializable {
         double totalPrice = 0.0;
         double unitPrice = 0.0;
         try {
-            totalPrice = patientOrderController.calculateTotalPrice(Integer.parseInt(lblMedId.getText()), qty);
+            totalPrice = patientOrderController.calculateTotalPrice(lblMedId.getText(), qty);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         unitPrice = totalPrice / qty;
 
-        PatientOrderDetailsDTO orderDetailsDTO = new PatientOrderDetailsDTO(Integer.parseInt(txtOrderId.getText()), Integer.parseInt(lblMedId.getText()), unitPrice, qty, totalPrice);
+        PatientOrderDetailsDTO orderDetailsDTO = new PatientOrderDetailsDTO(Integer.parseInt(txtOrderId.getText()), lblMedId.getText(), unitPrice, qty, totalPrice);
         PatientOrderDetailsTM patientOrderDetailsTM = new PatientOrderDetailsTM(orderDetailsDTO.getOrderId(), orderDetailsDTO.getMedicineId(), orderDetailsDTO.getUnitPrice(), orderDetailsDTO.getQuantity(), orderDetailsDTO.getTotalPrice());
 
         orderDetailsList.add(patientOrderDetailsTM); // for the table
@@ -235,7 +235,7 @@ public class NurseIssueMedicationController implements Initializable {
 
     @FXML
     void searchPrescriptionOnAction(ActionEvent event) {
-        loadPrescriptionTable(Integer.parseInt(txtPrescriptionId.getText()));
+        loadPrescriptionTable(txtPrescriptionId.getText());
     }
 
     @Override
@@ -270,9 +270,9 @@ public class NurseIssueMedicationController implements Initializable {
     private void loadMedicineDetails(String medicineName) {
 
         try {
-            int medicineId = medicineController.getMedicineIdByMedicineName(medicineName);
-            if (medicineId != -1) {
-                lblMedId.setText(String.valueOf(medicineId));
+            String medicineId = medicineController.getMedicineIdByMedicineName(medicineName);
+            if (medicineId != null) {
+                lblMedId.setText(medicineId);
                 lblMedName.setText(medicineName);
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -286,7 +286,7 @@ public class NurseIssueMedicationController implements Initializable {
         }
     }
 
-    private void loadPrescriptionTable(int prescriptionId) {
+    private void loadPrescriptionTable(String prescriptionId) {
         try {
             ArrayList<PrescriptionMedicineDTO> presMedDTOs = prescriptionController.getPrescriptionById(prescriptionId);
             ObservableList<PrescriptionMedicineTM> presMedList = FXCollections.observableArrayList();
@@ -306,7 +306,7 @@ public class NurseIssueMedicationController implements Initializable {
     private void checkExpiration() {
         if (forDays) {
             try {
-                MedicineDTO medicineDTO = medicineController.checkExpiration(Integer.parseInt(lblMedId.getText()), Integer.parseInt(txtDuration.getText()), "days");
+                MedicineDTO medicineDTO = medicineController.checkExpiration(lblMedId.getText(), Integer.parseInt(txtDuration.getText()), "days");
                 if (medicineDTO != null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -319,7 +319,7 @@ public class NurseIssueMedicationController implements Initializable {
             }
         } else if (forWeeks) {
             try {
-                MedicineDTO medicineDTO = medicineController.checkExpiration(Integer.parseInt(lblMedId.getText()), Integer.parseInt(txtDuration.getText()), "weeks");
+                MedicineDTO medicineDTO = medicineController.checkExpiration(lblMedId.getText(), Integer.parseInt(txtDuration.getText()), "weeks");
                 if (medicineDTO != null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -332,7 +332,7 @@ public class NurseIssueMedicationController implements Initializable {
             }
         } else if (forMonths) {
             try {
-                MedicineDTO medicineDTO = medicineController.checkExpiration(Integer.parseInt(lblMedId.getText()), Integer.parseInt(txtDuration.getText()), "months");
+                MedicineDTO medicineDTO = medicineController.checkExpiration(lblMedId.getText(), Integer.parseInt(txtDuration.getText()), "months");
                 if (medicineDTO != null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -355,7 +355,7 @@ public class NurseIssueMedicationController implements Initializable {
         if ((perDay == true && forDays == true) || (perWeek == true && forWeeks == true) || (perMonth == true && forMonths == true)) {
             qty = frequency * duration;
             try {
-                inventoryId = medicineController.getInventoryIdByMedicineId(Integer.parseInt(lblMedId.getText()));
+                inventoryId = medicineController.getInventoryIdByMedicineId(lblMedId.getText());
                 availableQty = inventoryController.getQuantityByInventoryId(inventoryId);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -364,7 +364,7 @@ public class NurseIssueMedicationController implements Initializable {
         } else if (perDay == true && forWeeks == true) { // per day, for weeks
             qty = (frequency * 7) * duration;
             try {
-                inventoryId = medicineController.getInventoryIdByMedicineId(Integer.parseInt(lblMedId.getText()));
+                inventoryId = medicineController.getInventoryIdByMedicineId(lblMedId.getText());
                 availableQty = inventoryController.getQuantityByInventoryId(inventoryId);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -374,7 +374,7 @@ public class NurseIssueMedicationController implements Initializable {
             qty = (frequency * 30) * duration;
 
             try {
-                inventoryId = medicineController.getInventoryIdByMedicineId(Integer.parseInt(lblMedId.getText()));
+                inventoryId = medicineController.getInventoryIdByMedicineId(lblMedId.getText());
                 availableQty = inventoryController.getQuantityByInventoryId(inventoryId);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -383,7 +383,7 @@ public class NurseIssueMedicationController implements Initializable {
         } else if (perWeek == true && forMonths == true) { // per week, for months
             qty = (frequency * 4) * duration;
             try {
-                inventoryId = medicineController.getInventoryIdByMedicineId(Integer.parseInt(lblMedId.getText()));
+                inventoryId = medicineController.getInventoryIdByMedicineId(lblMedId.getText());
                 availableQty = inventoryController.getQuantityByInventoryId(inventoryId);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -414,7 +414,7 @@ public class NurseIssueMedicationController implements Initializable {
     }
 
     private void placeOrder() {
-        PatientOrderDTO orderDTO = new PatientOrderDTO(Integer.parseInt(txtOrderId.getText()), Integer.parseInt(txtPrescriptionId.getText()), Double.parseDouble(lblSubTotal.getText()));
+        PatientOrderDTO orderDTO = new PatientOrderDTO(Integer.parseInt(txtOrderId.getText()), txtPrescriptionId.getText(), Double.parseDouble(lblSubTotal.getText()));
         try {
             String response = patientOrderController.placeOrder(orderDTO, orderDetailsArray);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

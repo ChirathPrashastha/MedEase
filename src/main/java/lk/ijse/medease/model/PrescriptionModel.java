@@ -18,14 +18,16 @@ public class PrescriptionModel {
         try {
             connection.setAutoCommit(false);
 
-            String prescriptionAddSql = "INSERT INTO prescription (doctor_id, patient_id, patient_age, diagnosis, notes) VALUES (?,?,?,?,?)";
+            String prescriptionAddSql = "INSERT INTO prescription (prescription_id, doctor_id, patient_id, patient_age, diagnosis, notes) VALUES (?,?,?,?,?,?)";
 
             PreparedStatement prescriptionAddingStatement = connection.prepareStatement(prescriptionAddSql);
-            prescriptionAddingStatement.setString(1, prescriptionDTO.getDoctorId());
-            prescriptionAddingStatement.setInt(2, prescriptionDTO.getPatientId());
-            prescriptionAddingStatement.setInt(3, prescriptionDTO.getAge());
-            prescriptionAddingStatement.setString(4, prescriptionDTO.getDiagnosis());
-            prescriptionAddingStatement.setString(5, prescriptionDTO.getNotes());
+
+            prescriptionAddingStatement.setString(1, prescriptionDTO.getPrescriptionId());
+            prescriptionAddingStatement.setString(2, prescriptionDTO.getDoctorId());
+            prescriptionAddingStatement.setString(3, prescriptionDTO.getPatientId());
+            prescriptionAddingStatement.setInt(4, prescriptionDTO.getAge());
+            prescriptionAddingStatement.setString(5, prescriptionDTO.getDiagnosis());
+            prescriptionAddingStatement.setString(6, prescriptionDTO.getNotes());
 
             boolean isPrescriptionSaved = prescriptionAddingStatement.executeUpdate() > 0 ? true : false;
 
@@ -36,8 +38,8 @@ public class PrescriptionModel {
 
                 for (PrescriptionMedicineDTO dto : presMedArray) {
                     PreparedStatement presMedAddingStatement = connection.prepareStatement(presMedAddSql);
-                    presMedAddingStatement.setInt(1, dto.getPrescriptionId());
-                    presMedAddingStatement.setInt(2, dto.getMedicineId());
+                    presMedAddingStatement.setString(1, dto.getPrescriptionId());
+                    presMedAddingStatement.setString(2, dto.getMedicineId());
                     presMedAddingStatement.setString(3, dto.getName());
                     presMedAddingStatement.setString(4, dto.getDosage());
                     presMedAddingStatement.setString(5, dto.getFrequency());
@@ -83,49 +85,49 @@ public class PrescriptionModel {
         }
     }
 
-    public ArrayList<PrescriptionDTO> getPatientHistory(int patientId) throws ClassNotFoundException, SQLException {
+    public ArrayList<PrescriptionDTO> getPatientHistory(String patientId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM prescription WHERE patient_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, patientId);
+        statement.setString(1, patientId);
         ResultSet rst = statement.executeQuery();
 
         ArrayList<PrescriptionDTO> prescriptionDTOs = new ArrayList<>();
 
         while (rst.next()){
-            PrescriptionDTO prescriptionDTO = new PrescriptionDTO(rst.getInt("prescription_id"), rst.getString("doctor_id"), rst.getInt("patient_id"), rst.getInt("patient_age"), rst.getString("diagnosis"), rst.getString("notes"));
+            PrescriptionDTO prescriptionDTO = new PrescriptionDTO(rst.getString("prescription_id"), rst.getString("doctor_id"), rst.getString("patient_id"), rst.getInt("patient_age"), rst.getString("diagnosis"), rst.getString("notes"));
             prescriptionDTOs.add(prescriptionDTO);
         }
         return prescriptionDTOs;
     }
 
-    public ArrayList<PrescriptionMedicineDTO> getPrescriptionHistory(int patientId) throws ClassNotFoundException, SQLException {
+    public ArrayList<PrescriptionMedicineDTO> getPrescriptionHistory(String patientId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT prescription_medicine.prescription_id, prescription_medicine.name, prescription_medicine.dosage, prescription_medicine.frequency, prescription_medicine.duration FROM prescription_medicine INNER JOIN prescription ON prescription_medicine.prescription_id = prescription.prescription_id WHERE prescription.patient_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, patientId);
+        statement.setString(1, patientId);
 
         ResultSet rst = statement.executeQuery();
 
         ArrayList<PrescriptionMedicineDTO> prescriptionMedicineDTOs = new ArrayList<>();
         while (rst.next()){
-            PrescriptionMedicineDTO presMedDto = new PrescriptionMedicineDTO(rst.getInt("prescription_id"), rst.getString("name"), rst.getString("dosage"), rst.getString("frequency"), rst.getString("duration"));
+            PrescriptionMedicineDTO presMedDto = new PrescriptionMedicineDTO(rst.getString("prescription_id"), rst.getString("name"), rst.getString("dosage"), rst.getString("frequency"), rst.getString("duration"));
             prescriptionMedicineDTOs.add(presMedDto);
         }
         return prescriptionMedicineDTOs;
     }
 
-    public ArrayList<PrescriptionMedicineDTO> getPrescriptionById(int prescriptionId) throws ClassNotFoundException, SQLException {
+    public ArrayList<PrescriptionMedicineDTO> getPrescriptionById(String prescriptionId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT name, dosage, frequency, duration FROM prescription_medicine WHERE prescription_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, prescriptionId);
+        statement.setString(1, prescriptionId);
 
         ResultSet rst = statement.executeQuery();
 
@@ -135,6 +137,24 @@ public class PrescriptionModel {
             prescriptionMedicineDTOs.add(presMedDto);
         }
         return prescriptionMedicineDTOs;
+    }
+
+    public String getNextId() throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT prescription_id FROM prescription ORDER BY prescription_id DESC LIMIT 1";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            String lastAppId = rst.getString("prescription_id");
+            String lastIdNumberString = lastAppId.substring(2);
+            int lastIdNumber = Integer.parseInt(lastIdNumberString);
+            int nextIdNumber = lastIdNumber + 1;
+            String nextIdString = String.format("RX"+"%04d", nextIdNumber);
+            return nextIdString;
+        }
+        return "RX0001";
     }
 
 //    public String updatePrescription(PrescriptionDTO prescriptionDTO) throws ClassNotFoundException, SQLException {

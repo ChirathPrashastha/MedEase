@@ -3,7 +3,7 @@ package lk.ijse.medease.dto;
 import java.sql.Date;
 
 public class PatientDTO {
-    private int patientId;
+    private String patientId;
     private String name;
     private Date birthDate;
     private String contact;
@@ -18,7 +18,7 @@ public class PatientDTO {
         this.allergies = allergies;
     }
 
-    public PatientDTO(int patientId, String name, Date birthDate, String contact, String email, String allergies) {
+    public PatientDTO(String patientId, String name, Date birthDate, String contact, String email, String allergies) {
         this.patientId = patientId;
         this.name = name;
         this.birthDate = birthDate;
@@ -27,7 +27,7 @@ public class PatientDTO {
         this.allergies = allergies;
     }
 
-    public int getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 

@@ -2,12 +2,12 @@ package lk.ijse.medease.dto.tm;
 
 public class PatientOrderDetailsTM {
     private int orderId;
-    private int medicineId;
+    private String medicineId;
     private double unitPrice;
     private int quantity;
     private double totalPrice;
 
-    public PatientOrderDetailsTM(int orderId, int medicineId, double unitPrice, int quantity, double totalPrice) {
+    public PatientOrderDetailsTM(int orderId, String medicineId, double unitPrice, int quantity, double totalPrice) {
         this.orderId = orderId;
         this.medicineId = medicineId;
         this.unitPrice = unitPrice;
@@ -23,11 +23,11 @@ public class PatientOrderDetailsTM {
         this.orderId = orderId;
     }
 
-    public int getMedicineId() {
+    public String getMedicineId() {
         return medicineId;
     }
 
-    public void setMedicineId(int medicineId) {
+    public void setMedicineId(String medicineId) {
         this.medicineId = medicineId;
     }
 

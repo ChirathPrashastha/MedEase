@@ -3,14 +3,14 @@ package lk.ijse.medease.dto.tm;
 import java.sql.Date;
 
 public class PatientTM {
-    private int patientId;
+    private String patientId;
     private String name;
     private Date birthDate;
     private String contact;
     private String email;
     private String allergies;
 
-    public PatientTM(int patientId, String name, Date birthDate, String contact, String email, String allergies) {
+    public PatientTM(String patientId, String name, Date birthDate, String contact, String email, String allergies) {
         this.patientId = patientId;
         this.name = name;
         this.birthDate = birthDate;
@@ -19,11 +19,11 @@ public class PatientTM {
         this.allergies = allergies;
     }
 
-    public int getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(int patientId) {
+    public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
 

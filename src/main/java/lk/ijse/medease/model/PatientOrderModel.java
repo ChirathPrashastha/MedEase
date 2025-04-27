@@ -36,7 +36,7 @@ public class PatientOrderModel {
 
             PreparedStatement orderAddingStatement = connection.prepareStatement(orderAddingSql);
             orderAddingStatement.setInt(1, orderDTO.getOrderId());
-            orderAddingStatement.setInt(2, orderDTO.getPrescriptionId());
+            orderAddingStatement.setString(2, orderDTO.getPrescriptionId());
             orderAddingStatement.setDouble(3, orderDTO.getSubTotal());
 
             boolean isOrderAdded = orderAddingStatement.executeUpdate() > 0 ? true : false;
@@ -49,7 +49,7 @@ public class PatientOrderModel {
                 for (PatientOrderDetailsDTO dto : orderDetailsArray) {
                     PreparedStatement orderDetailsAddingStatement = connection.prepareStatement(orderDetailsAddingSql);
                     orderDetailsAddingStatement.setInt(1, dto.getOrderId());
-                    orderDetailsAddingStatement.setInt(2, dto.getMedicineId());
+                    orderDetailsAddingStatement.setString(2, dto.getMedicineId());
                     orderDetailsAddingStatement.setDouble(3, dto.getUnitPrice());
                     orderDetailsAddingStatement.setInt(4, dto.getQuantity());
                     orderDetailsAddingStatement.setDouble(5, dto.getTotalPrice());
@@ -102,7 +102,7 @@ public class PatientOrderModel {
         }
     }
 
-    public double calculateTotalPrice(int medicineId, int quantity) throws ClassNotFoundException, SQLException {
+    public double calculateTotalPrice(String medicineId, int quantity) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         double unitPrice = 0.0;
@@ -111,7 +111,7 @@ public class PatientOrderModel {
         String sql = "SELECT price FROM medicine WHERE medicine_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, medicineId);
+        statement.setString(1, medicineId);
 
         ResultSet rst = statement.executeQuery();
 

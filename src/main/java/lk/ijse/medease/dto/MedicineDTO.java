@@ -3,7 +3,7 @@ package lk.ijse.medease.dto;
 import java.sql.Date;
 
 public class MedicineDTO {
-    private int medicineId;
+    private String medicineId;
     private String genericName;
     private String brand;
     private String category;
@@ -11,7 +11,7 @@ public class MedicineDTO {
     private Date expirationDate;
     private int inventoryId;
 
-    public MedicineDTO(int medicineId, String genericName, String brand, String category, double price, Date expirationDate, int inventoryId) {
+    public MedicineDTO(String medicineId, String genericName, String brand, String category, double price, Date expirationDate, int inventoryId) {
         this.medicineId = medicineId;
         this.genericName = genericName;
         this.brand = brand;
@@ -36,11 +36,11 @@ public class MedicineDTO {
         this.category = category;
     }
 
-    public int getMedicineId() {
+    public String getMedicineId() {
         return medicineId;
     }
 
-    public void setMedicineId(int medicineId) {
+    public void setMedicineId(String medicineId) {
         this.medicineId = medicineId;
     }
 

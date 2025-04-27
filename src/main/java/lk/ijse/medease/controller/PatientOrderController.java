@@ -20,7 +20,7 @@ public class PatientOrderController {
         return response;
     }
 
-    public double calculateTotalPrice(int medicineId, int quantity) throws SQLException, ClassNotFoundException {
+    public double calculateTotalPrice(String medicineId, int quantity) throws SQLException, ClassNotFoundException {
         double totalPrice = patientOrderModel.calculateTotalPrice(medicineId, quantity);
         return totalPrice;
     }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class MedicineModel {
 
-    public int getMedicineIdByMedicineName(String medicineName) throws SQLException, ClassNotFoundException {
+    public String getMedicineIdByMedicineName(String medicineName) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT medicine_id FROM medicine WHERE generic_name = ? OR brand = ?";
@@ -22,10 +22,9 @@ public class MedicineModel {
 
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            return resultSet.getInt("medicine_id");
-        }else {
-            return -1;
+            return resultSet.getString("medicine_id");
         }
+        return null;
     }
 
     public ArrayList<MedicineDTO> getMedicineList() throws SQLException, ClassNotFoundException {
@@ -44,23 +43,22 @@ public class MedicineModel {
         return medicineList;
     }
 
-    public int getInventoryIdByMedicineId(int medicineId) throws SQLException, ClassNotFoundException {
+    public int getInventoryIdByMedicineId(String medicineId) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT inventory_id FROM medicine WHERE medicine_id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
 
-        statement.setInt(1, medicineId);
+        statement.setString(1, medicineId);
 
         ResultSet rst = statement.executeQuery();
         if (rst.next()) {
             return rst.getInt("inventory_id");
-        }else {
-            return -1;
         }
+        return -1;
     }
 
-    public MedicineDTO checkExpiration(int medicineId, int duration, String period) throws SQLException, ClassNotFoundException {
+    public MedicineDTO checkExpiration(String medicineId, int duration, String period) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = null;
@@ -74,7 +72,7 @@ public class MedicineModel {
         }
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, medicineId);
+        statement.setString(1, medicineId);
         statement.setInt(2, duration);
 
         ResultSet rst = statement.executeQuery();
@@ -82,7 +80,7 @@ public class MedicineModel {
         MedicineDTO medicineDTO = null;
 
         while (rst.next()){
-            medicineDTO = new MedicineDTO(rst.getInt("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getInt("inventory_id"));
+            medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getInt("inventory_id"));
         }
 
         if (medicineDTO != null){

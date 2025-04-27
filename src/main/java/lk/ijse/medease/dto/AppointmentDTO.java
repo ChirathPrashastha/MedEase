@@ -6,14 +6,14 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class AppointmentDTO {
-    private int appointmentId;
-    private int patientId;
+    private String appointmentId;
+    private String patientId;
     private String doctorId;
     private Date date;
     private int checkInNo;
     private String time;
 
-    public AppointmentDTO(int appointmentId, int patientId, Date date, int checkInNo, String time) {
+    public AppointmentDTO(String appointmentId, String patientId, Date date, int checkInNo, String time) {
         this.appointmentId = appointmentId;
         this.patientId = patientId;
         this.date = date;
@@ -21,15 +21,7 @@ public class AppointmentDTO {
         this.time = time;
     }
 
-    public AppointmentDTO(int patientId, String doctorId, Date date, int checkInNo, String time) {
-        this.patientId = patientId;
-        this.doctorId = doctorId;
-        this.date = date;
-        this.checkInNo = checkInNo;
-        this.time = time;
-    }
-
-    public AppointmentDTO(int appointmentId, int patientId, String doctorId, Date date, int checkInNo, String time) {
+    public AppointmentDTO(String appointmentId, String patientId, String doctorId, Date date, int checkInNo, String time) {
         this.appointmentId = appointmentId;
         this.patientId = patientId;
         this.doctorId = doctorId;
@@ -70,15 +62,15 @@ public class AppointmentDTO {
         this.doctorId = doctorId;
     }
 
-    public int getPatientId() {
+    public String  getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(int patientId) {
+    public void setPatientId(String  patientId) {
         this.patientId = patientId;
     }
 
-    public int getAppointmentId() {
+    public String getAppointmentId() {
         return appointmentId;
     }
 }

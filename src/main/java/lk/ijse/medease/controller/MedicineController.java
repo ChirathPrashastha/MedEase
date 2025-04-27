@@ -13,8 +13,8 @@ public class MedicineController {
         medicineModel = new MedicineModel();
     }
 
-    public int getMedicineIdByMedicineName(String medicineName) throws SQLException, ClassNotFoundException {
-        int response = medicineModel.getMedicineIdByMedicineName(medicineName);
+    public String getMedicineIdByMedicineName(String medicineName) throws SQLException, ClassNotFoundException {
+        String response = medicineModel.getMedicineIdByMedicineName(medicineName);
         return response;
     }
 
@@ -23,12 +23,12 @@ public class MedicineController {
         return medicineList;
     }
 
-    public int getInventoryIdByMedicineId(int medicineId) throws SQLException, ClassNotFoundException {
+    public int getInventoryIdByMedicineId(String medicineId) throws SQLException, ClassNotFoundException {
         int response = medicineModel.getInventoryIdByMedicineId(medicineId);
         return response;
     }
 
-    public MedicineDTO checkExpiration(int medicineId, int duration, String period) throws SQLException, ClassNotFoundException {
+    public MedicineDTO checkExpiration(String medicineId, int duration, String period) throws SQLException, ClassNotFoundException {
         MedicineDTO response = medicineModel.checkExpiration( medicineId, duration, period);
         return response;
     }

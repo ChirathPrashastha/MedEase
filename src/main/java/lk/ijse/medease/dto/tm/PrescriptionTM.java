@@ -1,31 +1,31 @@
 package lk.ijse.medease.dto.tm;
 
 public class PrescriptionTM {
-    private int prescriptionId;
-    private int patientId;
+    private String prescriptionId;
+    private String patientId;
     private String diagnosis;
     private String notes;
 
-    public PrescriptionTM(int prescriptionId, int patientId, String diagnosis, String notes) {
+    public PrescriptionTM(String prescriptionId, String patientId, String diagnosis, String notes) {
         this.prescriptionId = prescriptionId;
         this.patientId = patientId;
         this.diagnosis = diagnosis;
         this.notes = notes;
     }
 
-    public int getPrescriptionId() {
+    public String getPrescriptionId() {
         return prescriptionId;
     }
 
-    public void setPrescriptionId(int prescriptionId) {
+    public void setPrescriptionId(String prescriptionId) {
         this.prescriptionId = prescriptionId;
     }
 
-    public int getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(int patientId) {
+    public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
 

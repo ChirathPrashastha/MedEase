@@ -64,7 +64,7 @@ public class PatientHistoryController implements Initializable {
         colDiagnosis.setCellValueFactory(new PropertyValueFactory<>("diagnosis"));
         colNotes.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
-        int patientId = Integer.parseInt(DoctorPrescriptionController.controller.txtPID.getText());
+        String patientId = DoctorPrescriptionController.controller.txtPID.getText();
 
         try {
             ArrayList<PrescriptionDTO> prescriptionDTOs = prescriptionController.getPatientHistory(patientId);

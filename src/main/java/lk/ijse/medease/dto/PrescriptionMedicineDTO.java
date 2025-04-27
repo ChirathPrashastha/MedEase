@@ -1,14 +1,14 @@
 package lk.ijse.medease.dto;
 
 public class PrescriptionMedicineDTO {
-    private int prescriptionId;
-    private int medicineId;
+    private String prescriptionId;
+    private String medicineId;
     private String name;
     private String dosage;
     private String frequency;
     private String duration;
 
-    public PrescriptionMedicineDTO(int prescriptionId, int medicineId, String name, String dosage, String frequency, String duration) {
+    public PrescriptionMedicineDTO(String prescriptionId, String medicineId, String name, String dosage, String frequency, String duration) {
         this.prescriptionId = prescriptionId;
         this.medicineId = medicineId;
         this.name = name;
@@ -17,7 +17,7 @@ public class PrescriptionMedicineDTO {
         this.duration = duration;
     }
 
-    public PrescriptionMedicineDTO(int prescriptionId, String name, String dosage, String frequency, String duration) {
+    public PrescriptionMedicineDTO(String prescriptionId, String name, String dosage, String frequency, String duration) {
         this.prescriptionId = prescriptionId;
         this.name = name;
         this.dosage = dosage;
@@ -32,19 +32,19 @@ public class PrescriptionMedicineDTO {
         this.duration = duration;
     }
 
-    public int getPrescriptionId() {
+    public String getPrescriptionId() {
         return prescriptionId;
     }
 
-    public void setPrescriptionId(int prescriptionId) {
+    public void setPrescriptionId(String prescriptionId) {
         this.prescriptionId = prescriptionId;
     }
 
-    public int getMedicineId() {
+    public String getMedicineId() {
         return medicineId;
     }
 
-    public void setMedicineId(int medicineId) {
+    public void setMedicineId(String medicineId) {
         this.medicineId = medicineId;
     }
 
