@@ -15,6 +15,8 @@ import lk.ijse.medease.dto.MedicineDTO;
 import lk.ijse.medease.dto.PatientOrderDTO;
 import lk.ijse.medease.dto.PatientOrderDetailsDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
+import lk.ijse.medease.dto.tm.PatientOrderDetailsTM;
+import lk.ijse.medease.dto.tm.PrescriptionMedicineTM;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,7 +31,7 @@ public class NurseIssueMedicationController implements Initializable {
     private InventoryController inventoryController;
     private PatientOrderController patientOrderController;
 
-    public ObservableList<PatientOrderDetailsDTO> orderDetailsList; // for the table
+    public ObservableList<PatientOrderDetailsTM> orderDetailsList; // for the table
     private ArrayList<PatientOrderDetailsDTO> orderDetailsArray; // for the database
 
     private int qty;
@@ -46,16 +48,16 @@ public class NurseIssueMedicationController implements Initializable {
     private int duration = 0;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colDosage;
+    private TableColumn<PrescriptionMedicineTM, String> colDosage;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colDuration;
+    private TableColumn<PrescriptionMedicineTM, String> colDuration;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colFrequency;
+    private TableColumn<PrescriptionMedicineTM, String> colFrequency;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colName;
+    private TableColumn<PrescriptionMedicineTM, String> colName;
 
     @FXML
     private Label lblItemCount;
@@ -70,7 +72,7 @@ public class NurseIssueMedicationController implements Initializable {
     private Label lblSubTotal;
 
     @FXML
-    private TableView<PrescriptionMedicineDTO> tblPresMed;
+    private TableView<PrescriptionMedicineTM> tblPresMed;
 
     @FXML
     private TextField txtDuration;
@@ -117,8 +119,9 @@ public class NurseIssueMedicationController implements Initializable {
         unitPrice = totalPrice / qty;
 
         PatientOrderDetailsDTO orderDetailsDTO = new PatientOrderDetailsDTO(Integer.parseInt(txtOrderId.getText()), Integer.parseInt(lblMedId.getText()), unitPrice, qty, totalPrice);
+        PatientOrderDetailsTM patientOrderDetailsTM = new PatientOrderDetailsTM(orderDetailsDTO.getOrderId(), orderDetailsDTO.getMedicineId(), orderDetailsDTO.getUnitPrice(), orderDetailsDTO.getQuantity(), orderDetailsDTO.getTotalPrice());
 
-        orderDetailsList.add(orderDetailsDTO); // for the table
+        orderDetailsList.add(patientOrderDetailsTM); // for the table
 
         int itemCount = orderDetailsList.size();
 
@@ -126,8 +129,8 @@ public class NurseIssueMedicationController implements Initializable {
 
         double subTotal = 0.0;
 
-        for (PatientOrderDetailsDTO dto : orderDetailsList) {
-            subTotal += dto.getTotalPrice();
+        for (PatientOrderDetailsTM tm : orderDetailsList) {
+            subTotal += tm.getTotalPrice();
         }
 
         lblSubTotal.setText(String.valueOf(subTotal));
@@ -253,7 +256,7 @@ public class NurseIssueMedicationController implements Initializable {
         colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
 
         tblPresMed.setRowFactory(tv -> {
-            TableRow<PrescriptionMedicineDTO> row = new TableRow<>();
+            TableRow<PrescriptionMedicineTM> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getClickCount() == 1) {
                     String medicineName = row.getItem().getName();
@@ -286,7 +289,13 @@ public class NurseIssueMedicationController implements Initializable {
     private void loadPrescriptionTable(int prescriptionId) {
         try {
             ArrayList<PrescriptionMedicineDTO> presMedDTOs = prescriptionController.getPrescriptionById(prescriptionId);
-            ObservableList<PrescriptionMedicineDTO> presMedList = FXCollections.observableArrayList(presMedDTOs);
+            ObservableList<PrescriptionMedicineTM> presMedList = FXCollections.observableArrayList();
+
+            for (PrescriptionMedicineDTO dto : presMedDTOs){
+                PrescriptionMedicineTM prescriptionMedicineTM = new PrescriptionMedicineTM(dto.getName(), dto.getDosage(), dto.getFrequency(), dto.getDuration());
+                presMedList.add(prescriptionMedicineTM);
+            }
+
             tblPresMed.setItems(presMedList);
 
         } catch (Exception e) {

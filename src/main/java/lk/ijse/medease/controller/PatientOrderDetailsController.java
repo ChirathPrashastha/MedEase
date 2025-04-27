@@ -11,31 +11,32 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.medease.dto.PatientOrderDetailsDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
+import lk.ijse.medease.dto.tm.PatientOrderDetailsTM;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PatientOrderDetailsController implements Initializable {
 
-    private ObservableList<PatientOrderDetailsDTO> orderDetailsList;
+    private ObservableList<PatientOrderDetailsTM> orderDetailsList;
 
     @FXML
-    private TableColumn<PatientOrderDetailsDTO, Number> colMedicineId;
+    private TableColumn<PatientOrderDetailsTM, Number> colMedicineId;
 
     @FXML
-    private TableColumn<PatientOrderDetailsDTO, Number> colOrderId;
+    private TableColumn<PatientOrderDetailsTM, Number> colOrderId;
 
     @FXML
-    private TableColumn<PatientOrderDetailsDTO, Number> colUnitPrice;
+    private TableColumn<PatientOrderDetailsTM, Number> colUnitPrice;
 
     @FXML
-    private TableColumn<PatientOrderDetailsDTO, Number> colQuantity;
+    private TableColumn<PatientOrderDetailsTM, Number> colQuantity;
 
     @FXML
-    private TableColumn<PatientOrderDetailsDTO, Number> colTotalPrice;
+    private TableColumn<PatientOrderDetailsTM, Number> colTotalPrice;
 
     @FXML
-    private TableView<PatientOrderDetailsDTO> tblOrderDetails;
+    private TableView<PatientOrderDetailsTM> tblOrderDetails;
 
     @FXML
     void btnDeleteRowOnAction(ActionEvent event) {
