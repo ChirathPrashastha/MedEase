@@ -9,6 +9,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
+import lk.ijse.medease.dto.tm.PrescriptionMedicineTM;
+import lk.ijse.medease.dto.tm.PrescriptionTM;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -19,39 +21,39 @@ public class PatientHistoryController implements Initializable {
     private PrescriptionController prescriptionController;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, Number> colPrescriptionId;
+    private TableColumn<PrescriptionMedicineTM, Number> colPrescriptionId;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colDosage;
+    private TableColumn<PrescriptionMedicineTM, String> colDosage;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colFrequency;
+    private TableColumn<PrescriptionMedicineTM, String> colFrequency;
 
     @FXML
-    private TableColumn<PrescriptionMedicineDTO, String> colName;
+    private TableColumn<PrescriptionMedicineTM, String> colName;
 
     @FXML
-    private TableColumn<?, ?> colDuration;
+    private TableColumn<PrescriptionMedicineTM, String> colDuration;
 
     @FXML
-    private TableView<PrescriptionMedicineDTO> tblPresMed;
+    private TableView<PrescriptionMedicineTM> tblPresMed;
 
 
 
     @FXML
-    private TableColumn<PrescriptionDTO, String> colDiagnosis;
+    private TableColumn<PrescriptionTM, String> colDiagnosis;
 
     @FXML
-    private TableColumn<PrescriptionDTO, String> colNotes;
+    private TableColumn<PrescriptionTM, String> colNotes;
 
     @FXML
-    private TableColumn<PrescriptionDTO, Number> colPID;
+    private TableColumn<PrescriptionTM, Number> colPID;
 
     @FXML
-    private TableColumn<PrescriptionDTO, Number> colPresID;
+    private TableColumn<PrescriptionTM, Number> colPresID;
 
     @FXML
-    private TableView<PrescriptionDTO> tblPatientHistory;
+    private TableView<PrescriptionTM> tblPatientHistory;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,8 +68,15 @@ public class PatientHistoryController implements Initializable {
 
         try {
             ArrayList<PrescriptionDTO> prescriptionDTOs = prescriptionController.getPatientHistory(patientId);
-            ObservableList<PrescriptionDTO> historyList = FXCollections.observableList(prescriptionDTOs);
-            tblPatientHistory.setItems(historyList);
+
+            ObservableList<PrescriptionTM> historyObList = FXCollections.observableArrayList();
+
+            for (PrescriptionDTO dto : prescriptionDTOs){
+                PrescriptionTM prescriptionTM = new PrescriptionTM(dto.getPrescriptionId(),dto.getPatientId(),dto.getDiagnosis(), dto.getNotes());
+                historyObList.add(prescriptionTM);
+            }
+
+            tblPatientHistory.setItems(historyObList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,8 +89,14 @@ public class PatientHistoryController implements Initializable {
 
         try {
             ArrayList<PrescriptionMedicineDTO> prescriptionMedicineDTOs = prescriptionController.getPrescriptionHistory(patientId);
-            ObservableList<PrescriptionMedicineDTO> presMedList = FXCollections.observableList(prescriptionMedicineDTOs);
-            tblPresMed.setItems(presMedList);
+            ObservableList<PrescriptionMedicineTM> presMedObList = FXCollections.observableArrayList();
+
+            for (PrescriptionMedicineDTO dto : prescriptionMedicineDTOs){
+                PrescriptionMedicineTM prescriptionMedicineTM = new PrescriptionMedicineTM(dto.getPrescriptionId(), dto.getName(), dto.getDosage(), dto.getFrequency(), dto.getDuration());
+                presMedObList.add(prescriptionMedicineTM);
+            }
+
+            tblPresMed.setItems(presMedObList);
         } catch (Exception e) {
             e.printStackTrace();
         }
