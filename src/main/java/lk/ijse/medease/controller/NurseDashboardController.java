@@ -43,7 +43,10 @@ public class NurseDashboardController implements Initializable {
 
     @FXML
     void btnManageInventoryOnAction(ActionEvent event) {
-
+        navigateTo("/view/NurseManageInventory.fxml");
+        btnManageInventory.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnIssueMedication.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     @FXML

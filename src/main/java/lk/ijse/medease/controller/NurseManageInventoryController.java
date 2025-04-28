@@ -2,68 +2,82 @@ package lk.ijse.medease.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class NurseManageInventoryController {
+
+    @FXML
+    private AnchorPane pageAnc;
+
+    @FXML
+    private TableColumn<?, ?> colBrand;
+
+    @FXML
+    private TableColumn<?, ?> colCategory;
+
+    @FXML
+    private TableColumn<?, ?> colEXP;
 
     @FXML
     private TableColumn<?, ?> colInventoryId;
 
     @FXML
-    private TableColumn<?, ?> colQuantity;
+    private TableColumn<?, ?> colMedId;
 
     @FXML
-    private TableColumn<?, ?> colSection;
+    private TableColumn<?, ?> colMedName;
 
     @FXML
-    private TableColumn<?, ?> colSupplierId;
+    private TableColumn<?, ?> colPrice;
 
     @FXML
-    private Label lblMID;
+    private TableView<?> tblMedicine;
 
     @FXML
-    private Label lblMedName;
+    private TextField txtMedIDorName;
 
     @FXML
-    private TableView<?> tblInventory;
-
-    @FXML
-    private TextField txtInventoryId;
-
-    @FXML
-    private TextField txtQty;
-
-    @FXML
-    private TextField txtSection;
-
-    @FXML
-    private TextField txtSupplierId;
-
-    @FXML
-    void btnAddOnAction(ActionEvent event) {
+    void btnLowStockOnAction(ActionEvent event) {
 
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnManageMedOnAction(ActionEvent event) {
+        try {
+            pageAnc.getChildren().clear();
 
+            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/NurseManageMed.fxml"));
+            anchorPane.prefWidthProperty().bind(pageAnc.widthProperty());
+            anchorPane.prefHeightProperty().bind(pageAnc.heightProperty());
+
+            pageAnc.getChildren().add(anchorPane);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void btnRequestRestockOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnNearExpiryOnAction(ActionEvent event) {
 
     }
 
     @FXML
     void getMedicineDetailsOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void reloadTableOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void searchMedOnAction(ActionEvent event) {
 
     }
 
