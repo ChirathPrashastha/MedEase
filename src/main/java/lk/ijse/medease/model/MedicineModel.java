@@ -57,7 +57,7 @@ public class MedicineModel {
             connection.rollback();
             throw e;
         } finally {
-            connection.commit();
+            connection.setAutoCommit(true);
         }
     }
 
@@ -106,7 +106,47 @@ public class MedicineModel {
             connection.rollback();
             throw e;
         }finally {
-            connection.commit();
+            connection.setAutoCommit(true);
+        }
+    }
+
+    public String deleteMedicine(String medicineId, String inventoryId) throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        try {
+            connection.setAutoCommit(false);
+
+            String deleteMedicineSql = "DELETE FROM medicine WHERE medicine_id = ?";
+
+            PreparedStatement deleteMedicineStatement = connection.prepareStatement(deleteMedicineSql);
+            deleteMedicineStatement.setString(1, medicineId);
+
+            boolean isMedicineDeleted = deleteMedicineStatement.executeUpdate() > 0;
+
+            if (isMedicineDeleted) {
+
+                String deleteInventorySql = "DELETE FROM inventory WHERE inventory_id = ?";
+
+                PreparedStatement deleteInventoryStatement = connection.prepareStatement(deleteInventorySql);
+                deleteInventoryStatement.setString(1, inventoryId);
+
+                boolean isInventoryDeleted = deleteInventoryStatement.executeUpdate() > 0;
+
+                if (isInventoryDeleted) {
+                    return "Medicine Deleted Successfully";
+                }else {
+                    connection.rollback();
+                    return "Failed to Delete Inventory";
+                }
+            }else {
+                connection.rollback();
+                return "Failed to Delete from Medicine";
+            }
+        } catch (Exception e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(true);
         }
     }
 

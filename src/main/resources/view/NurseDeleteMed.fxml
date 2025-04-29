@@ -18,69 +18,37 @@
             <Font name="Cambria Math" size="14.0" />
          </font>
       </Label>
-      <Pane layoutX="316.0" layoutY="201.0" prefHeight="36.0" prefWidth="177.0" styleClass="expiry-btn" stylesheets="@../css/NurseDashboardStyle.css">
+      <Pane layoutX="314.0" layoutY="147.0" prefHeight="36.0" prefWidth="177.0" styleClass="expiry-btn" stylesheets="@../css/NurseDashboardStyle.css">
          <children>
-            <Label alignment="CENTER" layoutX="37.0" layoutY="3.0" prefHeight="28.0" prefWidth="130.0" stylesheets="@../css/NurseDashboardStyle.css" text="DELETE FROM MEDICINE" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="36.0" layoutY="3.0" prefHeight="28.0" prefWidth="130.0" stylesheets="@../css/NurseDashboardStyle.css" text="DELETE MEDICINE" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold" size="11.0" />
                </font>
             </Label>
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="12.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/antibiotics.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#btnDelMedOnAction" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: transparent;">
+            <Button mnemonicParsing="false" onAction="#btnDeleteMedicineOnAction" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="517.0" layoutY="201.0" prefHeight="36.0" prefWidth="195.0" styleClass="expiry-btn" stylesheets="@../css/NurseDashboardStyle.css">
-         <children>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="12.0" layoutY="5.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/inventory.png" />
-               </image>
-            </ImageView>
-            <Label alignment="CENTER" layoutX="42.0" layoutY="7.0" prefHeight="20.0" prefWidth="142.0" stylesheets="@../css/NurseDashboardStyle.css" text="DELETE FROM INVENTORY" textFill="WHITE">
-               <font>
-                  <Font name="Cambria Bold" size="11.0" />
-               </font>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#btnDelInventoryOnAction" prefHeight="36.0" prefWidth="195.0" style="-fx-background-color: transparent;">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </Pane>
-      <VBox layoutX="36.0" layoutY="95.0" prefHeight="87.0" prefWidth="153.0" spacing="5.0">
+      <VBox layoutX="36.0" layoutY="95.0" prefHeight="49.0" prefWidth="153.0" spacing="5.0">
          <children>
             <Label prefHeight="37.0" prefWidth="122.0" text="MEDICINE ID" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="176.0" prefHeight="37.0" prefWidth="122.0" text="INVENTORY ID" textFill="WHITE">
-               <font>
-                  <Font name="Cambria Math" size="14.0" />
-               </font>
-            </Label>
          </children>
       </VBox>
-      <VBox layoutX="207.0" layoutY="94.0" prefHeight="100.0" prefWidth="283.0" spacing="5.0">
+      <VBox layoutX="207.0" layoutY="94.0" prefHeight="49.0" prefWidth="283.0" spacing="5.0">
          <children>
-            <TextField fx:id="txtMedId" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
-               <font>
-                  <Font name="Cambria Math" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor>
-            </TextField>
-            <TextField fx:id="txtInventoryId" layoutX="10.0" layoutY="210.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtMedId" onAction="#medicineDetailsOnAction" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -90,7 +58,7 @@
             </TextField>
          </children>
       </VBox>
-      <Pane layoutX="37.0" layoutY="268.0" prefHeight="206.0" prefWidth="343.0" styleClass="header" stylesheets="@../css/NurseDashboardStyle.css">
+      <Pane layoutX="37.0" layoutY="239.0" prefHeight="206.0" prefWidth="343.0" styleClass="header" stylesheets="@../css/NurseDashboardStyle.css">
          <children>
             <Label layoutX="33.0" layoutY="47.0" prefHeight="37.0" prefWidth="116.0" text="MEDICINE NAME" textFill="WHITE">
                <font>
@@ -102,7 +70,7 @@
                   <Font name="Cambria Bold Italic" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="33.0" layoutY="120.0" prefHeight="37.0" prefWidth="116.0" text="CATEGORY" textFill="WHITE">
+            <Label layoutX="33.0" layoutY="120.0" prefHeight="37.0" prefWidth="116.0" text="INVENTORY ID" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold Italic" size="13.0" />
                </font>
@@ -122,7 +90,7 @@
                   <Font name="Cambria Bold Italic" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="lblCategory" layoutX="174.0" layoutY="120.0" prefHeight="37.0" prefWidth="153.0" textFill="WHITE">
+            <Label fx:id="lblInventoryId" layoutX="174.0" layoutY="120.0" prefHeight="37.0" prefWidth="153.0" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold Italic" size="13.0" />
                </font>

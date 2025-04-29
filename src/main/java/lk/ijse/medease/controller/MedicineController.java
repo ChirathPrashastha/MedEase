@@ -22,6 +22,10 @@ public class MedicineController {
         return medicineModel.updateMedicine(medicineDTO, inventoryDTO);
     }
 
+    public String deleteMedicine(String medicineId, String inventoryId) throws ClassNotFoundException, SQLException {
+        return medicineModel.deleteMedicine(medicineId, inventoryId);
+    }
+
     public String getMedicineIdByMedicineName(String medicineName) throws SQLException, ClassNotFoundException {
         String response = medicineModel.getMedicineIdByMedicineName(medicineName);
         return response;
