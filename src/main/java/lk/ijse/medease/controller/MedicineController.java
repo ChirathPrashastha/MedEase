@@ -1,5 +1,6 @@
 package lk.ijse.medease.controller;
 
+import lk.ijse.medease.dto.InventoryDTO;
 import lk.ijse.medease.dto.MedicineDTO;
 import lk.ijse.medease.model.MedicineModel;
 
@@ -11,6 +12,14 @@ public class MedicineController {
 
     public MedicineController() {
         medicineModel = new MedicineModel();
+    }
+
+    public String addMedicine(MedicineDTO medicineDTO, InventoryDTO inventoryDTO) throws ClassNotFoundException, SQLException {
+        return medicineModel.addMedicine(medicineDTO, inventoryDTO);
+    }
+
+    public String updateMedicine(MedicineDTO medicineDTO, InventoryDTO inventoryDTO) throws ClassNotFoundException, SQLException {
+        return medicineModel.updateMedicine(medicineDTO, inventoryDTO);
     }
 
     public String getMedicineIdByMedicineName(String medicineName) throws SQLException, ClassNotFoundException {
@@ -48,5 +57,9 @@ public class MedicineController {
 
     public ArrayList<MedicineDTO> getLowStockMedicine() throws ClassNotFoundException, SQLException{
         return medicineModel.getLowStockMedicine();
+    }
+
+    public String getNextId() throws ClassNotFoundException, SQLException {
+        return medicineModel.getNextId();
     }
 }

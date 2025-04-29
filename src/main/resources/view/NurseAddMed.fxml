@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="558.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/NurseDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.NurseAddMedController">
    <children>
       <Label alignment="CENTER" layoutX="27.0" layoutY="20.0" prefHeight="37.0" prefWidth="283.0" styleClass="header" stylesheets="@../css/NurseDashboardStyle.css" text="ADD MEDICINE" textFill="WHITE">

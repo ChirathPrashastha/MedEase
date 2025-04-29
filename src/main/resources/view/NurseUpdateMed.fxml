@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="558.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/NurseDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.NurseUpdateMedController">
    <children>
       <Label alignment="CENTER" layoutX="27.0" layoutY="20.0" prefHeight="37.0" prefWidth="283.0" styleClass="header" stylesheets="@../css/NurseDashboardStyle.css" text="UPDATE MEDICINE" textFill="WHITE">
@@ -72,7 +71,7 @@
       </VBox>
       <VBox layoutX="207.0" layoutY="94.0" prefHeight="439.0" prefWidth="283.0" spacing="5.0">
          <children>
-            <TextField fx:id="txtMedId" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtMedId" onAction="#getInventoryIdOnAction" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -154,7 +153,7 @@
             </TextField>
          </children>
       </VBox>
-      <Button layoutX="578.0" layoutY="265.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="28.0" prefWidth="92.0" styleClass="update-btn" stylesheets="@../css/NurseDashboardStyle.css" text="UPDATE">
+      <Button layoutX="578.0" layoutY="265.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="28.0" prefWidth="92.0" styleClass="update-btn" stylesheets="@../css/NurseDashboardStyle.css" text="UPDATE">
          <font>
             <Font name="Cambria Bold" size="13.0" />
          </font>
