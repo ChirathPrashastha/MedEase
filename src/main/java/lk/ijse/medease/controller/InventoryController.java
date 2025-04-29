@@ -22,6 +22,10 @@ public class InventoryController {
         return inventoryDTO;
     }
 
+    public String restock(String inventoryId, int quantity) throws SQLException, ClassNotFoundException {
+        return inventoryModel.restock(inventoryId, quantity);
+    }
+
     public String getNextId() throws ClassNotFoundException, SQLException {
         return inventoryModel.getNextId();
     }

@@ -60,6 +60,18 @@ public class InventoryModel {
         return null;
     }
 
+    public String restock(String inventoryId, int quantity) throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "UPDATE inventory SET quantity = quantity + ? WHERE inventory_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, quantity);
+        statement.setString(2, inventoryId);
+
+        return statement.executeUpdate() > 0 ? "Restocked Successfully" : "Failed to Restock";
+    }
+
     public String getNextId() throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
