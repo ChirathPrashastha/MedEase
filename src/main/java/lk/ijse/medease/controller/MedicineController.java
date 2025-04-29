@@ -32,4 +32,21 @@ public class MedicineController {
         MedicineDTO response = medicineModel.checkExpiration( medicineId, duration, period);
         return response;
     }
+
+    public ArrayList<MedicineDTO> getAllMedicine() throws ClassNotFoundException, SQLException {
+        ArrayList<MedicineDTO> medicineList = medicineModel.getAllMedicine();
+        return medicineList;
+    }
+
+    public ArrayList<MedicineDTO> searchMedicine(String idOrName) throws SQLException, ClassNotFoundException {
+        return medicineModel.searchMedicine(idOrName);
+    }
+
+    public ArrayList<MedicineDTO> getNearExpiryMedicine() throws ClassNotFoundException, SQLException{
+        return medicineModel.getNearExpiryMedicine();
+    }
+
+    public ArrayList<MedicineDTO> getLowStockMedicine() throws ClassNotFoundException, SQLException{
+        return medicineModel.getLowStockMedicine();
+    }
 }

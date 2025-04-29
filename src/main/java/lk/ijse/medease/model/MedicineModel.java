@@ -89,4 +89,72 @@ public class MedicineModel {
             return null;
         }
     }
+
+    public ArrayList<MedicineDTO> searchMedicine(String idOrName) throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM medicine WHERE medicine_id = ? OR brand = ? OR generic_name = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, idOrName);
+        statement.setString(2, idOrName);
+        statement.setString(3, idOrName);
+
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<MedicineDTO> medicineList = new ArrayList<>();
+        while (rst.next()) {
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
+            medicineList.add(medicineDTO);
+        }
+        return medicineList;
+    }
+
+    public ArrayList<MedicineDTO> getAllMedicine() throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM medicine";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<MedicineDTO> medicineList = new ArrayList<>();
+        while (rst.next()) {
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
+            medicineList.add(medicineDTO);
+        }
+        return medicineList;
+    }
+
+    public ArrayList<MedicineDTO> getNearExpiryMedicine() throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM medicine WHERE expiration_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 3 MONTH";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<MedicineDTO> medicineList = new ArrayList<>();
+        while (rst.next()) {
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
+            medicineList.add(medicineDTO);
+        }
+        return medicineList;
+    }
+
+    public ArrayList<MedicineDTO> getLowStockMedicine() throws ClassNotFoundException, SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM medicine INNER JOIN inventory ON medicine.inventory_id = inventory.inventory_id WHERE quantity < 100";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<MedicineDTO> medicineList = new ArrayList<>();
+        while (rst.next()) {
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
+            medicineList.add(medicineDTO);
+        }
+        return medicineList;
+    }
 }
