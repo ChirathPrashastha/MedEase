@@ -4,10 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,13 +34,22 @@ public class NurseDashboardController implements Initializable {
     private AnchorPane mainContainerAnc;
 
     @FXML
-    void btnIssueMedicationOnAction(ActionEvent event) {
+    private AnchorPane nurseDashAnc;
 
+    @FXML
+    void btnIssueMedicationOnAction(ActionEvent event) {
+        navigateTo("/view/NurseIssueMedication.fxml");
+        btnIssueMedication.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnManageInventory.setStyle("-fx-border-color: transparent");
+        btnRequestStocks.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     @FXML
-    void btnLogoutOnAction(ActionEvent event) {
-
+    void btnLogoutOnAction(ActionEvent event) throws IOException {
+        nurseDashAnc.getChildren().clear();
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
+        nurseDashAnc.getChildren().add(parent);
     }
 
     @FXML
@@ -46,12 +57,17 @@ public class NurseDashboardController implements Initializable {
         navigateTo("/view/NurseManageInventory.fxml");
         btnManageInventory.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
         btnIssueMedication.setStyle("-fx-border-color: transparent");
+        btnRequestStocks.setStyle("-fx-border-color: transparent");
         btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     @FXML
     void btnRequestStocksOnAction(ActionEvent event) {
-
+        navigateTo("/view/NurseRequestRestock.fxml");
+        btnRequestStocks.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnIssueMedication.setStyle("-fx-border-color: transparent");
+        btnManageInventory.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     @Override

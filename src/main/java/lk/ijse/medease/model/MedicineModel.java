@@ -242,6 +242,11 @@ public class MedicineModel {
         ResultSet rst = statement.executeQuery();
 
         ArrayList<MedicineDTO> medicineList = new ArrayList<>();
+
+        if (rst.equals(null)){
+            return medicineList;
+        }
+
         while (rst.next()) {
             MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
             medicineList.add(medicineDTO);
