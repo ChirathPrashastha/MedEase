@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerEmployeeController">
+   <children>
+      <HBox prefHeight="42.0" prefWidth="768.0">
+         <children>
+            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="42.0" prefWidth="154.0" styleClass="panel-button" stylesheets="@../css/ManagerDashboardStyle.css" text="ADD" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnUpdate" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="42.0" prefWidth="154.0" styleClass="panel-button" stylesheets="@../css/ManagerDashboardStyle.css" text="UPDATE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDelete" layoutX="164.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="42.0" prefWidth="154.0" styleClass="panel-button" stylesheets="@../css/ManagerDashboardStyle.css" text="DELETE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnRestock" layoutX="318.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnRestockOnAction" prefHeight="42.0" prefWidth="154.0" styleClass="panel-button" stylesheets="@../css/ManagerDashboardStyle.css" text="ATTENDANCE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSupplier" layoutX="472.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnSupplierOnAction" prefHeight="42.0" prefWidth="154.0" styleClass="panel-button" stylesheets="@../css/ManagerDashboardStyle.css" text="VIEW EMPLOYEE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="ancPage" layoutY="42.0" prefHeight="558.0" prefWidth="768.0" />
+   </children>
+</AnchorPane>

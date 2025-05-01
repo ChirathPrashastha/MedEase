@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="558.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerAddEmployeeController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="768.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="37.0" prefWidth="283.0" styleClass="header" stylesheets="@../css/NurseDashboardStyle.css" text="ADD EMPLOYEE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <VBox layoutX="35.0" layoutY="99.0" prefHeight="265.0" prefWidth="153.0" spacing="5.0">
+         <children>
+            <Label prefHeight="37.0" prefWidth="122.0" text="EMPLOYEE ID" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="122.0" text="NAME" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="47.0" prefHeight="37.0" prefWidth="122.0" text="JOB ROLE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="84.0" prefHeight="37.0" prefWidth="122.0" text="ADDRESS" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="121.0" prefHeight="37.0" prefWidth="122.0" text="CONTACT" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="158.0" prefHeight="37.0" prefWidth="122.0" text="EMAIL" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="206.0" layoutY="98.0" prefHeight="258.0" prefWidth="394.0" spacing="5.0">
+         <children>
+            <Label fx:id="lblEmployeeId" alignment="CENTER" prefHeight="37.0" prefWidth="142.0" styleClass="id-label" stylesheets="@../css/NurseDashboardStyle.css" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtName" layoutX="10.0" layoutY="10.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <Pane prefHeight="37.0" prefWidth="200.0">
+               <children>
+                  <RadioButton fx:id="btnDoctor" layoutX="2.0" layoutY="9.0" mnemonicParsing="false" onAction="#radioBtnDoctorOnAction" />
+                  <RadioButton fx:id="btnNurse" layoutX="121.0" layoutY="9.0" mnemonicParsing="false" onAction="#radioBtnNurseOnAction" />
+                  <RadioButton fx:id="btnReceptionist" layoutX="233.0" layoutY="9.0" mnemonicParsing="false" onAction="#radioBtnReceptionistOnAction" />
+                  <RadioButton fx:id="btnManager" layoutX="340.0" layoutY="9.0" mnemonicParsing="false" onAction="#radioBtnManagerOnAction" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="25.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/doctorR.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="144.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/nurseR.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="256.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/receptionist%20R.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="362.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/managerR.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <TextField fx:id="txtAddress" layoutX="10.0" layoutY="90.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtContact" layoutX="10.0" layoutY="130.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtEmail" layoutX="10.0" layoutY="170.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+         </children>
+      </VBox>
+      <Pane layoutX="496.0" layoutY="368.0" prefHeight="37.0" prefWidth="104.0" styleClass="add-btn" stylesheets="@../css/DoctorDashboardStyle.css">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/add.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="49.0" layoutY="5.0" prefHeight="25.0" prefWidth="36.0" text="ADD">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="37.0" prefWidth="104.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

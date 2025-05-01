@@ -1,0 +1,30 @@
+.container-anc {
+    -fx-background-color: linear-gradient(to right top ,#1A3B4B, #0F9EA5 );
+}
+
+.header {
+    -fx-background-color: #272640;
+    -fx-background-radius: 30;
+}
+
+.panel-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50;
+}
+
+.input-fields {
+    -fx-background-color: #1234;
+    -fx-border-color: #3E1F47;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-text-fill: white;
+}
+
+.id-label {
+    -fx-background-color: #212F45;
+    -fx-background-radius: 30;
+}
+
+.add-button {
+    -fx-background-color: rgba(120, 229, 16, 0.7);
+    -fx-background-radius: 30;
+}
