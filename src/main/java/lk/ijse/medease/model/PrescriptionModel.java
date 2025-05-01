@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class PrescriptionModel {
 
-    public String addPrescription(PrescriptionDTO prescriptionDTO, ArrayList<PrescriptionMedicineDTO> presMedArray, int checkInNo, String doctorId) throws Exception {
+    public String addPrescription(PrescriptionDTO prescriptionDTO, ArrayList<PrescriptionMedicineDTO> presMedArray, int checkInNo, String doctorId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         try {
@@ -85,7 +85,7 @@ public class PrescriptionModel {
         }
     }
 
-    public ArrayList<PrescriptionDTO> getPatientHistory(String patientId) throws ClassNotFoundException, SQLException {
+    public ArrayList<PrescriptionDTO> getPatientHistory(String patientId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM prescription WHERE patient_id = ?";

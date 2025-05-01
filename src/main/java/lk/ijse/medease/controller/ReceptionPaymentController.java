@@ -13,6 +13,7 @@ import lk.ijse.medease.dto.tm.PaymentTM;
 
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -31,13 +32,13 @@ public class ReceptionPaymentController implements Initializable {
     private TableColumn<PaymentTM, Double> colAmount;
 
     @FXML
-    private TableColumn<PaymentTM, Number> colAppId;
+    private TableColumn<PaymentTM, String> colAppId;
 
     @FXML
     private TableColumn<PaymentTM, Date> colPaidDate;
 
     @FXML
-    private TableColumn<PaymentTM, Number> colPayId;
+    private TableColumn<PaymentTM, String> colPayId;
 
     @FXML
     private TableColumn<PaymentTM, String> colPayMethod;
@@ -71,7 +72,7 @@ public class ReceptionPaymentController implements Initializable {
     }
 
     private void addPayment() {
-        PaymentDTO paymentDTO = new PaymentDTO(Integer.parseInt(txtAppointmentId.getText()), Double.parseDouble(txtAmount.getText()), paymentMethod);
+        PaymentDTO paymentDTO = new PaymentDTO(txtPaymentId.getText(), txtAppointmentId.getText(), Double.parseDouble(txtAmount.getText()), paymentMethod);
 
         try {
             String response = paymentController.addPayment(paymentDTO);
@@ -97,6 +98,17 @@ public class ReceptionPaymentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         paymentController = new PaymentController();
+
+        try {
+            String paymentId = paymentController.getNextId();
+            txtPaymentId.setText(paymentId);
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to Generate Payment ID");
+            alert.showAndWait();
+        }
 
         colPayId.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
         colAppId.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));

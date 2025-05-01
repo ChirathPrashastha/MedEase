@@ -3,20 +3,20 @@ package lk.ijse.medease.dto;
 import java.sql.Date;
 
 public class PaymentDTO {
-   private int paymentId;
-   private int appointmentId;
+   private String paymentId;
+   private String appointmentId;
    private double amount;
    private Date paidDate;
    private String paymentMethod;
 
-    public PaymentDTO(int appointmentId, double amount, String paymentStatus) {
+    public PaymentDTO(String paymentId, String appointmentId, double amount, String paymentMethod) {
+        this.paymentId = paymentId;
         this.appointmentId = appointmentId;
         this.amount = amount;
-        this.paymentMethod = paymentStatus;
+        this.paymentMethod = paymentMethod;
     }
 
-
-    public PaymentDTO(int paymentId, int appointmentId, double amount, Date paidDate, String paymentMethod) {
+    public PaymentDTO(String paymentId, String appointmentId, double amount, Date paidDate, String paymentMethod) {
         this.paymentId = paymentId;
         this.appointmentId = appointmentId;
         this.amount = amount;
@@ -24,15 +24,19 @@ public class PaymentDTO {
         this.paymentMethod = paymentMethod;
     }
 
-    public int getPaymentId() {
+    public String getPaymentId() {
         return paymentId;
     }
 
-    public int getAppointmentId() {
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public String getAppointmentId() {
         return appointmentId;
     }
 
-    public void setAppointmentId(int appointmentId) {
+    public void setAppointmentId(String appointmentId) {
         this.appointmentId = appointmentId;
     }
 

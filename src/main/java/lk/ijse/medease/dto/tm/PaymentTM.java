@@ -3,13 +3,13 @@ package lk.ijse.medease.dto.tm;
 import java.sql.Date;
 
 public class PaymentTM {
-    private int paymentId;
-    private int appointmentId;
+    private String paymentId;
+    private String appointmentId;
     private double amount;
     private Date paidDate;
     private String paymentMethod;
 
-    public PaymentTM(int paymentId, int appointmentId, double amount, Date paidDate, String paymentMethod) {
+    public PaymentTM(String paymentId, String appointmentId, double amount, Date paidDate, String paymentMethod) {
         this.paymentId = paymentId;
         this.appointmentId = appointmentId;
         this.amount = amount;
@@ -17,19 +17,19 @@ public class PaymentTM {
         this.paymentMethod = paymentMethod;
     }
 
-    public int getPaymentId() {
+    public String getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
     }
 
-    public int getAppointmentId() {
+    public String getAppointmentId() {
         return appointmentId;
     }
 
-    public void setAppointmentId(int appointmentId) {
+    public void setAppointmentId(String appointmentId) {
         this.appointmentId = appointmentId;
     }
 
