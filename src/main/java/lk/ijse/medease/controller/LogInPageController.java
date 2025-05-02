@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.medease.dto.JobRole;
 import lk.ijse.medease.dto.UserDTO;
 import lk.ijse.medease.model.AuthenticationModel;
 
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class LogInPageController {
-    private String jobRole;
+    private JobRole jobRole;
     private String username, password;
     public static UserDTO userDTO;
 
@@ -34,17 +35,16 @@ public class LogInPageController {
         username = txtUsername.getText();
         password = txtPassword.getText();
 
-
          userDTO = AuthenticationModel.checkCredentials(username, password);
 
         if (userDTO != null) {
            jobRole = AuthenticationModel.getJobRole(userDTO.getEmployeeId());
 
             switch (jobRole){
-                case "Manager" -> navigateTo("/view/ManagerDashboard.fxml");
-                case "Receptionist" -> navigateTo("/view/ReceptionDashboard.fxml");
-                case "Doctor" -> navigateTo("/view/DoctorDashboard.fxml");
-                case "Nurse" -> navigateTo("/view/NurseDashboard.fxml");
+                case MANAGER -> navigateTo("/view/ManagerDashboard.fxml");
+                case RECEPTIONIST -> navigateTo("/view/ReceptionDashboard.fxml");
+                case DOCTOR -> navigateTo("/view/DoctorDashboard.fxml");
+                case NURSE -> navigateTo("/view/NurseDashboard.fxml");
             }
 
         }else {

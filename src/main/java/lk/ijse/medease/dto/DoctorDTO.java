@@ -6,9 +6,9 @@ public class DoctorDTO {
     private String specialty;
     private String registrationNumber;
     private String hospital;
-    private String shift;
+    private Shift shift;
 
-    public DoctorDTO(String doctorId, String employeeId, String specialty, String registrationNumber, String hospital, String shift) {
+    public DoctorDTO(String doctorId, String employeeId, String specialty, String registrationNumber, String hospital, Shift shift) {
         this.doctorId = doctorId;
         this.employeeId = employeeId;
         this.specialty = specialty;
@@ -57,11 +57,11 @@ public class DoctorDTO {
         this.hospital = hospital;
     }
 
-    public String getShift() {
+    public Shift getShift() {
         return shift;
     }
 
-    public void setShift(String shift) {
+    public void setShift(Shift shift) {
         this.shift = shift;
     }
 }

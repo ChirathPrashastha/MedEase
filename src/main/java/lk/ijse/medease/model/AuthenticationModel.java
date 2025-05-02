@@ -1,6 +1,7 @@
 package lk.ijse.medease.model;
 
 import lk.ijse.medease.db.DBConnection;
+import lk.ijse.medease.dto.JobRole;
 import lk.ijse.medease.dto.UserDTO;
 
 import java.sql.Connection;
@@ -24,7 +25,7 @@ public class AuthenticationModel {
         return null;
     }
 
-    public static String getJobRole(String employeeId) throws SQLException {
+    public static JobRole getJobRole(String employeeId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         PreparedStatement statement = connection.prepareStatement("SELECT employee.job_role FROM employee WHERE employee_id = ?");
@@ -33,7 +34,8 @@ public class AuthenticationModel {
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            return resultSet.getString("job_role");
+            String jobRoleStr = resultSet.getString("job_role");
+            return JobRole.valueOf(jobRoleStr);
         }
         return null;
     }

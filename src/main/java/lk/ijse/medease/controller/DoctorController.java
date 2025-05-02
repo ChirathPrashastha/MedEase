@@ -42,4 +42,8 @@ public class DoctorController {
         ArrayList<DoctorDTO> doctorDTOs = doctorModel.getAllDoctors();
         return doctorDTOs;
     }
+
+    public String getNextId() throws SQLException {
+        return doctorModel.getNextId();
+    }
 }
