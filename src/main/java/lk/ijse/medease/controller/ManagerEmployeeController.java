@@ -20,39 +20,64 @@ public class ManagerEmployeeController implements Initializable {
 
     @FXML
     private Button btnDelete;
-
-    @FXML
-    private Button btnRestock;
-
-    @FXML
-    private Button btnSupplier;
-
+    
     @FXML
     private Button btnUpdate;
 
     @FXML
-    void btnAddOnAction(ActionEvent event) {
+    private Button btnAttendance;
 
+    @FXML
+    private Button btnViewEmployee;
+
+    @FXML
+    void btnAddOnAction(ActionEvent event) {
+        navigateTo("/view/ManagerAddEmployee.fxml");
+        btnAdd.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnUpdate.setStyle("-fx-border-color: transparent");
+        btnDelete.setStyle("-fx-border-color: transparent");
+        btnAttendance.setStyle("-fx-border-color: transparent");
+        btnViewEmployee.setStyle("-fx-border-color: transparent");
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnRestockOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnSupplierOnAction(ActionEvent event) {
-
+        navigateTo("/view/ManagerDeleteEmployee.fxml");
+        btnDelete.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnAdd.setStyle("-fx-border-color: transparent");
+        btnUpdate.setStyle("-fx-border-color: transparent");
+        btnAttendance.setStyle("-fx-border-color: transparent");
+        btnViewEmployee.setStyle("-fx-border-color: transparent");
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        navigateTo("/view/ManagerUpdateEmployee.fxml");
+        btnUpdate.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnAdd.setStyle("-fx-border-color: transparent");
+        btnDelete.setStyle("-fx-border-color: transparent");
+        btnAttendance.setStyle("-fx-border-color: transparent");
+        btnViewEmployee.setStyle("-fx-border-color: transparent");
+    }
 
+    @FXML
+    void btnAttendanceOnAction(ActionEvent event) {
+        navigateTo("/view/ManagerAttendance.fxml");
+        btnAttendance.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnAdd.setStyle("-fx-border-color: transparent");
+        btnUpdate.setStyle("-fx-border-color: transparent");
+        btnDelete.setStyle("-fx-border-color: transparent");
+        btnViewEmployee.setStyle("-fx-border-color: transparent");
+    }
+
+    @FXML
+    void btnViewEmployeeOnAction(ActionEvent event) {
+        navigateTo("/view/ManagerViewEmployee.fxml");
+        btnViewEmployee.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnAdd.setStyle("-fx-border-color: transparent");
+        btnUpdate.setStyle("-fx-border-color: transparent");
+        btnDelete.setStyle("-fx-border-color: transparent");
+        btnAttendance.setStyle("-fx-border-color: transparent");
     }
 
     private void navigateTo(String path) {

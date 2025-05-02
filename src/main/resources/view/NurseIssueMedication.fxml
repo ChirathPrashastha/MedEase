@@ -18,7 +18,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/NurseDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.NurseIssueMedicationController">
    <children>
-      <Pane layoutX="484.0" layoutY="474.0" prefHeight="45.0" prefWidth="164.0" styleClass="order-btn" stylesheets="@../css/NurseDashboardStyle.css" />
+      <Pane layoutX="484.0" layoutY="474.0" prefHeight="45.0" prefWidth="164.0" styleClass="order-button" stylesheets="@../css/NurseDashboardStyle.css" />
       <Label alignment="CENTER" layoutX="182.0" layoutY="50.0" prefHeight="44.0" prefWidth="239.0" styleClass="header" stylesheets="@../css/NurseDashboardStyle.css" text="ISSUE MEDICATION" textFill="WHITE">
          <font>
             <Font name="Cambria Math" size="16.0" />
@@ -216,7 +216,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Pane layoutX="486.0" layoutY="533.0" prefHeight="45.0" prefWidth="164.0" styleClass="order-btn" stylesheets="@../css/NurseDashboardStyle.css" />
+      <Pane layoutX="486.0" layoutY="533.0" prefHeight="45.0" prefWidth="164.0" styleClass="order-button" stylesheets="@../css/NurseDashboardStyle.css" />
       <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="503.0" layoutY="540.0" pickOnBounds="true">
          <image>
             <Image url="@../images/placeOrder.png" />

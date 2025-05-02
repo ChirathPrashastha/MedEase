@@ -61,6 +61,11 @@
     -fx-background-radius: 50;
 }
 
+.order-button {
+    -fx-background-color: #1234;
+    -fx-background-radius: 30;
+}
+
 .proceed {
     -fx-background-color: rgba(120, 229, 16, 0.7);
     -fx-background-radius: 30;
