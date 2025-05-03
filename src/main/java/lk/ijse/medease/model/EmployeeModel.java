@@ -3,6 +3,7 @@ package lk.ijse.medease.model;
 import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.DoctorDTO;
 import lk.ijse.medease.dto.EmployeeDTO;
+import lk.ijse.medease.dto.JobRole;
 import lk.ijse.medease.dto.UserDTO;
 
 import java.sql.Connection;
@@ -246,6 +247,84 @@ public class EmployeeModel {
         }finally {
             connection.setAutoCommit(true);
         }
+    }
+
+    public String deleteEmployee(String employeeId, JobRole jobRole) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        try {
+            connection.setAutoCommit(false);
+
+            String deleteEmployeeSQL = "DELETE FROM employee WHERE employee_id = ?";
+
+            PreparedStatement deleteEmployeeStatement = connection.prepareStatement(deleteEmployeeSQL);
+            deleteEmployeeStatement.setString(1, employeeId);
+
+            boolean isEmployeeDeleted = deleteEmployeeStatement.executeUpdate() > 0;
+
+            if (isEmployeeDeleted) {
+
+                String deleteUserSQL = "DELETE FROM authentication WHERE employee_id = ?";
+
+                PreparedStatement deleteUserStatement = connection.prepareStatement(deleteUserSQL);
+                deleteUserStatement.setString(1, employeeId);
+
+                boolean isUserDeleted = deleteUserStatement.executeUpdate() > 0;
+
+                if (isUserDeleted) {
+                    if (jobRole.equals(JobRole.DOCTOR)){
+
+                        String deleteDoctorSQL ="DELETE FROM doctor WHERE employee_id = ?";
+
+                        PreparedStatement deleteDoctorStatement = connection.prepareStatement(deleteDoctorSQL);
+                        deleteDoctorStatement.setString(1, employeeId);
+
+                        boolean isDoctorDeleted = deleteDoctorStatement.executeUpdate() > 0;
+
+                        if (isDoctorDeleted) {
+                            return "Employee Deleted Successfully";
+                        }else {
+                            connection.rollback();
+                            return "Failed to Delete Doctor";
+                        }
+
+                    }else {
+                        return "Employee Deleted Successfully";
+                    }
+
+                }else {
+                    connection.rollback();
+                    return "Failed to Delete Authentication";
+                }
+
+            }else {
+                connection.rollback();
+                return "Failed to Delete Employee";
+            }
+
+        }catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(true);
+        }
+    }
+
+    public EmployeeDTO serachEmployee(String employeeId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM employee WHERE employee_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, employeeId);
+
+        ResultSet rst = statement.executeQuery();
+
+        if (rst.next()) {
+           EmployeeDTO employeeDTO = new EmployeeDTO(rst.getString("employee_id"), rst.getString("name"), JobRole.valueOf(rst.getString("job_role")), rst.getDate("recruited_date"), rst.getString("address"), rst.getString("contact"), rst.getString("email"));
+           return employeeDTO;
+        }
+        return null;
     }
 
     public String getNextId() throws SQLException {

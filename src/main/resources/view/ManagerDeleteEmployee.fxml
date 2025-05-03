@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="558.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerDeleteEmployeeController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="768.0">
@@ -37,9 +36,9 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="206.0" layoutY="98.0" prefHeight="51.0" prefWidth="394.0" spacing="5.0">
+      <VBox layoutX="206.0" layoutY="98.0" prefHeight="51.0" prefWidth="343.0" spacing="5.0">
          <children>
-            <TextField fx:id="txtEmployeeId" layoutX="10.0" layoutY="10.0" prefHeight="37.0" promptText="press enter after filling for employee info" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtEmployeeId" layoutX="10.0" layoutY="10.0" onAction="#employeeInfoOnAction" prefHeight="37.0" prefWidth="369.0" promptText="press enter after filling for employee info" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -49,14 +48,14 @@
             </TextField>
          </children>
       </VBox>
-      <Pane layoutX="484.0" layoutY="153.0" prefHeight="37.0" prefWidth="116.0" styleClass="delete-button" stylesheets="@../css/DoctorDashboardStyle.css">
+      <Pane layoutX="433.0" layoutY="150.0" prefHeight="37.0" prefWidth="116.0" styleClass="delete-button" stylesheets="@../css/DoctorDashboardStyle.css">
          <children>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="11.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/delete.png" />
                </image>
             </ImageView>
-            <Label layoutX="48.0" layoutY="6.0" prefHeight="25.0" prefWidth="53.0" text="DELETE" textFill="WHITE">
+            <Label layoutX="47.0" layoutY="6.0" prefHeight="25.0" prefWidth="53.0" text="DELETE" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold" size="13.0" />
                </font>
