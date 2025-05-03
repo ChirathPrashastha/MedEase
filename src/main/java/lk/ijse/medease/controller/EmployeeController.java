@@ -7,6 +7,7 @@ import lk.ijse.medease.dto.UserDTO;
 import lk.ijse.medease.model.EmployeeModel;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EmployeeController {
     private EmployeeModel employeeModel;
@@ -36,7 +37,11 @@ public class EmployeeController {
     }
 
     public EmployeeDTO searchEmployee(String employeeId) throws SQLException {
-        return employeeModel.serachEmployee(employeeId);
+        return employeeModel.searchEmployee(employeeId);
+    }
+
+    public ArrayList<EmployeeDTO> getAllEmployees() throws SQLException {
+        return employeeModel.getAllEmployees();
     }
 
     public String getNextId() throws SQLException {

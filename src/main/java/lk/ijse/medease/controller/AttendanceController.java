@@ -15,11 +15,6 @@ public class AttendanceController {
         attendanceModel = new AttendanceModel();
     }
 
-    public String markAttendance(AttendanceDTO attendanceDTO) throws SQLException {
-        String response = attendanceModel.markAttendance(attendanceDTO);
-        return response;
-    }
-
     public String updateAttendance(AttendanceDTO attendanceDTO) throws SQLException {
         String response = attendanceModel.updateAttendance(attendanceDTO);
         return response;
@@ -46,5 +41,9 @@ public class AttendanceController {
 
     public ArrayList<AttendanceDTO> filterAttendance(AttendStatus attendStatus, Date date) throws SQLException {
         return attendanceModel.filterAttendance(attendStatus, date);
+    }
+
+    public String markAttendance(String employeeId, Date date) throws SQLException {
+        return attendanceModel.markAttendance(employeeId, date);
     }
 }

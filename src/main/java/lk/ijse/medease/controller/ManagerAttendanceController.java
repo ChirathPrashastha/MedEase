@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import lk.ijse.medease.dto.AttendStatus;
 import lk.ijse.medease.dto.AttendanceDTO;
 import lk.ijse.medease.dto.tm.AttendanceTM;
@@ -57,7 +60,7 @@ public class ManagerAttendanceController implements Initializable {
 
     @FXML
     void btnPresentOnAction(ActionEvent event) {
-
+        markAttendance();
     }
 
     @FXML
@@ -69,11 +72,6 @@ public class ManagerAttendanceController implements Initializable {
     void btnAbsentOnlyOnAction(ActionEvent event) {
         tblAttendance.getItems().clear();
         loadFilteredTable(AttendStatus.ABSENT);
-    }
-
-    @FXML
-    void btnLowestAttendanceOnAction(ActionEvent event) {
-
     }
 
     @FXML
@@ -189,6 +187,64 @@ public class ManagerAttendanceController implements Initializable {
             }
 
             tblAttendance.setItems(attendanceObList);
+
+        }catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    private void markAttendance() {
+        try {
+            int selectedYear = cbYear.getValue();
+            Month selectedMonth = Month.valueOf(cbMonth.getValue());
+            int selectedDay = cbDay.getValue();
+
+            LocalDate localDate = LocalDate.of(selectedYear, selectedMonth, selectedDay);
+            Date selectedDate = Date.valueOf(localDate);
+
+            String response = attendanceController.markAttendance(txtEmployeeId.getText(), selectedDate);
+
+            if (response.equals("success")){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ATTENDANCE");
+                alert.setHeaderText("Attendance Marked Successfully");
+
+                Image image = new Image(getClass().getResource("/images/success.png").toExternalForm());
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(25);
+                imageView.setFitWidth(25);
+
+                alert.setGraphic(imageView);
+
+                alert.getDialogPane().lookup(".header-panel").setStyle("-fx-background-color: #85ff7a");
+                alert.getDialogPane().setStyle("-fx-background-color: #2db83d");
+
+                alert.showAndWait();
+
+                tblAttendance.getItems().clear();
+                loadTableData();
+
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ATTENDANCE");
+                alert.setHeaderText("Failed to Mark Attendance");
+
+                Image image = new Image(getClass().getResource("/images/failed.png").toExternalForm());
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(25);
+                imageView.setFitWidth(25);
+
+                alert.setGraphic(imageView);
+
+                alert.getDialogPane().lookup(".header-panel").setStyle("-fx-background-color: #f87c7c");
+                alert.getDialogPane().setStyle("-fx-background-color: #f83e3e");
+
+                alert.showAndWait();
+            }
 
         }catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

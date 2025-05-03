@@ -56,22 +56,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnReports" layoutX="10.0" layoutY="144.0" mnemonicParsing="false" onAction="#btnReportsOnAction" prefHeight="40.0" prefWidth="255.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Reports" textFill="WHITE">
-                     <font>
-                        <Font name="Corbel" size="17.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="btnOthers" layoutX="10.0" layoutY="182.0" mnemonicParsing="false" onAction="#btnOthersOnActon" prefHeight="40.0" prefWidth="255.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Others" textFill="WHITE">
-                     <font>
-                        <Font name="Corbel" size="17.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <Button fx:id="btnLogout" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="40.0" prefWidth="255.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Logout" textFill="WHITE">
                      <font>
                         <Font name="Corbel" size="17.0" />

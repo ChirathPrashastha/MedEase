@@ -6,10 +6,8 @@ import lk.ijse.medease.dto.EmployeeDTO;
 import lk.ijse.medease.dto.JobRole;
 import lk.ijse.medease.dto.UserDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class EmployeeModel {
 
@@ -310,7 +308,7 @@ public class EmployeeModel {
         }
     }
 
-    public EmployeeDTO serachEmployee(String employeeId) throws SQLException {
+    public EmployeeDTO searchEmployee(String employeeId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM employee WHERE employee_id = ?";
@@ -325,6 +323,22 @@ public class EmployeeModel {
            return employeeDTO;
         }
         return null;
+    }
+
+    public ArrayList<EmployeeDTO> getAllEmployees() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM employee";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<EmployeeDTO> employeeList = new ArrayList<>();
+        while (rst.next()) {
+            EmployeeDTO employeeDTO = new EmployeeDTO(rst.getString("employee_id"), rst.getString("name"), JobRole.valueOf(rst.getString("job_role")), rst.getDate("recruited_date"), rst.getString("address"), rst.getString("contact"), rst.getString("email"));
+            employeeList.add(employeeDTO);
+        }
+        return employeeList;
     }
 
     public String getNextId() throws SQLException {

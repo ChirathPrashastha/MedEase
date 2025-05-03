@@ -25,12 +25,6 @@ public class ManagerDashboardController implements Initializable {
     private Button btnLogout;
 
     @FXML
-    private Button btnOthers;
-
-    @FXML
-    private Button btnReports;
-
-    @FXML
     private AnchorPane mainContainerAnc;
 
     @FXML
@@ -42,8 +36,6 @@ public class ManagerDashboardController implements Initializable {
         btnEmployee.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
         btnHome.setStyle("-fx-border-color: transparent");
         btnInventory.setStyle("-fx-border-color: transparent");
-        btnReports.setStyle("-fx-border-color: transparent");
-        btnOthers.setStyle("-fx-border-color: transparent");
         btnLogout.setStyle("-fx-border-color: transparent");
     }
 
@@ -59,16 +51,6 @@ public class ManagerDashboardController implements Initializable {
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnOthersOnActon(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnReportsOnAction(ActionEvent event) {
 
     }
 

@@ -9,16 +9,16 @@ import java.util.ArrayList;
 
 public class AttendanceModel {
 
-    public String markAttendance(AttendanceDTO attendanceDTO) throws SQLException {
+    public String markAttendance(String employeeId, Date date) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO attendance (employee_id, status) VALUES (?, ?)";
+        String sql = "UPDATE attendance SET status = 'PRESENT' WHERE employee_id = ? AND attend_date = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, attendanceDTO.getEmployeeId());
-        statement.setString(2, attendanceDTO.getStatus().name());
+        statement.setString(1, employeeId);
+        statement.setDate(2, date);
 
-        return statement.executeUpdate() > 0 ? "Attendance Marked Successfully" : "Failed to Mark Attendance";
+        return statement.executeUpdate() > 0 ? "success" : "failed";
     }
 
     public String updateAttendance(AttendanceDTO attendanceDTO) throws SQLException {
