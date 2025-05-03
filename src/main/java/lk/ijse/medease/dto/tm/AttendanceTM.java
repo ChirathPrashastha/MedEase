@@ -1,18 +1,15 @@
-package lk.ijse.medease.dto;
+package lk.ijse.medease.dto.tm;
+
+import lk.ijse.medease.dto.AttendStatus;
 
 import java.sql.Date;
 
-public class AttendanceDTO {
+public class AttendanceTM {
     private Date attendDate;
     private String employeeId;
     private AttendStatus status;
 
-    public AttendanceDTO(String employeeId, AttendStatus status) {
-        this.employeeId = employeeId;
-        this.status = status;
-    }
-
-    public AttendanceDTO(Date attendDate, String employeeId, AttendStatus status) {
+    public AttendanceTM(Date attendDate, String employeeId, AttendStatus status) {
         this.attendDate = attendDate;
         this.employeeId = employeeId;
         this.status = status;
@@ -20,6 +17,10 @@ public class AttendanceDTO {
 
     public Date getAttendDate() {
         return attendDate;
+    }
+
+    public void setAttendDate(Date attendDate) {
+        this.attendDate = attendDate;
     }
 
     public String getEmployeeId() {

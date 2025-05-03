@@ -1,6 +1,7 @@
 package lk.ijse.medease.model;
 
 import lk.ijse.medease.db.DBConnection;
+import lk.ijse.medease.dto.AttendStatus;
 import lk.ijse.medease.dto.AttendanceDTO;
 
 import java.sql.*;
@@ -8,32 +9,32 @@ import java.util.ArrayList;
 
 public class AttendanceModel {
 
-    public String markAttendance(AttendanceDTO attendanceDTO) throws ClassNotFoundException, SQLException {
+    public String markAttendance(AttendanceDTO attendanceDTO) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO attendance (employee_id, status) VALUES (?, ?)";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, attendanceDTO.getEmployeeId());
-        statement.setString(2, attendanceDTO.getStatus());
+        statement.setString(2, attendanceDTO.getStatus().name());
 
         return statement.executeUpdate() > 0 ? "Attendance Marked Successfully" : "Failed to Mark Attendance";
     }
 
-    public String updateAttendance(AttendanceDTO attendanceDTO) throws ClassNotFoundException, SQLException {
+    public String updateAttendance(AttendanceDTO attendanceDTO) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "UPDATE attendance SET status = ? WHERE employee_id = ? AND attend_date = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, attendanceDTO.getStatus());
+        statement.setString(1, attendanceDTO.getStatus().name());
         statement.setString(2, attendanceDTO.getEmployeeId());
         statement.setDate(3, attendanceDTO.getAttendDate());
 
         return statement.executeUpdate() > 0 ? "Attendance Updated Successfully" : "Failed to Update Attendance";
     }
 
-    public String deleteAttendance(AttendanceDTO attendanceDTO) throws ClassNotFoundException, SQLException {
+    public String deleteAttendance(AttendanceDTO attendanceDTO) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM attendance WHERE attend_date = ? AND employee_id = ?";
@@ -46,7 +47,7 @@ public class AttendanceModel {
         return statement.executeUpdate() > 0 ? "Attendance Deleted Successfully" : "Failed to Delete Attendance";
     }
 
-    public String searchAttendance(String employeeId, Date date) throws ClassNotFoundException, SQLException {
+    public String searchAttendance(String employeeId, Date date) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT status FROM attendance WHERE attend_date = ? AND employee_id = ?";
@@ -64,7 +65,7 @@ public class AttendanceModel {
         }
     }
 
-    public ArrayList<AttendanceDTO> getAllAttendance() throws ClassNotFoundException, SQLException {
+    public ArrayList<AttendanceDTO> getAllAttendance() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM attendance";
@@ -75,7 +76,44 @@ public class AttendanceModel {
         ArrayList<AttendanceDTO> attendanceList = new ArrayList<>();
 
         while (rst.next()) {
-            AttendanceDTO attendanceDTO = new AttendanceDTO(rst.getDate("attend_date"), rst.getString("employee_id"), rst.getString("status"));
+            AttendanceDTO attendanceDTO = new AttendanceDTO(rst.getDate("attend_date"), rst.getString("employee_id"), AttendStatus.valueOf(rst.getString("status")));
+            attendanceList.add(attendanceDTO);
+        }
+        return attendanceList;
+    }
+
+    public ArrayList<AttendanceDTO> getAttendanceByDate(Date date) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM attendance WHERE attend_date = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setDate(1, date);
+
+        ResultSet rst = statement.executeQuery();
+        ArrayList<AttendanceDTO> attendanceList = new ArrayList<>();
+
+        while (rst.next()) {
+            AttendanceDTO attendanceDTO = new AttendanceDTO(rst.getDate("attend_date"), rst.getString("employee_id"), AttendStatus.valueOf(rst.getString("status")));
+            attendanceList.add(attendanceDTO);
+        }
+        return attendanceList;
+    }
+
+    public ArrayList<AttendanceDTO> filterAttendance(AttendStatus attendStatus, Date date) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM attendance WHERE status = ? AND attend_date = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, attendStatus.name());
+        statement.setDate(2, date);
+
+        ResultSet rst = statement.executeQuery();
+
+        ArrayList<AttendanceDTO> attendanceList = new ArrayList<>();
+        while (rst.next()) {
+            AttendanceDTO attendanceDTO = new AttendanceDTO(rst.getDate("attend_date"), rst.getString("employee_id"), AttendStatus.valueOf(rst.getString("status")));
             attendanceList.add(attendanceDTO);
         }
         return attendanceList;

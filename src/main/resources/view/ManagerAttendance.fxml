@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="558.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerAttendanceController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="768.0">
@@ -45,7 +44,7 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="206.0" layoutY="98.0" prefHeight="96.0" prefWidth="225.0" spacing="7.0">
+      <VBox layoutX="206.0" layoutY="98.0" prefHeight="96.0" prefWidth="257.0" spacing="7.0">
          <children>
             <TextField fx:id="txtEmployeeId" layoutX="10.0" layoutY="10.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
@@ -76,6 +75,25 @@
                         </Button>
                      </children>
                   </Pane>
+                  <Pane layoutX="139.0" layoutY="2.0" prefHeight="33.0" prefWidth="116.0" styleClass="day-off-button" stylesheets="@../css/DoctorDashboardStyle.css">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/day-off.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="43.0" layoutY="3.0" prefHeight="25.0" prefWidth="55.0" text="DAY OFF" textFill="#800834">
+                           <font>
+                              <Font name="Cambria Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#btnDayOffOnAction" prefHeight="33.0" prefWidth="116.0" style="-fx-background-color: transparent;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
          </children>
@@ -93,7 +111,7 @@
       <ComboBox fx:id="cbMonth" layoutX="165.0" layoutY="208.0" onAction="#getMonthOnAction" prefHeight="25.0" prefWidth="109.0" />
       <ComboBox fx:id="cbYear" layoutX="35.0" layoutY="208.0" onAction="#getYearOnAction" prefHeight="25.0" prefWidth="109.0" />
       <ComboBox fx:id="cbDay" layoutX="294.0" layoutY="208.0" onAction="#getDayOnAction" prefHeight="25.0" prefWidth="109.0" />
-      <VBox layoutX="557.0" layoutY="317.0" prefHeight="150.0" prefWidth="180.0" spacing="17.0">
+      <VBox layoutX="557.0" layoutY="317.0" prefHeight="199.0" prefWidth="180.0" spacing="17.0">
          <children>
             <Pane prefHeight="33.0" prefWidth="180.0" styleClass="low-btn" stylesheets="@../css/DoctorDashboardStyle.css">
                <children>
@@ -125,12 +143,26 @@
             </Pane>
             <Pane prefHeight="33.0" prefWidth="180.0" styleClass="delete-button" stylesheets="@../css/DoctorDashboardStyle.css">
                <children>
-                  <Label layoutX="53.0" layoutY="3.0" prefHeight="25.0" prefWidth="96.0" text="ABSENTS ONLY" textFill="#51030d">
+                  <Label layoutX="50.0" layoutY="3.0" prefHeight="25.0" prefWidth="96.0" text="ABSENTS ONLY" textFill="#51030d">
                      <font>
                         <Font name="Cambria Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button layoutY="-1.0" mnemonicParsing="false" onAction="#btnAbsentOnlyOnAction" prefHeight="33.0" prefWidth="180.0" style="-fx-background-color: transparent;">
+                  <Button mnemonicParsing="false" onAction="#btnAbsentOnlyOnAction" prefHeight="33.0" prefWidth="180.0" style="-fx-background-color: transparent;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane prefHeight="33.0" prefWidth="116.0" styleClass="day-off-button" stylesheets="@../css/DoctorDashboardStyle.css">
+               <children>
+                  <Label layoutX="51.0" layoutY="4.0" prefHeight="25.0" prefWidth="90.0" text="DAY OFF ONLY" textFill="#800834">
+                     <font>
+                        <Font name="Cambria Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#btnDayOffOnlyOnAction" prefHeight="33.0" prefWidth="180.0" style="-fx-background-color: transparent;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -139,19 +171,15 @@
             </Pane>
          </children>
       </VBox>
-      <Pane layoutX="423.0" layoutY="204.0" prefHeight="33.0" prefWidth="122.0" styleClass="search-button" stylesheets="@../css/DoctorDashboardStyle.css">
-         <children>
-            <Label layoutX="39.0" layoutY="3.0" prefHeight="25.0" prefWidth="55.0" text="SEARCH" textFill="WHITE">
-               <font>
-                  <Font name="Cambria Bold" size="12.0" />
-               </font>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="33.0" prefWidth="122.0" style="-fx-background-color: transparent;">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </Pane>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="499.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/reload.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="499.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnReloadOnAction" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

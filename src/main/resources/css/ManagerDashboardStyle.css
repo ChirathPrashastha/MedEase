@@ -17,6 +17,11 @@
     -fx-background-radius: 30;
 }
 
+.day-off-button {
+    -fx-background-color: rgba(255, 143, 143, 0.7);
+    -fx-background-radius: 30;
+}
+
 .input-fields {
     -fx-background-color: #1234;
     -fx-border-color: #3E1F47;
