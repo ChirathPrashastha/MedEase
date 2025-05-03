@@ -130,6 +130,124 @@ public class EmployeeModel {
         }
     }
 
+    public String updateEmployee(EmployeeDTO employeeDTO, UserDTO userDTO) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        try {
+            connection.setAutoCommit(false);
+
+            String updateEmployeeSQL = "UPDATE employee SET name = ?, job_role = ?, recruited_date = ?, address = ?, contact = ?, email = ? WHERE employee_id = ?";
+
+            PreparedStatement updateEmployeeStatement = connection.prepareStatement(updateEmployeeSQL);
+            updateEmployeeStatement.setString(1, employeeDTO.getName());
+            updateEmployeeStatement.setString(2, employeeDTO.getJobRole().name());
+            updateEmployeeStatement.setDate(3, employeeDTO.getRecruitedDate());
+            updateEmployeeStatement.setString(4, employeeDTO.getAddress());
+            updateEmployeeStatement.setString(5, employeeDTO.getContact());
+            updateEmployeeStatement.setString(6, employeeDTO.getEmail());
+            updateEmployeeStatement.setString(7, employeeDTO.getEmployeeId());
+
+            boolean isEmployeeUpdated = updateEmployeeStatement.executeUpdate() > 0;
+
+            if (isEmployeeUpdated) {
+
+                String updateUserSQL = "UPDATE authentication SET username = ?, password = ? WHERE employee_id = ?";
+
+                PreparedStatement updateUserStatement = connection.prepareStatement(updateUserSQL);
+                updateUserStatement.setString(1, userDTO.getUsername());
+                updateUserStatement.setString(2, userDTO.getPassword());
+                updateUserStatement.setString(3, userDTO.getEmployeeId());
+
+                boolean isUserUpdated = updateUserStatement.executeUpdate() > 0;
+
+                if (isUserUpdated) {
+                    return "Employee Updated Successfully";
+                }else {
+                    connection.rollback();
+                    return "Failed to Update Authentication";
+                }
+
+            }else {
+                connection.rollback();
+                return "Failed to Update Employee";
+            }
+
+        } catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(true);
+        }
+    }
+
+    public String updateEmployee(EmployeeDTO employeeDTO, DoctorDTO doctorDTO, UserDTO userDTO) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        try {
+            connection.setAutoCommit(false);
+
+            String updateEmployeeSQL = "UPDATE employee SET name = ?, job_role = ?, recruited_date = ?, address = ?, contact = ?, email = ? WHERE employee_id = ?";
+
+            PreparedStatement updateEmployeeStatement = connection.prepareStatement(updateEmployeeSQL);
+            updateEmployeeStatement.setString(1, employeeDTO.getName());
+            updateEmployeeStatement.setString(2, employeeDTO.getJobRole().name());
+            updateEmployeeStatement.setDate(3, employeeDTO.getRecruitedDate());
+            updateEmployeeStatement.setString(4, employeeDTO.getAddress());
+            updateEmployeeStatement.setString(5, employeeDTO.getContact());
+            updateEmployeeStatement.setString(6, employeeDTO.getEmail());
+            updateEmployeeStatement.setString(7, employeeDTO.getEmployeeId());
+
+            boolean isEmployeeUpdated = updateEmployeeStatement.executeUpdate() > 0;
+
+            if (isEmployeeUpdated) {
+
+                String updateUserSQL = "UPDATE authentication SET username = ?, password = ? WHERE employee_id = ?";
+
+                PreparedStatement updateUserStatement = connection.prepareStatement(updateUserSQL);
+                updateUserStatement.setString(1, userDTO.getUsername());
+                updateUserStatement.setString(2, userDTO.getPassword());
+                updateUserStatement.setString(3, userDTO.getEmployeeId());
+
+                boolean isUserUpdated = updateUserStatement.executeUpdate() > 0;
+
+                if (isUserUpdated) {
+
+                    String updateDoctorSQL = "UPDATE doctor SET speciality = ?, registration_no = ?, hospital = ?, shift = ? WHERE doctor_id = ?";
+
+                    PreparedStatement updateDoctorStatement = connection.prepareStatement(updateDoctorSQL);
+                    updateDoctorStatement.setString(1, doctorDTO.getSpecialty());
+                    updateDoctorStatement.setString(2, doctorDTO.getRegistrationNumber());
+                    updateDoctorStatement.setString(3, doctorDTO.getHospital());
+                    updateDoctorStatement.setString(4, doctorDTO.getShift().getTime());
+                    updateDoctorStatement.setString(5, doctorDTO.getDoctorId());
+
+                    boolean isDoctorUpdated = updateDoctorStatement.executeUpdate() > 0;
+
+                    if (isDoctorUpdated) {
+                        return "Employee Updated Successfully";
+                    }else {
+                        connection.rollback();
+                        return "Failed to Update Doctor";
+                    }
+
+                }else {
+                    connection.rollback();
+                    return "Failed to Update Authentication";
+                }
+
+            }else {
+                connection.rollback();
+                return "Failed to Update Employee";
+            }
+
+        } catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(true);
+        }
+    }
+
     public String getNextId() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 

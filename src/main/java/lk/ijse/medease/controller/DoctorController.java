@@ -33,7 +33,7 @@ public class DoctorController {
         return response;
     }
 
-    public String getDoctorId(String employeeId) throws ClassNotFoundException, SQLException {
+    public String getDoctorId(String employeeId) throws SQLException {
         String response = doctorModel.getDoctorId(employeeId);
         return response;
     }

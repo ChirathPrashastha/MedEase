@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="558.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerUpdateEmployeeController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="768.0">
@@ -29,7 +28,7 @@
             </Label>
          </children>
       </HBox>
-      <VBox layoutX="35.0" layoutY="99.0" prefHeight="265.0" prefWidth="153.0" spacing="5.0">
+      <VBox layoutX="35.0" layoutY="99.0" prefHeight="347.0" prefWidth="153.0" spacing="5.0">
          <children>
             <Label prefHeight="37.0" prefWidth="122.0" text="EMPLOYEE ID" textFill="WHITE">
                <font>
@@ -51,6 +50,11 @@
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </Label>
+            <Label layoutX="10.0" layoutY="136.0" prefHeight="37.0" prefWidth="122.0" text="RECRUITED DATE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
             <Label layoutX="10.0" layoutY="121.0" prefHeight="37.0" prefWidth="122.0" text="CONTACT" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="14.0" />
@@ -61,9 +65,19 @@
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </Label>
+            <Label layoutX="10.0" layoutY="220.0" prefHeight="37.0" prefWidth="122.0" text="USERNAME" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="262.0" prefHeight="37.0" prefWidth="122.0" text="PASSWORD" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
-      <VBox layoutX="206.0" layoutY="98.0" prefHeight="258.0" prefWidth="394.0" spacing="5.0">
+      <VBox layoutX="206.0" layoutY="98.0" prefHeight="347.0" prefWidth="394.0" spacing="5.0">
          <children>
             <TextField fx:id="txtEmployeeId" layoutX="10.0" layoutY="10.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
@@ -117,6 +131,14 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
+            <TextField fx:id="txtRecruitedDate" layoutX="10.0" layoutY="136.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
             <TextField fx:id="txtContact" layoutX="10.0" layoutY="130.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
@@ -133,9 +155,25 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
+            <TextField fx:id="txtUsername" layoutX="10.0" layoutY="220.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtPassword" layoutX="10.0" layoutY="262.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
          </children>
       </VBox>
-      <Pane layoutX="484.0" layoutY="368.0" prefHeight="37.0" prefWidth="116.0" styleClass="update-button" stylesheets="@../css/DoctorDashboardStyle.css">
+      <Pane layoutX="484.0" layoutY="464.0" prefHeight="37.0" prefWidth="116.0" styleClass="update-button" stylesheets="@../css/DoctorDashboardStyle.css">
          <children>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>

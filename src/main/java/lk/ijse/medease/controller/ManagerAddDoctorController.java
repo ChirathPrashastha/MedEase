@@ -27,7 +27,7 @@ public class ManagerAddDoctorController implements Initializable {
     private ComboBox<Shift> cbShift;
 
     @FXML
-    private Label lblDoctorId;
+    public Label lblDoctorId;
 
     @FXML
     public Label lblEmployeeId;

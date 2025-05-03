@@ -72,7 +72,7 @@ public class DoctorModel {
         }
     }
 
-    public String getDoctorId(String employeeId) throws ClassNotFoundException , SQLException {
+    public String getDoctorId(String employeeId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT doctor_id FROM doctor WHERE employee_id = ?";

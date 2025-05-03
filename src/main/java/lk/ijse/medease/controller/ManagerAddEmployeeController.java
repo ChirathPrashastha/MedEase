@@ -69,7 +69,7 @@ public class ManagerAddEmployeeController implements Initializable {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-        clearFields();
+        clearInputs();
     }
 
     @FXML
@@ -125,17 +125,7 @@ public class ManagerAddEmployeeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         employeeController = new EmployeeController();
 
-        try {
-            String employeeId = employeeController.getNextId();
-            lblEmployeeId.setText(employeeId);
-        }catch (SQLException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("System Error");
-            alert.setContentText("Failed to Generate Employee ID");
-            alert.showAndWait();
-        }
+        generateEmployeeId();
     }
 
     private void loadDoctorDetailsWindow() throws IOException {
@@ -166,6 +156,7 @@ public class ManagerAddEmployeeController implements Initializable {
                 alert.showAndWait();
 
                 clearFields();
+                generateEmployeeId();
 
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -185,6 +176,7 @@ public class ManagerAddEmployeeController implements Initializable {
                 alert.showAndWait();
 
                 clearFields();
+                generateEmployeeId();
 
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -196,15 +188,32 @@ public class ManagerAddEmployeeController implements Initializable {
         }
     }
 
-    private void clearFields() {
+    private void generateEmployeeId() {
+        try {
+            String employeeId = employeeController.getNextId();
+            lblEmployeeId.setText(employeeId);
+        }catch (SQLException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("System Error");
+            alert.setContentText("Failed to Generate Employee ID");
+            alert.showAndWait();
+        }
+    }
 
+    private void clearFields() {
         lblEmployeeId.setText("");
-        txtName.setText("");
-        txtPassword.setText("");
-        txtUsername.setText("");
-        txtAddress.setText("");
-        txtContact.setText("");
-        txtEmail.setText("");
+        clearInputs();
+    }
+
+    private void clearInputs() {
+        txtName.clear();
+        txtPassword.clear();
+        txtUsername.clear();
+        txtAddress.clear();
+        txtContact.clear();
+        txtEmail.clear();
 
         btnDoctor.setDisable(false);
         btnManager.setDisable(false);

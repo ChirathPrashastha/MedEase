@@ -22,6 +22,14 @@ public class EmployeeController {
         return employeeModel.addEmployee(employeeDTO, doctorDTO, userDTO);
     }
 
+    public String updateEmployee(EmployeeDTO employeeDTO, UserDTO userDTO) throws SQLException {
+        return employeeModel.updateEmployee(employeeDTO, userDTO);
+    }
+
+    public String updateEmployee(EmployeeDTO employeeDTO, DoctorDTO doctorDTO, UserDTO userDTO) throws SQLException {
+        return employeeModel.updateEmployee(employeeDTO, doctorDTO, userDTO);
+    }
+
     public String getNextId() throws SQLException {
         return employeeModel.getNextId();
     }
