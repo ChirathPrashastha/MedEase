@@ -46,4 +46,8 @@ public class AttendanceController {
     public String markAttendance(String employeeId, Date date) throws SQLException {
         return attendanceModel.markAttendance(employeeId, date);
     }
+
+    public String addDayOff(String employeeId, Date date) throws SQLException {
+        return attendanceModel.addDayOff(employeeId, date);
+    }
 }

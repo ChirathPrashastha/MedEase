@@ -65,7 +65,7 @@ public class ManagerAttendanceController implements Initializable {
 
     @FXML
     void btnDayOffOnAction(ActionEvent event) {
-
+        addDayOff();
     }
 
     @FXML
@@ -225,6 +225,7 @@ public class ManagerAttendanceController implements Initializable {
 
                 alert.showAndWait();
 
+                txtEmployeeId.clear();
                 tblAttendance.getItems().clear();
                 loadTableData();
 
@@ -251,6 +252,107 @@ public class ManagerAttendanceController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText("Database Error");
             alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    private void addDayOff() {
+        int selectedYear = cbYear.getValue();
+        Month selectedMonth = Month.valueOf(cbMonth.getValue());
+        int selectedDay = cbDay.getValue();
+
+        LocalDate localDate = LocalDate.of(selectedYear, selectedMonth, selectedDay);
+        Date selectedDate = Date.valueOf(localDate);
+
+        try {
+            String response = attendanceController.addDayOff(txtEmployeeId.getText(), selectedDate);
+
+            if (response.equals("success")){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("DAY OFF");
+                alert.setHeaderText("Day Off Scheduled Successfully");
+
+                Image image = new Image(getClass().getResource("/images/success.png").toExternalForm());
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(25);
+                imageView.setFitWidth(25);
+
+                alert.setGraphic(imageView);
+
+                alert.getDialogPane().lookup(".header-panel").setStyle("-fx-background-color: #85ff7a");
+                alert.getDialogPane().setStyle("-fx-background-color: #2db83d");
+
+                alert.showAndWait();
+                txtEmployeeId.clear();
+
+            }else if (response.equals("failed")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Day Off");
+                alert.setHeaderText("Failed to Schedule Day Off");
+
+                Image image = new Image(getClass().getResource("/images/failed.png").toExternalForm());
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(25);
+                imageView.setFitWidth(25);
+
+                alert.setGraphic(imageView);
+
+                alert.getDialogPane().lookup(".header-panel").setStyle("-fx-background-color: #f87c7c");
+                alert.getDialogPane().setStyle("-fx-background-color: #f83e3e");
+
+                alert.showAndWait();
+            }else if (response.equals("ineligible")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Day Off");
+                alert.setHeaderText("Failed to Schedule Day Off");
+                alert.setContentText("Employee's Maximum Day Off Count is Reached");
+
+                Image image = new Image(getClass().getResource("/images/failed.png").toExternalForm());
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(25);
+                imageView.setFitWidth(25);
+
+                alert.setGraphic(imageView);
+
+                alert.getDialogPane().lookup(".header-panel").setStyle("-fx-background-color: #f87c7c");
+                alert.getDialogPane().setStyle("-fx-background-color: #f83e3e");
+
+                alert.showAndWait();
+            }else if (response == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Day Off");
+                alert.setHeaderText("Database Error");
+                alert.setContentText("Failed to retrieve data");
+
+                Image image = new Image(getClass().getResource("/images/failed.png").toExternalForm());
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(25);
+                imageView.setFitWidth(25);
+
+                alert.setGraphic(imageView);
+
+                alert.getDialogPane().lookup(".header-panel").setStyle("-fx-background-color: #f87c7c");
+                alert.getDialogPane().setStyle("-fx-background-color: #f83e3e");
+
+                alert.showAndWait();
+            }
+
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Day Off");
+            alert.setHeaderText("Database Error");
+            alert.setContentText("Please check the details");
+
+            Image image = new Image(getClass().getResource("/images/failed.png").toExternalForm());
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(25);
+            imageView.setFitWidth(25);
+
+            alert.setGraphic(imageView);
+
+            alert.getDialogPane().lookup(".header-panel").setStyle("-fx-background-color: #f87c7c");
+            alert.getDialogPane().setStyle("-fx-background-color: #f83e3e");
+
             alert.showAndWait();
         }
     }

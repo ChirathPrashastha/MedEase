@@ -5,6 +5,7 @@ import lk.ijse.medease.dto.AttendStatus;
 import lk.ijse.medease.dto.AttendanceDTO;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AttendanceModel {
@@ -117,5 +118,39 @@ public class AttendanceModel {
             attendanceList.add(attendanceDTO);
         }
         return attendanceList;
+    }
+
+    public String addDayOff(String employeeId, Date date) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        LocalDate localDate = date.toLocalDate();
+        int year = localDate.getYear();
+        int month = localDate.getMonthValue();
+
+        String checkingSQL = "SELECT COUNT(*) AS dayOffCount FROM day_off WHERE YEAR(date) = ? AND MONTH(date) = ? AND employee_id = ?";
+
+        PreparedStatement checkingStatement = connection.prepareStatement(checkingSQL);
+        checkingStatement.setInt(1, year);
+        checkingStatement.setInt(2, month);
+        checkingStatement.setString(3, employeeId);
+
+        ResultSet checkingRst = checkingStatement.executeQuery();
+        if (checkingRst.next()) {
+            int dayOffCount = checkingRst.getInt("dayOffCount");
+
+            if (dayOffCount <= 5) {
+                String dayOffAddingSQL = "INSERT INTO day_off VALUES (?,?)";
+
+                PreparedStatement dayOffAddingStatement = connection.prepareStatement(dayOffAddingSQL);
+                dayOffAddingStatement.setString(1, employeeId);
+                dayOffAddingStatement.setDate(2, date);
+
+
+                return dayOffAddingStatement.executeUpdate() > 0 ? "success" : "failed";
+            }else {
+                return "ineligible";
+            }
+        }
+        return null;
     }
 }
