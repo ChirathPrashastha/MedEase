@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import lk.ijse.medease.dto.MedicineDTO;
 import lk.ijse.medease.dto.RestockDTO;
+import lk.ijse.medease.dto.RestockStatus;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -90,7 +91,7 @@ public class NurseRequestRestockController implements Initializable {
         try {
             String restockId = restockController.getNextId();
 
-            RestockDTO restockDTO = new RestockDTO(restockId, txtMedId.getText(), Integer.parseInt(txtReqQty.getText()),"Pending");
+            RestockDTO restockDTO = new RestockDTO(restockId, txtMedId.getText(), Integer.parseInt(txtReqQty.getText()), RestockStatus.PENDING);
 
             try {
                 String response = restockController.requestRestock(restockDTO);

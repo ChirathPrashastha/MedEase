@@ -19,7 +19,7 @@ public class RestockModel {
         statement.setString(1, restockDTO.getRestockId());
         statement.setString(2, restockDTO.getMedicineId());
         statement.setInt(3, restockDTO.getRequestedQuantity());
-        statement.setString(4, restockDTO.getStatus());
+        statement.setString(4, restockDTO.getStatus().name());
 
         return statement.executeUpdate() > 0 ? "Stock Requested Successfully" : "Failed to Request Stock";
     }

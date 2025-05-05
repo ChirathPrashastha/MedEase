@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerInventoryController">
+   <children>
+      <HBox prefHeight="42.0" prefWidth="768.0">
+         <children>
+            <Button fx:id="btnInventory" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="42.0" prefWidth="256.0" styleClass="panel-button" stylesheets="@../css/ManagerDashboardStyle.css" text="INVENTORY" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSupplier" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnSupplierOnAction" prefHeight="42.0" prefWidth="256.0" styleClass="panel-button" stylesheets="@../css/ManagerDashboardStyle.css" text="SUPPLIERS" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnRequest" layoutX="164.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnRequestOnAction" prefHeight="42.0" prefWidth="256.0" styleClass="panel-button" stylesheets="@../css/ManagerDashboardStyle.css" text="STOCK REQUESTS" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="ancPage" layoutY="43.0" prefHeight="557.0" prefWidth="768.0" />
+   </children>
+</AnchorPane>

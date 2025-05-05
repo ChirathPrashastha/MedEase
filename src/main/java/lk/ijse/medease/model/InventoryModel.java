@@ -2,6 +2,7 @@ package lk.ijse.medease.model;
 
 import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.InventoryDTO;
+import lk.ijse.medease.dto.RestockStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,16 +61,44 @@ public class InventoryModel {
         return null;
     }
 
-    public String restock(String inventoryId, int quantity) throws ClassNotFoundException, SQLException {
+    public String restock(String inventoryId, int quantity, String medicineId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "UPDATE inventory SET quantity = quantity + ? WHERE inventory_id = ?";
+        try {
+            connection.setAutoCommit(false);
 
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, quantity);
-        statement.setString(2, inventoryId);
+            String restockSQL = "UPDATE inventory SET quantity = quantity + ? WHERE inventory_id = ?";
 
-        return statement.executeUpdate() > 0 ? "Restocked Successfully" : "Failed to Restock";
+            PreparedStatement statement = connection.prepareStatement(restockSQL);
+            statement.setInt(1, quantity);
+            statement.setString(2, inventoryId);
+
+            boolean isRestocked =  statement.executeUpdate() > 0;
+            if (isRestocked) {
+                String statusUpdateSQL = "UPDATE restock SET status = ? WHERE medicine_id =?";
+
+                PreparedStatement statusUpdateStatement = connection.prepareStatement(statusUpdateSQL);
+                statusUpdateStatement.setString(1, RestockStatus.RESTOCKED.name());
+                statusUpdateStatement.setString(2, medicineId);
+
+                boolean isStatusUpdated = statusUpdateStatement.executeUpdate() > 0;
+
+                if (isStatusUpdated) {
+                    return "Medicine Restocked Successfully";
+                }else {
+                    connection.rollback();
+                    return "Failed to update restock status";
+                }
+            }else {
+                connection.rollback();
+                return "Failed to Restock";
+            }
+        } catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(true);
+        }
     }
 
     public String getNextId() throws ClassNotFoundException, SQLException {

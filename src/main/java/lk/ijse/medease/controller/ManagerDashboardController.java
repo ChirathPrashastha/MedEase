@@ -41,12 +41,20 @@ public class ManagerDashboardController implements Initializable {
 
     @FXML
     void btnHomeOnAction(ActionEvent event) {
-
+        navigateTo("/view/ManagerHome.fxml");
+        btnHome.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnEmployee.setStyle("-fx-border-color: transparent");
+        btnInventory.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     @FXML
     void btnInventoryOnAction(ActionEvent event) {
-
+        navigateTo("/view/ManagerInventory.fxml");
+        btnInventory.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnHome.setStyle("-fx-border-color: transparent");
+        btnEmployee.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
     }
 
     @FXML

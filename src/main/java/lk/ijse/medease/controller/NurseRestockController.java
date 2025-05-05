@@ -40,7 +40,7 @@ public class NurseRestockController implements Initializable {
                 alert.showAndWait();
 
             }else {
-                String response = inventoryController.restock(txtInventoryId.getText(), Integer.parseInt(txtQuantity.getText()));
+                String response = inventoryController.restock(txtInventoryId.getText(), Integer.parseInt(txtQuantity.getText()), txtMedId.getText());
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Restock");

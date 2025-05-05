@@ -4,9 +4,9 @@ public class RestockDTO {
     private String restockId;
     private String medicineId;
     private int requestedQuantity;
-    private String status;
+    private RestockStatus status;
 
-    public RestockDTO(String restockId, String medicineId, int requestedQuantity, String status) {
+    public RestockDTO(String restockId, String medicineId, int requestedQuantity, RestockStatus status) {
         this.restockId = restockId;
         this.medicineId = medicineId;
         this.requestedQuantity = requestedQuantity;
@@ -37,11 +37,11 @@ public class RestockDTO {
         this.requestedQuantity = requestedQuantity;
     }
 
-    public String getStatus() {
+    public RestockStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(RestockStatus status) {
         this.status = status;
     }
 }
