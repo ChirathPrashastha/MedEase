@@ -14,7 +14,23 @@ public class SupplierController {
         supplierModel = new SupplierModel();
     }
 
-    public ArrayList<SupplierDTO> getAllSuppliers() throws SQLException, ClassNotFoundException {
+    public String addSupplier(SupplierDTO supplierDTO) throws SQLException {
+        return supplierModel.addSupplier(supplierDTO);
+    }
+
+    public String updateSupplier(SupplierDTO supplierDTO) throws SQLException {
+        return supplierModel.updateSupplier(supplierDTO);
+    }
+
+    public String deleteSupplier(String supplierID) throws SQLException {
+        return supplierModel.deleteSupplier(supplierID);
+    }
+
+    public ArrayList<SupplierDTO> getAllSuppliers() throws SQLException {
         return supplierModel.getAllSuppliers();
+    }
+
+    public String getNextId() throws SQLException {
+        return supplierModel.getNextId();
     }
 }
