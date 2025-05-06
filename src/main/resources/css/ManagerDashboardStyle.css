@@ -53,3 +53,9 @@
     -fx-background-color: rgba(255, 165, 0, 0.7);
     -fx-background-radius: 30;
 }
+
+.restock-qty-field {
+    -fx-background-color: #212F45;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+}

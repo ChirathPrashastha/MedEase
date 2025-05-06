@@ -51,7 +51,7 @@ public class MedicineController {
         return medicineList;
     }
 
-    public ArrayList<MedicineDTO> searchMedicine(String idOrName) throws SQLException, ClassNotFoundException {
+    public ArrayList<MedicineDTO> searchMedicine(String idOrName) throws SQLException{
         return medicineModel.searchMedicine(idOrName);
     }
 

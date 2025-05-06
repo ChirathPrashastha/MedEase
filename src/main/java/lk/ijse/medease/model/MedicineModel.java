@@ -229,7 +229,7 @@ public class MedicineModel {
         }
     }
 
-    public ArrayList<MedicineDTO> searchMedicine(String idOrName) throws ClassNotFoundException, SQLException {
+    public ArrayList<MedicineDTO> searchMedicine(String idOrName) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM medicine WHERE medicine_id = ? OR brand = ? OR generic_name = ?";

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="558.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerStockRequestController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="768.0">
@@ -32,8 +31,9 @@
       </HBox>
       <TableView fx:id="tblRestock" layoutX="37.0" layoutY="96.0" prefHeight="271.0" prefWidth="396.0">
         <columns>
+          <TableColumn fx:id="colRestockId" prefWidth="75.0" text="Restock ID" />
           <TableColumn fx:id="colMedicineId" prefWidth="75.0" text="Medicine ID" />
-          <TableColumn fx:id="colReqQTY" prefWidth="75.0" text="Requested QTY" />
+            <TableColumn fx:id="colReqQTY" prefWidth="75.0" text="Requested QTY" />
             <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
         </columns>
          <columnResizePolicy>
@@ -73,7 +73,7 @@
                         <Font name="Cambria Math" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtQuantity" prefHeight="30.0" styleClass="id-label" stylesheets="@../css/ManagerDashboardStyle.css">
+                  <TextField fx:id="txtQuantity" prefHeight="30.0" styleClass="restock-qty-field" stylesheets="@../css/ManagerDashboardStyle.css">
                      <font>
                         <Font name="Cambria Math" size="14.0" />
                      </font>
