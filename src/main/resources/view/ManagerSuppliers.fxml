@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="557.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerSuppliersController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="768.0">
@@ -124,7 +123,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="tblSupplier" layoutX="36.0" layoutY="283.0" prefHeight="252.0" prefWidth="701.0">
+      <TableView fx:id="tblSupplier" layoutX="36.0" layoutY="283.0" onMouseClicked="#tblOnMouseClicked" prefHeight="252.0" prefWidth="701.0">
         <columns>
           <TableColumn fx:id="colSupplierId" prefWidth="75.0" text="Supplier ID" />
           <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />

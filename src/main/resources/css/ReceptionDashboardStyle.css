@@ -17,9 +17,10 @@
 }
 
 .input-fields {
-    -fx-background-color: transparent;
+    -fx-background-color: #1234;
     -fx-border-color: #3E1F47;
     -fx-border-width: 0px 0px 2px 0px;
+    -fx-text-fill: white;
 }
 
 .add-btn {

@@ -30,7 +30,7 @@ public class PatientModel {
     public String updatePatient(PatientDTO patientDTO) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "UPDATE patient SET name = ? , birth_date = ? , contact = ? , email = ? , allergies = ? WHERE patient_id = ?";
+        String sql = "UPDATE patient SET name = ? , birth_date = ? , contact = ? , email = ? , allergies = ? WHERE patient_id = ? AND status = 'ACTIVE'";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, patientDTO.getName());
@@ -46,7 +46,7 @@ public class PatientModel {
     public String deletePatient(String patientId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "DELETE FROM patient WHERE patient_id = ?";
+        String sql = "UPDATE patient SET status = 'DELETED' WHERE patient_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, patientId);
@@ -57,7 +57,7 @@ public class PatientModel {
     public PatientDTO searchPatient(String patientId) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "SELECT * FROM patient WHERE patient_id = ?";
+        String sql = "SELECT * FROM patient WHERE patient_id = ? AND status = 'ACTIVE'";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, patientId);
@@ -75,7 +75,7 @@ public class PatientModel {
     public ArrayList<PatientDTO> getAllPatients() throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "SELECT * FROM patient";
+        String sql = "SELECT * FROM patient WHERE status = 'ACTIVE'";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet rst = statement.executeQuery();

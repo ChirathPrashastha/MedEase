@@ -13,43 +13,43 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionAppointmentController">
    <children>
-      <VBox alignment="CENTER" layoutX="38.0" layoutY="40.0" prefHeight="230.0" prefWidth="169.0" spacing="10.0">
+      <VBox alignment="CENTER" layoutX="38.0" layoutY="34.0" prefHeight="257.0" prefWidth="169.0" spacing="10.0">
          <children>
-            <Label prefHeight="46.0" prefWidth="127.0" text="PATIENT ID" textFill="WHITE">
+            <Label prefHeight="35.0" prefWidth="127.0" text="PATIENT ID" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="127.0" text="DOCTOR ID" textFill="WHITE">
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="127.0" text="DOCTOR ID" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="127.0" text="DATE" textFill="WHITE">
+            <Label layoutX="10.0" layoutY="56.0" prefHeight="35.0" prefWidth="127.0" text="DATE" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="102.0" prefHeight="46.0" prefWidth="135.0" text="CHECK IN NO" textFill="WHITE">
+            <Label layoutX="10.0" layoutY="102.0" prefHeight="35.0" prefWidth="135.0" text="CHECK IN NO" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="27.0" layoutY="163.0" prefHeight="46.0" prefWidth="135.0" text="APPOINTMENT ID" textFill="WHITE">
+            <Label layoutX="27.0" layoutY="163.0" prefHeight="35.0" prefWidth="135.0" text="APPOINTMENT ID" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="27.0" layoutY="207.0" prefHeight="46.0" prefWidth="135.0" text="TIME" textFill="WHITE">
+            <Label layoutX="27.0" layoutY="207.0" prefHeight="35.0" prefWidth="135.0" text="TIME" textFill="WHITE">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="219.0" layoutY="37.0" prefHeight="230.0" prefWidth="319.0" spacing="10.0">
+      <VBox layoutX="219.0" layoutY="32.0" prefHeight="266.0" prefWidth="319.0" spacing="10.0">
          <children>
-            <TextField fx:id="txtPatientId" prefHeight="40.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtPatientId" onKeyReleased="#patientIdOnKeyReleased" prefHeight="35.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
@@ -57,7 +57,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtDoctorId" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtDoctorId" layoutX="10.0" layoutY="10.0" onKeyReleased="#doctorIdOnKeyReleased" prefHeight="35.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
@@ -65,7 +65,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtDate" layoutX="10.0" layoutY="60.0" prefHeight="40.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtDate" layoutX="10.0" layoutY="60.0" onKeyReleased="#dateOnKeyReleased" prefHeight="35.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
@@ -73,7 +73,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtCheckInNo" layoutX="10.0" layoutY="110.0" prefHeight="40.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtCheckInNo" layoutX="10.0" layoutY="110.0" prefHeight="35.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
@@ -81,7 +81,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtAppointmentId" layoutX="10.0" layoutY="145.0" prefHeight="40.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtAppointmentId" layoutX="10.0" layoutY="145.0" prefHeight="35.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
@@ -89,7 +89,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtTime" layoutX="10.0" layoutY="190.0" prefHeight="40.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtTime" layoutX="10.0" layoutY="190.0" prefHeight="35.0" prefWidth="449.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
@@ -99,7 +99,7 @@
             </TextField>
          </children>
       </VBox>
-      <Button layoutX="562.0" layoutY="116.0" mnemonicParsing="false" onAction="#btnAppCheckOnAction" prefHeight="25.0" prefWidth="81.0" styleClass="check-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="CHECK" textFill="WHITE">
+      <Button layoutX="562.0" layoutY="126.0" mnemonicParsing="false" onAction="#btnAppCheckOnAction" prefHeight="25.0" prefWidth="81.0" styleClass="check-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="CHECK" textFill="WHITE">
          <font>
             <Font name="Cambria Bold" size="10.0" />
          </font>
@@ -107,7 +107,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="tblAppointment" layoutX="53.0" layoutY="368.0" prefHeight="203.0" prefWidth="663.0">
+      <TableView fx:id="tblAppointment" layoutX="53.0" layoutY="368.0" onMouseClicked="#tblOnMouseClicked" prefHeight="203.0" prefWidth="663.0">
         <columns>
           <TableColumn fx:id="colAppId" prefWidth="75.0" text="AppointmentID" />
           <TableColumn fx:id="colPatientId" prefWidth="75.0" text="PatientID" />
@@ -120,9 +120,9 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox alignment="TOP_RIGHT" layoutX="241.0" layoutY="304.0" prefHeight="53.0" prefWidth="301.0" spacing="10.0">
+      <HBox alignment="TOP_RIGHT" layoutX="241.0" layoutY="310.0" prefHeight="45.0" prefWidth="301.0" spacing="10.0">
          <children>
-            <Button layoutX="213.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="delete-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="DELETE">
+            <Button fx:id="btnDelete" layoutX="213.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="delete-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="DELETE">
                <font>
                   <Font name="Cambria Bold" size="12.0" />
                </font>
@@ -130,7 +130,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="232.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="update-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="UPDATE">
+            <Button fx:id="btnUpdate" layoutX="232.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="28.0" prefWidth="79.0" styleClass="update-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="UPDATE">
                <font>
                   <Font name="Cambria Bold" size="12.0" />
                </font>

@@ -43,6 +43,10 @@ public class DoctorController {
         return doctorDTOs;
     }
 
+    public String getEmployeeIdByDoctorId(String doctorId) throws SQLException {
+        return doctorModel.getEmployeeIdByDoctorId(doctorId);
+    }
+
     public String getNextId() throws SQLException {
         return doctorModel.getNextId();
     }

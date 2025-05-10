@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -58,8 +60,10 @@ public class ManagerDashboardController implements Initializable {
     }
 
     @FXML
-    void btnLogoutOnAction(ActionEvent event) {
-
+    void btnLogoutOnAction(ActionEvent event) throws IOException {
+        managerDashAnc.getChildren().clear();
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
+        managerDashAnc.getChildren().add(parent);
     }
 
     private void navigateTo(String path) {

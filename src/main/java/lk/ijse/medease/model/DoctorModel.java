@@ -72,6 +72,21 @@ public class DoctorModel {
         }
     }
 
+    public String getEmployeeIdByDoctorId (String doctorId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT employee_id FROM doctor WHERE doctor_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, doctorId);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return rst.getString("employee_id");
+        }
+        return null;
+    }
+
     public String getDoctorId(String employeeId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 

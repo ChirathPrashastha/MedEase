@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ReceptionDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ReceptionPaymentController">
    <children>
-      <VBox layoutX="49.0" layoutY="27.0" prefHeight="139.0" prefWidth="166.0" spacing="5.0">
+      <VBox layoutX="49.0" layoutY="22.0" prefHeight="139.0" prefWidth="166.0" spacing="5.0">
          <children>
             <Label prefHeight="40.0" prefWidth="202.0" text="PAYMENT ID" textFill="WHITE">
                <font>
@@ -43,12 +43,12 @@
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtAppointmentId" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="186.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtAppointmentId" layoutX="10.0" layoutY="10.0" onKeyReleased="#appointmentIdOnKeyReleased" prefHeight="40.0" prefWidth="186.0" styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtAmount" layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="257.0" promptText="Rs." styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
+            <TextField fx:id="txtAmount" layoutX="10.0" layoutY="50.0" onKeyReleased="#amountOnKeyReleased" prefHeight="40.0" prefWidth="257.0" promptText="Rs." styleClass="input-fields" stylesheets="@../css/ReceptionDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="16.0" />
                </font>
@@ -97,7 +97,6 @@
             <Image url="@../images/payment.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <TableView fx:id="tblPayment" layoutX="42.0" layoutY="287.0" prefHeight="283.0" prefWidth="689.0">
         <columns>
           <TableColumn fx:id="colPayId" prefWidth="75.0" text="PaymentId" />

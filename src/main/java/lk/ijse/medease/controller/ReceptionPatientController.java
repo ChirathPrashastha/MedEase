@@ -5,11 +5,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.medease.dto.PatientDTO;
 import lk.ijse.medease.dto.tm.PatientTM;
 
@@ -20,6 +20,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReceptionPatientController implements Initializable {
+
+    private final String namePattern = "^[A-Za-z ]+$";
+    private final String datePattern = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$";
+    private final String contactPattern = "^[0-9]{10}$";
+    private final String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
     private PatientController patientController;
 
@@ -63,12 +68,88 @@ public class ReceptionPatientController implements Initializable {
     private TextField txtPatientId;
 
     @FXML
+    private Button btnAdd;
+
+    @FXML
+    private Button btnDelete;
+
+    @FXML
+    private Button btnUpdate;
+
+    @FXML
+    void tblOnMouseClicked(MouseEvent event) {
+        PatientTM patientTM = tblPatient.getSelectionModel().getSelectedItem();
+        if (patientTM != null) {
+            txtPatientId.setText(patientTM.getPatientId());
+            txtName.setText(patientTM.getName());
+            txtBirthDate.setText(String.valueOf(patientTM.getBirthDate()));
+            txtContact.setText(patientTM.getContact());
+            txtEmail.setText(patientTM.getEmail());
+            txtAllergies.setText(patientTM.getAllergies());
+
+            btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
+        }
+    }
+
+    @FXML
+    void nameOnKeyReleased(KeyEvent event) {
+        String name = txtName.getText();
+        boolean isNameValid = name.matches(namePattern);
+
+        txtName.setStyle(txtName.getStyle() + "-fx-text-fill: white;");
+        if (!isNameValid) {
+            txtName.setStyle(txtName.getStyle() + "-fx-text-fill: red;");
+        }
+    }
+
+    @FXML
+    void birthDateOnKeyReleased(KeyEvent event) {
+        txtBirthDate.setStyle(txtName.getStyle() + "-fx-text-fill: white;");
+        if (!(txtBirthDate.getText().matches(datePattern))) {
+            txtBirthDate.setStyle(txtName.getStyle() + "-fx-text-fill: red;");
+        }
+    }
+
+    @FXML
+    void contactOnKeyReleased(KeyEvent event) {
+        txtContact.setStyle(txtName.getStyle() + "-fx-text-fill: white;");
+        if (!(txtContact.getText().matches(contactPattern))) {
+            txtContact.setStyle(txtName.getStyle() + "-fx-text-fill: red;");
+        }
+    }
+
+    @FXML
+    void emailOnKeyReleased(KeyEvent event) {
+        txtEmail.setStyle(txtName.getStyle() + "-fx-text-fill: white;");
+        if (!(txtEmail.getText().matches(emailPattern))) {
+            txtEmail.setStyle(txtName.getStyle() + "-fx-text-fill: red;");
+        }
+    }
+
+    @FXML
     void btnAddOnAction(ActionEvent event) {
-        addPatient();
+        if (txtPatientId.getText().isEmpty() || txtName.getText().isEmpty() || txtBirthDate.getText().isEmpty() || txtContact.getText().isEmpty() || txtEmail.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("MISSING FIELDS");
+            alert.setContentText("Please enter all the details");
+            alert.showAndWait();
+
+        }else if (txtName.getText().matches(namePattern) && txtBirthDate.getText().matches(datePattern) && txtContact.getText().matches(contactPattern) && txtEmail.getText().matches(emailPattern)) {
+            addPatient();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("INVALID");
+            alert.setHeaderText("INVALID FIELDS");
+            alert.setContentText("Please check the details");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+
         deletePatient();
     }
 
@@ -103,8 +184,12 @@ public class ReceptionPatientController implements Initializable {
     private void deletePatient() {
         try {
             String response = patientController.deletePatient(txtPatientId.getText());
+
             loadData();
             clearFields();
+            setPatientId();
+            disableButtons();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Delete Patient");
             alert.setHeaderText("DELETE PATIENT");
@@ -125,8 +210,12 @@ public class ReceptionPatientController implements Initializable {
 
         try {
             String response = patientController.updatePatient(patientDTO);
+
             loadData();
             clearFields();
+            setPatientId();
+            disableButtons();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Update Patient");
             alert.setContentText(response);
@@ -143,14 +232,11 @@ public class ReceptionPatientController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        disableButtons();
+
         patientController = new PatientController();
 
-        try {
-            String patientId = patientController.getNextId();
-            txtPatientId.setText(patientId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setPatientId();
 
         colPID.setCellValueFactory(new PropertyValueFactory<>("patientId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -178,6 +264,20 @@ public class ReceptionPatientController implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void setPatientId(){
+        try {
+            String patientId = patientController.getNextId();
+            txtPatientId.setText(patientId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void disableButtons() {
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     private void clearFields(){

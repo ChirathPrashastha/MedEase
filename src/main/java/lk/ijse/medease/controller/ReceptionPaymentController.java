@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.medease.dto.PaymentDTO;
 import lk.ijse.medease.dto.tm.PaymentTM;
 
@@ -21,6 +22,9 @@ public class ReceptionPaymentController implements Initializable {
 
     private PaymentController paymentController;
     private String paymentMethod;
+
+    private final String appointmentIdPattern = "^A\\d{4}$";
+    private final String amountPattern = "^\\d+(\\.\\d{1,2})?$";
 
     @FXML
     private CheckBox checkCard;
@@ -57,8 +61,32 @@ public class ReceptionPaymentController implements Initializable {
     private TextField txtPaymentId;
 
     @FXML
+    void appointmentIdOnKeyReleased(KeyEvent event) {
+        txtAppointmentId.setStyle(txtAppointmentId.getStyle() + "-fx-text-fill: white;");
+        if (!(txtAppointmentId.getText().matches(appointmentIdPattern))){
+            txtAppointmentId.setStyle(txtAppointmentId.getStyle() + "-fx-text-fill: red;");
+        }
+    }
+
+    @FXML
+    void amountOnKeyReleased(KeyEvent event) {
+        txtAmount.setStyle(txtAmount.getStyle() + "-fx-text-fill: white;");
+        if (!(txtAmount.getText().matches(amountPattern))){
+            txtAmount.setStyle(txtAmount.getStyle() + "-fx-text-fill: red;");
+        }
+    }
+
+    @FXML
     void btnProceedOnAction(ActionEvent event) {
-        addPayment();
+        if (txtAppointmentId.getText().matches(appointmentIdPattern) && txtAmount.getText().matches(amountPattern)){
+            addPayment();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid Appointment ID Or Amount Entered");
+            alert.showAndWait();
+        }
     }
 
     @FXML

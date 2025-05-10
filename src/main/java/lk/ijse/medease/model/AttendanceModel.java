@@ -153,4 +153,20 @@ public class AttendanceModel {
         }
         return null;
     }
+
+    public boolean checkEmployeeIsOffOn(String employeeId, Date date) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM day_off WHERE employee_id = ? AND date = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, employeeId);
+        statement.setDate(2, date);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return true;
+        }
+        return false;
+    }
 }

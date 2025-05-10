@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.medease.dto.SupplierDTO;
 import lk.ijse.medease.dto.tm.SupplierTM;
 
@@ -68,6 +69,18 @@ public class ManagerSuppliersController implements Initializable {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         updateSupplier();
+    }
+
+    @FXML
+    void tblOnMouseClicked(MouseEvent event) {
+        SupplierTM selectedSupplier = tblSupplier.getSelectionModel().getSelectedItem();
+        if (selectedSupplier != null) {
+            txtSupplierId.setText(selectedSupplier.getSupplierId());
+            txtName.setText(selectedSupplier.getName());
+            txtAddress.setText(selectedSupplier.getAddress());
+            txtContact.setText(selectedSupplier.getContact());
+            txtEmail.setText(selectedSupplier.getEmail());
+        }
     }
 
     @Override

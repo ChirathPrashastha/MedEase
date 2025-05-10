@@ -10,7 +10,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.medease.dto.MedicineDTO;
 import lk.ijse.medease.dto.RestockDTO;
 import lk.ijse.medease.dto.RestockStatus;
-import lk.ijse.medease.dto.tm.PrescriptionMedicineTM;
 import lk.ijse.medease.dto.tm.RestockTM;
 
 import java.net.URL;

@@ -9,6 +9,7 @@ public class PatientDTO {
     private String contact;
     private String email;
     private String allergies;
+    private PatientStatus status;
 
     public PatientDTO(String name, Date birthDate, String contact, String email, String allergies) {
         this.name = name;

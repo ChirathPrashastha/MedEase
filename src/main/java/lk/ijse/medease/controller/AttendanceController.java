@@ -50,4 +50,8 @@ public class AttendanceController {
     public String addDayOff(String employeeId, Date date) throws SQLException {
         return attendanceModel.addDayOff(employeeId, date);
     }
+
+    public boolean checkEmployeeIsOffOn(String employeeId, Date date) throws SQLException {
+        return attendanceModel.checkEmployeeIsOffOn(employeeId, date);
+    }
 }
