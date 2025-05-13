@@ -95,12 +95,11 @@ public class ReceptionAppointmentController implements Initializable {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
-        addAppointment();
-    }
-
-    @FXML
-    void btnAppCheckOnAction(ActionEvent event) {
-        checkNumber();
+        if (txtAppointmentId.getText().isEmpty() || txtPatientId.getText().isEmpty() || txtDoctorId.getText().isEmpty() || txtDate.getText().isEmpty() || txtCheckInNo.getText().isEmpty() || txtTime.getText().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please fill all the fields", ButtonType.OK).showAndWait();
+        }else {
+            addAppointment();
+        }
     }
 
     @FXML
@@ -119,6 +118,8 @@ public class ReceptionAppointmentController implements Initializable {
         txtDate.setStyle(txtDate.getStyle() + "-fx-text-fill: white;");
         if (!(txtDate.getText().matches(datePattern))) {
             txtDate.setStyle(txtDate.getStyle() + "-fx-text-fill: red;");
+        }else {
+            checkNumber();
         }
     }
 

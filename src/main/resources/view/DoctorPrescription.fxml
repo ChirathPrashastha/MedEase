@@ -109,12 +109,12 @@
       </VBox>
       <VBox layoutX="166.0" layoutY="22.0" prefHeight="218.0" prefWidth="369.0" spacing="3.0">
          <children>
-            <TextField fx:id="txtPrescriptionId" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="281.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtPrescriptionId" alignment="CENTER" maxWidth="110.0" prefHeight="26.0" prefWidth="110.0" styleClass="app-id-field" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtPID" onAction="#checkHistoryOnAction" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtPID" onKeyReleased="#checkHistoryOnKeyReleased" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -124,7 +124,7 @@
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtName" layoutX="10.0" layoutY="94.0" onAction="#checkAvailabilityOnAction" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
+            <TextField fx:id="txtName" layoutX="10.0" layoutY="94.0" onKeyReleased="#checkAvailabilityOnKeyReleased" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -207,7 +207,7 @@
             </Label>
          </children>
       </Pane>
-      <TextField fx:id="txtAID" layoutX="589.0" layoutY="22.0" onAction="#checkHistoryOnAction" prefHeight="26.0" prefWidth="65.0" styleClass="app-id-field" stylesheets="@../css/DoctorDashboardStyle.css">
+      <TextField fx:id="txtAID" alignment="CENTER" layoutX="568.0" layoutY="22.0" prefHeight="26.0" prefWidth="77.0" styleClass="app-id-field" stylesheets="@../css/DoctorDashboardStyle.css">
          <font>
             <Font name="Cambria Math" size="14.0" />
          </font>

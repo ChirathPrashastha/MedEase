@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
@@ -32,9 +33,13 @@ public class DoctorPrescriptionController implements Initializable {
 
     private PrescriptionController prescriptionController;
 
+    private PatientController patientController;
+
     private ArrayList<PrescriptionMedicineDTO> presMedDtoArray;
 
     private ObservableList<PrescriptionMedicineTM> presMedList ;
+
+    private final String patientIdPattern = "^P\\d{4}$";
 
     @FXML
     private TableColumn<PrescriptionMedicineTM, String> colDosage;
@@ -106,8 +111,53 @@ public class DoctorPrescriptionController implements Initializable {
     public Label txtPatientName;
 
     @FXML
-    void btnAddMedOnAction(ActionEvent event) {
+    void checkHistoryOnKeyReleased(KeyEvent event) {
+        txtPID.setStyle(txtPID.getStyle() + "-fx-text-fill: white;");
+        if (!(txtPID.getText().matches(patientIdPattern))) {
+            txtPID.setStyle(txtPID.getStyle() + "-fx-text-fill: red;");
+        }else {
+            try {
+                if (!(prescriptionController.getPatientHistory(txtPID.getText()).isEmpty()) ) {
+                    imgAlert.setVisible(true);
+                } else {
+                    imgAlert.setVisible(false);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    void checkAvailabilityOnKeyReleased(KeyEvent event) {
         try {
+            String medId = medicineController.getMedicineIdByMedicineName(txtName.getText());
+
+            if (medId != null){
+                txtAvailability.setText("Available");
+                txtAvailability.setStyle("-fx-text-fill: #8fce00");
+                Image availableImg = new Image(getClass().getResourceAsStream("/images/yes.png"));
+                imgAvailability.setImage(availableImg);
+            } else {
+                txtAvailability.setText("Unavailable");
+                txtAvailability.setStyle("-fx-text-fill: red");
+                Image unavailableImg = new Image(getClass().getResourceAsStream("/images/no.png"));
+                imgAvailability.setImage(unavailableImg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void btnAddMedOnAction(ActionEvent event) {
+
+        try {
+            if (patientController.searchPatient(txtPID.getText()) == null){
+                new Alert(Alert.AlertType.ERROR, "Patient not found!", ButtonType.OK).showAndWait();
+                return;
+            }
+
             medicineId = medicineController.getMedicineIdByMedicineName(txtName.getText());
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,41 +181,6 @@ public class DoctorPrescriptionController implements Initializable {
             PrescriptionMedicineDTO presMedDTO = new PrescriptionMedicineDTO(txtPrescriptionId.getText(), txtName.getText(), txtDosage.getText(), txtFrequency.getText(), txtDuration.getText());
             presMedDtoArray.add(presMedDTO);
             clearFields();
-        }
-    }
-
-    @FXML
-    void checkHistoryOnAction(ActionEvent event) {
-        try {
-            if (!(prescriptionController.getPatientHistory(txtPID.getText()).isEmpty()) ) {
-                imgAlert.setVisible(true);
-            } else {
-                imgAlert.setVisible(false);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void checkAvailabilityOnAction(ActionEvent event) {
-
-        try {
-            String medId = medicineController.getMedicineIdByMedicineName(txtName.getText());
-
-            if (medId != null){
-                txtAvailability.setText("Available");
-                txtAvailability.setStyle("-fx-text-fill: #8fce00");
-                Image availableImg = new Image(getClass().getResourceAsStream("/images/yes.png"));
-                imgAvailability.setImage(availableImg);
-            } else {
-                txtAvailability.setText("Unavailable");
-                txtAvailability.setStyle("-fx-text-fill: red");
-                Image unavailableImg = new Image(getClass().getResourceAsStream("/images/no.png"));
-                imgAvailability.setImage(unavailableImg);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -225,6 +240,7 @@ public class DoctorPrescriptionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         controller = this;
         prescriptionController = new PrescriptionController();
+        patientController = new PatientController();
 
         try {
             String prescriptionId = prescriptionController.getNextId();

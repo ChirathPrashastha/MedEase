@@ -99,15 +99,7 @@
             </TextField>
          </children>
       </VBox>
-      <Button layoutX="562.0" layoutY="126.0" mnemonicParsing="false" onAction="#btnAppCheckOnAction" prefHeight="25.0" prefWidth="81.0" styleClass="check-btn" stylesheets="@../css/ReceptionDashboardStyle.css" text="CHECK" textFill="WHITE">
-         <font>
-            <Font name="Cambria Bold" size="10.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <TableView fx:id="tblAppointment" layoutX="53.0" layoutY="368.0" onMouseClicked="#tblOnMouseClicked" prefHeight="203.0" prefWidth="663.0">
+      <TableView fx:id="tblAppointment" layoutX="53.0" layoutY="361.0" onMouseClicked="#tblOnMouseClicked" prefHeight="222.0" prefWidth="663.0">
         <columns>
           <TableColumn fx:id="colAppId" prefWidth="75.0" text="AppointmentID" />
           <TableColumn fx:id="colPatientId" prefWidth="75.0" text="PatientID" />
