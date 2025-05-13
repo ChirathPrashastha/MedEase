@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.medease.dto.MedicineDTO;
 import lk.ijse.medease.dto.RestockDTO;
 import lk.ijse.medease.dto.RestockStatus;
@@ -39,12 +40,23 @@ public class NurseRequestRestockController implements Initializable {
 
     @FXML
     void btnRequestOnAction(ActionEvent event) {
-        requestRestock();
+        if (txtMedId.getText().equals("") || txtReqQty.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("INFORMATION");
+            alert.setHeaderText("Empty Fields");
+            alert.setContentText("Please fill all the required fields!");
+            alert.showAndWait();
+        }else {
+            requestRestock();
+        }
     }
 
     @FXML
-    void medicineDetailsOnAction(ActionEvent event) {
+    void medicineDetailsOnKeyReleased(KeyEvent event) {
+        loadMedicineDetails();
+    }
 
+    private void loadMedicineDetails() {
         try {
             ArrayList<MedicineDTO> medicineDTOs = medicineController.searchMedicine(txtMedId.getText());
             if (medicineDTOs.isEmpty()) {
@@ -79,14 +91,6 @@ public class NurseRequestRestockController implements Initializable {
     }
 
     private void requestRestock() {
-
-        if (txtMedId.getText().equals("") || txtReqQty.getText().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("INFORMATION");
-            alert.setHeaderText("Empty Fields");
-            alert.setContentText("Please fill all the required fields!");
-            alert.showAndWait();
-        }
 
         try {
             String restockId = restockController.getNextId();

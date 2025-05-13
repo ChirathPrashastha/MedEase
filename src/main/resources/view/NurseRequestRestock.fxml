@@ -39,7 +39,7 @@
       </VBox>
       <VBox layoutX="230.0" layoutY="140.0" prefHeight="91.0" prefWidth="283.0" spacing="5.0">
          <children>
-            <TextField fx:id="txtMedId" onAction="#medicineDetailsOnAction" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtMedId" onKeyReleased="#medicineDetailsOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -47,7 +47,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtReqQty" layoutX="10.0" layoutY="10.0" onAction="#medicineDetailsOnAction" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtReqQty" layoutX="10.0" layoutY="10.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>

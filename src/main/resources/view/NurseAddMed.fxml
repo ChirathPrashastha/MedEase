@@ -71,7 +71,7 @@
       </VBox>
       <VBox layoutX="207.0" layoutY="94.0" prefHeight="439.0" prefWidth="283.0" spacing="5.0">
          <children>
-            <TextField fx:id="txtMedId" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtMedId" onKeyReleased="#medicineIdOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -103,7 +103,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtPrice" layoutX="10.0" layoutY="130.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtPrice" layoutX="10.0" layoutY="130.0" onKeyReleased="#priceOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -111,7 +111,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtEXP" layoutX="10.0" layoutY="170.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtEXP" layoutX="10.0" layoutY="170.0" onKeyReleased="#expDateOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -127,7 +127,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtQuantity" layoutX="10.0" layoutY="250.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtQuantity" layoutX="10.0" layoutY="250.0" onKeyReleased="#txtQtyOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import lk.ijse.medease.dto.InventoryDTO;
 import lk.ijse.medease.dto.MedicineDTO;
@@ -48,7 +49,11 @@ public class NurseUpdateMedController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        updateMedicine();
+        if (txtMedId.getText().isEmpty() || txtGenericName.getText().isEmpty() || txtBrand.getText().isEmpty() || txtCategory.getText().isEmpty() || txtQuantity.getText().isEmpty() || txtSection.getText().isEmpty() || txtSupplier.getText().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please fill all the fields", ButtonType.OK).showAndWait();
+        }else {
+            updateMedicine();
+        }
     }
 
     private void updateMedicine() {

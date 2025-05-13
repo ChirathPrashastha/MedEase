@@ -48,7 +48,7 @@
       </VBox>
       <VBox layoutX="207.0" layoutY="94.0" prefHeight="49.0" prefWidth="283.0" spacing="5.0">
          <children>
-            <TextField fx:id="txtMedId" onAction="#medicineDetailsOnAction" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtMedId" onKeyReleased="#medicineDetailsOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>

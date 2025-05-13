@@ -4,8 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.medease.dto.MedicineDTO;
 
 import java.net.URL;
@@ -30,22 +32,27 @@ public class NurseDeleteMedController implements Initializable {
 
     @FXML
     void btnDeleteMedicineOnAction(ActionEvent event) {
-        try {
-            String response = medicineController.deleteMedicine(txtMedId.getText(), lblInventoryId.getText());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Medicine Deletion");
-            alert.setHeaderText(null);
-            alert.setContentText(response);
-            alert.showAndWait();
 
-            clearFields();
-        }catch (Exception e){
-            e.printStackTrace();
+        if (txtMedId.getText().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Please enter Medicine ID want to delete", ButtonType.OK).showAndWait();
+        }else {
+            try {
+                String response = medicineController.deleteMedicine(txtMedId.getText(), lblInventoryId.getText());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Medicine Deletion");
+                alert.setHeaderText(null);
+                alert.setContentText(response);
+                alert.showAndWait();
+
+                clearFields();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
     @FXML
-    void medicineDetailsOnAction(ActionEvent event) {
+    void medicineDetailsOnKeyReleased(KeyEvent event) {
         try {
             ArrayList<MedicineDTO> medicineDTOs = medicineController.searchMedicine(txtMedId.getText());
             MedicineDTO medicineDTO = medicineDTOs.get(0);
