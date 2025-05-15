@@ -198,8 +198,12 @@ public class DoctorPrescriptionController implements Initializable {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
-        addPrescription();
-        fullyClearFields();
+        if (presMedDtoArray.isEmpty()){
+            new Alert(Alert.AlertType.ERROR, "Unable to add the prescription").showAndWait();
+        }else {
+            addPrescription();
+            fullyClearFields();
+        }
     }
 
     @FXML

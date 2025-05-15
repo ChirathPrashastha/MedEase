@@ -44,6 +44,11 @@
     -fx-background-radius: 30;
 }
 
+.logout-button {
+    -fx-background-color: rgba(255, 0, 0, 0.6);
+    -fx-background-radius: 30;
+}
+
 .delete-button {
     -fx-background-color: rgba(255, 0, 0, 0.6);
     -fx-background-radius: 30;

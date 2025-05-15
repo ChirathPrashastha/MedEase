@@ -5,11 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DoctorDashboardController implements Initializable {
@@ -41,9 +45,21 @@ public class DoctorDashboardController implements Initializable {
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) throws IOException {
-        doctorDashAnc.getChildren().clear();
-        Parent parent = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
-        doctorDashAnc.getChildren().add(parent);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setContentText("Are you sure you want to logout?");
+
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        alert.getButtonTypes().setAll(yesButton, noButton);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == yesButton) {
+            doctorDashAnc.getChildren().clear();
+            Parent parent = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
+            doctorDashAnc.getChildren().add(parent);
+        }
     }
 
 

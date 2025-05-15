@@ -20,6 +20,11 @@
     -fx-text-fill: white;
 }
 
+.logout-button {
+    -fx-background-color: rgba(255, 0, 0, 0.6);
+    -fx-background-radius: 30;
+}
+
 .add-btn {
     -fx-background-color: #78e510;
     -fx-background-radius: 30;

@@ -30,7 +30,7 @@
                   <Insets bottom="20.0" />
                </padding>
             </Label>
-            <VBox prefHeight="389.0" prefWidth="255.0">
+            <VBox alignment="TOP_CENTER" prefHeight="389.0" prefWidth="255.0">
                <children>
                   <Button fx:id="btnIssueMedication" mnemonicParsing="false" onAction="#btnIssueMedicationOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Issue Medication" textFill="WHITE">
                      <font>
@@ -56,13 +56,16 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnLogout" layoutX="10.0" layoutY="177.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Logout" textFill="WHITE">
+                  <Button fx:id="btnLogout" layoutX="10.0" layoutY="177.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../css/ReceptionDashboardStyle.css" text="Logout" textFill="WHITE">
                      <font>
                         <Font name="Corbel" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <VBox.margin>
+                        <Insets top="150.0" />
+                     </VBox.margin>
                   </Button>
                </children>
                <padding>
