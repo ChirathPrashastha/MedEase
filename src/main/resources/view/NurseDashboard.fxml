@@ -29,6 +29,9 @@
                <padding>
                   <Insets bottom="20.0" />
                </padding>
+               <VBox.margin>
+                  <Insets top="13.0" />
+               </VBox.margin>
             </Label>
             <VBox alignment="TOP_CENTER" prefHeight="389.0" prefWidth="255.0">
                <children>
@@ -64,12 +67,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <VBox.margin>
-                        <Insets top="150.0" />
+                        <Insets top="140.0" />
                      </VBox.margin>
                   </Button>
                </children>
                <padding>
-                  <Insets top="20.0" />
+                  <Insets top="17.0" />
                </padding>
             </VBox>
          </children>

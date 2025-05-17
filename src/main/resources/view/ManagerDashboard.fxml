@@ -19,7 +19,7 @@
                   <Insets left="50.0" top="10.0" />
                </VBox.margin>
                <image>
-                  <Image url="@../images/ManagerLogo.png" />
+                  <Image url="@../images/managerR.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" prefHeight="56.0" prefWidth="255.0" text="Manager" textFill="WHITE">
@@ -29,6 +29,9 @@
                <padding>
                   <Insets bottom="20.0" />
                </padding>
+               <VBox.margin>
+                  <Insets top="13.0" />
+               </VBox.margin>
             </Label>
             <VBox alignment="TOP_CENTER" prefHeight="433.0" prefWidth="255.0">
                <children>
@@ -64,7 +67,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <VBox.margin>
-                        <Insets top="160.0" />
+                        <Insets top="145.0" />
                      </VBox.margin>
                   </Button>
                </children>
