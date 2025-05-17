@@ -2,6 +2,7 @@ package lk.ijse.medease.model;
 
 import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.AppointmentDTO;
+import lk.ijse.medease.dto.CheckInDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -46,17 +47,46 @@ public class AppointmentModel {
     public String addAppointment(AppointmentDTO appointmentDTO) throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO appointment (appointment_id, patient_id, doctor_id, date, check_in_no, time) VALUES (?,?,?,?,?,?)";
+        try {
+            connection.setAutoCommit(false);
 
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, appointmentDTO.getAppointmentId());
-        statement.setString(2, appointmentDTO.getPatientId());
-        statement.setString(3, appointmentDTO.getDoctorId());
-        statement.setDate(4, appointmentDTO.getDate());
-        statement.setInt(5, appointmentDTO.getCheckInNo());
-        statement.setString(6, appointmentDTO.getTime());
+            String addingAppointmentSql = "INSERT INTO appointment (appointment_id, patient_id, doctor_id, date, check_in_no, time) VALUES (?,?,?,?,?,?)";
 
-        return statement.executeUpdate() > 0 ? "Appointment Scheduled Successfully" : "Failed to Schedule the Appointment";
+            PreparedStatement addingAppointmentStatement = connection.prepareStatement(addingAppointmentSql);
+            addingAppointmentStatement.setString(1, appointmentDTO.getAppointmentId());
+            addingAppointmentStatement.setString(2, appointmentDTO.getPatientId());
+            addingAppointmentStatement.setString(3, appointmentDTO.getDoctorId());
+            addingAppointmentStatement.setDate(4, appointmentDTO.getDate());
+            addingAppointmentStatement.setInt(5, appointmentDTO.getCheckInNo());
+            addingAppointmentStatement.setString(6, appointmentDTO.getTime());
+
+            boolean isAppointmentAdded =  addingAppointmentStatement.executeUpdate() > 0;
+            if (isAppointmentAdded) {
+
+                String addingCheckInSql = "INSERT INTO check_in (doctor_id, date, check_in_no) VALUES (?, ?, ?)";
+
+                PreparedStatement addingCheckInStatement = connection.prepareStatement(addingCheckInSql);
+                addingCheckInStatement.setString(1, appointmentDTO.getDoctorId());
+                addingCheckInStatement.setDate(2, appointmentDTO.getDate());
+                addingCheckInStatement.setInt(3, appointmentDTO.getCheckInNo());
+
+                boolean isCheckInAdded = addingCheckInStatement.executeUpdate() > 0;
+                if (isCheckInAdded) {
+                    return "Appointment Added Successfully";
+                }else {
+                    connection.rollback();
+                    return "Failed to Save Check In";
+                }
+            }else {
+                connection.rollback();
+                return "Failed to Save Appointment";
+            }
+        } catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.commit();
+        }
     }
 
     public String updateAppointment(AppointmentDTO appointmentDTO) throws ClassNotFoundException, SQLException {

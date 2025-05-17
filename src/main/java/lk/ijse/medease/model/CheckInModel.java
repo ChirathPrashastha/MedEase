@@ -2,6 +2,7 @@ package lk.ijse.medease.model;
 
 import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.CheckInDTO;
+import lk.ijse.medease.dto.CheckInStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ public class CheckInModel {
 
         ArrayList<CheckInDTO> checkInList = new ArrayList<>();
         while (rst.next()) {
-            CheckInDTO checkInDTO = new CheckInDTO(rst.getInt("check_in_no"), rst.getString("status"));
+            CheckInDTO checkInDTO = new CheckInDTO(rst.getInt("check_in_no"), CheckInStatus.valueOf(rst.getString("status")));
             checkInList.add(checkInDTO);
         }
         return checkInList;

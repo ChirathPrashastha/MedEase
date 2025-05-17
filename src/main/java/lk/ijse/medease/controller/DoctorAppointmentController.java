@@ -11,10 +11,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.medease.dto.AppointmentDTO;
-import lk.ijse.medease.dto.CheckInDTO;
-import lk.ijse.medease.dto.DoctorDTO;
-import lk.ijse.medease.dto.PatientDTO;
+import lk.ijse.medease.dto.*;
 import lk.ijse.medease.dto.tm.AppointmentTM;
 import lk.ijse.medease.dto.tm.CheckInTM;
 
@@ -48,7 +45,7 @@ public class DoctorAppointmentController implements Initializable {
     private TableColumn<CheckInTM, Number> colNum;
 
     @FXML
-    private TableColumn<CheckInTM, String> colStatus;
+    private TableColumn<CheckInTM, CheckInStatus> colStatus;
 
     @FXML
     private TableView<CheckInTM> tblCheckIn;

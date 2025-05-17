@@ -7,9 +7,9 @@ public class CheckInDTO {
     private String doctorId;
     private Date date;
     private int checkInNo;
-    private String status;
+    private CheckInStatus status;
 
-    public CheckInDTO(int checkInId, String doctorId, Date date, int checkInNo, String status) {
+    public CheckInDTO(int checkInId, String doctorId, Date date, int checkInNo, CheckInStatus status) {
         this.checkInId = checkInId;
         this.doctorId = doctorId;
         this.date = date;
@@ -17,7 +17,7 @@ public class CheckInDTO {
         this.status = status;
     }
 
-    public CheckInDTO(int checkInNo, String status) {
+    public CheckInDTO(int checkInNo, CheckInStatus status) {
         this.checkInNo = checkInNo;
         this.status = status;
     }
@@ -54,11 +54,11 @@ public class CheckInDTO {
         this.checkInNo = checkInNo;
     }
 
-    public String getStatus() {
+    public CheckInStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(CheckInStatus status) {
         this.status = status;
     }
 }

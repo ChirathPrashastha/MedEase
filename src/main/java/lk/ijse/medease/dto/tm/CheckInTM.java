@@ -1,12 +1,14 @@
 package lk.ijse.medease.dto.tm;
 
+import lk.ijse.medease.dto.CheckInStatus;
+
 import java.sql.Date;
 
 public class CheckInTM {
     private int checkInNo;
-    private String status;
+    private CheckInStatus status;
 
-    public CheckInTM(int checkInNo, String status) {
+    public CheckInTM(int checkInNo, CheckInStatus status) {
         this.checkInNo = checkInNo;
         this.status = status;
     }
@@ -19,11 +21,11 @@ public class CheckInTM {
         this.checkInNo = checkInNo;
     }
 
-    public String getStatus() {
+    public CheckInStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(CheckInStatus status) {
         this.status = status;
     }
 }
