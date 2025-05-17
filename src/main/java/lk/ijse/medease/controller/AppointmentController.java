@@ -58,4 +58,8 @@ public class AppointmentController {
         ArrayList<AppointmentDTO> appointmentDTOs = appointmentModel.getAppointmentsByDoctor(doctorId);
         return appointmentDTOs;
     }
+
+    public int getTodayAppointmentCount() throws SQLException {
+        return appointmentModel.getTodayAppointmentCount();
+    }
 }

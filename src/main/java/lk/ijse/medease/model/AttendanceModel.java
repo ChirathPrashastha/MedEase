@@ -3,6 +3,7 @@ package lk.ijse.medease.model;
 import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.AttendStatus;
 import lk.ijse.medease.dto.AttendanceDTO;
+import lk.ijse.medease.dto.JobRole;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -168,5 +169,20 @@ public class AttendanceModel {
             return true;
         }
         return false;
+    }
+
+    public int getTodayAttendanceCountByJobRole(JobRole jobRole) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT COUNT(attendance.employee_id) AS count FROM attendance INNER JOIN employee ON attendance.employee_id = employee.employee_id WHERE job_role = ? AND attend_date = CURRENT_DATE AND status = 'PRESENT'";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, jobRole.name());
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return Integer.parseInt(rst.getString("count"));
+        }
+        return -1;
     }
 }

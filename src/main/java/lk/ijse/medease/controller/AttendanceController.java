@@ -2,6 +2,7 @@ package lk.ijse.medease.controller;
 
 import lk.ijse.medease.dto.AttendStatus;
 import lk.ijse.medease.dto.AttendanceDTO;
+import lk.ijse.medease.dto.JobRole;
 import lk.ijse.medease.model.AttendanceModel;
 
 import java.sql.Date;
@@ -53,5 +54,9 @@ public class AttendanceController {
 
     public boolean checkEmployeeIsOffOn(String employeeId, Date date) throws SQLException {
         return attendanceModel.checkEmployeeIsOffOn(employeeId, date);
+    }
+
+    public int getTodayAttendanceCountByJobRole(JobRole jobRole) throws SQLException{
+        return attendanceModel.getTodayAttendanceCountByJobRole(jobRole);
     }
 }

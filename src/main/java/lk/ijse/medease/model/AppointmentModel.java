@@ -139,6 +139,20 @@ public class AppointmentModel {
         return appointmentDTOs;
     }
 
+    public int getTodayAppointmentCount() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT COUNT(appointment_id) AS count FROM appointment WHERE date = CURRENT_DATE";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return Integer.parseInt(rst.getString("count"));
+        }
+        return -1;
+    }
+
     public String getNextId() throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
