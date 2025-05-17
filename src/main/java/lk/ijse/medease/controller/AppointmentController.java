@@ -35,9 +35,8 @@ public class AppointmentController {
         return response;
     }
 
-    public String deleteAppointment(String appointmentId) throws ClassNotFoundException, SQLException {
-        String response = appointmentModel.deleteAppointment(appointmentId);
-        return response;
+    public String deleteAppointment(AppointmentDTO appointmentDTO) throws SQLException {
+        return appointmentModel.deleteAppointment(appointmentDTO);
     }
 
     public AppointmentDTO searchAppointment(String appointmentId) throws ClassNotFoundException, SQLException {

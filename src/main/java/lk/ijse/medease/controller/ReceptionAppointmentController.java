@@ -243,18 +243,23 @@ public class ReceptionAppointmentController implements Initializable {
 
     private void deleteAppointment() {
         try {
-            String response = appointmentController.deleteAppointment(txtAppointmentId.getText());
-            loadData();
-            clearFields();
-            setAppointmentId();
-            disableButtons();
+            AppointmentDTO appointmentDTO = appointmentController.searchAppointment(txtAppointmentId.getText());
+            if (appointmentDTO == null){
+                new Alert(Alert.AlertType.ERROR, "Appointment Not Found!").showAndWait();
+            }else {
+                String response = appointmentController.deleteAppointment(appointmentDTO);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Appointment");
-            alert.setHeaderText("APPOINTMENT DELETE");
-            alert.setContentText(response);
-            alert.showAndWait();
+                loadData();
+                clearFields();
+                setAppointmentId();
+                disableButtons();
 
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Appointment");
+                alert.setHeaderText("APPOINTMENT DELETE");
+                alert.setContentText(response);
+                alert.showAndWait();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);

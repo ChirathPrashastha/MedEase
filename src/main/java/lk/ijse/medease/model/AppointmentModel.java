@@ -105,15 +105,46 @@ public class AppointmentModel {
         return statement.executeUpdate() > 0 ? "Appointment Updated Successfully" : "Failed to Update the Appointment";
     }
 
-    public String deleteAppointment(String appointmentId) throws ClassNotFoundException, SQLException {
+    public String deleteAppointment(AppointmentDTO appointmentDTO) throws  SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
-        String sql = "DELETE FROM appointment WHERE appointment_id = ?";
+        try {
+            connection.setAutoCommit(false);
 
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, appointmentId);
+            String deleteAppointmentSql = "DELETE FROM appointment WHERE appointment_id = ?";
 
-        return statement.executeUpdate() > 0 ? "Appointment Deleted Successfully" : "Failed to Delete the Appointment";
+            PreparedStatement deleteAppointmentStatement = connection.prepareStatement(deleteAppointmentSql);
+            deleteAppointmentStatement.setString(1, appointmentDTO.getAppointmentId());
+
+            boolean isAppointmentDeleted = deleteAppointmentStatement.executeUpdate() > 0;
+            if (isAppointmentDeleted) {
+
+                String deleteCheckInSql = "DELETE FROM check_in WHERE doctor_id = ? AND date = ? AND check_in_no = ?";
+
+                PreparedStatement deleteCheckInStatement = connection.prepareStatement(deleteCheckInSql);
+                deleteCheckInStatement.setString(1, appointmentDTO.getDoctorId());
+                deleteCheckInStatement.setDate(2, appointmentDTO.getDate());
+                deleteCheckInStatement.setInt(3, appointmentDTO.getCheckInNo());
+
+                boolean isCheckInDeleted = deleteCheckInStatement.executeUpdate() > 0;
+                if (isCheckInDeleted) {
+                    return "Appointment Deleted Successfully";
+                }else {
+                    connection.rollback();
+                    return "Failed to Delete Check In";
+                }
+            }else {
+                connection.rollback();
+                return "Failed to delete the Appointment";
+            }
+        } catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.commit();
+        }
+
+
     }
 
     public AppointmentDTO searchAppointment(String appointmentId) throws ClassNotFoundException, SQLException {
