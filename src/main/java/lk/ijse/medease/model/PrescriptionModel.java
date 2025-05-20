@@ -18,7 +18,7 @@ public class PrescriptionModel {
         try {
             connection.setAutoCommit(false);
 
-            String prescriptionAddSql = "INSERT INTO prescription (prescription_id, doctor_id, patient_id, patient_age, diagnosis, notes) VALUES (?,?,?,?,?,?)";
+            String prescriptionAddSql = "INSERT INTO prescription (prescription_id, doctor_id, patient_id, patient_age, diagnosis, appointment_id) VALUES (?,?,?,?,?,?)";
 
             PreparedStatement prescriptionAddingStatement = connection.prepareStatement(prescriptionAddSql);
 
@@ -27,7 +27,7 @@ public class PrescriptionModel {
             prescriptionAddingStatement.setString(3, prescriptionDTO.getPatientId());
             prescriptionAddingStatement.setInt(4, prescriptionDTO.getAge());
             prescriptionAddingStatement.setString(5, prescriptionDTO.getDiagnosis());
-            prescriptionAddingStatement.setString(6, prescriptionDTO.getNotes());
+            prescriptionAddingStatement.setString(6, prescriptionDTO.getAppointmentId());
 
             boolean isPrescriptionSaved = prescriptionAddingStatement.executeUpdate() > 0 ? true : false;
 
@@ -97,7 +97,7 @@ public class PrescriptionModel {
         ArrayList<PrescriptionDTO> prescriptionDTOs = new ArrayList<>();
 
         while (rst.next()){
-            PrescriptionDTO prescriptionDTO = new PrescriptionDTO(rst.getString("prescription_id"), rst.getString("doctor_id"), rst.getString("patient_id"), rst.getInt("patient_age"), rst.getString("diagnosis"), rst.getString("notes"));
+            PrescriptionDTO prescriptionDTO = new PrescriptionDTO(rst.getString("prescription_id"), rst.getString("doctor_id"), rst.getString("patient_id"), rst.getInt("patient_age"), rst.getString("diagnosis"), rst.getString("appointment_id"));
             prescriptionDTOs.add(prescriptionDTO);
         }
         return prescriptionDTOs;
@@ -137,6 +137,21 @@ public class PrescriptionModel {
             prescriptionMedicineDTOs.add(presMedDto);
         }
         return prescriptionMedicineDTOs;
+    }
+
+    public PrescriptionDTO getPrescriptionByAppointmentId(String appointmentId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM prescription WHERE appointment_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, appointmentId);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()){
+            return new PrescriptionDTO(rst.getString("prescription_id"), rst.getString("doctor_id"), rst.getString("patient_id"), rst.getInt("patient_age"), rst.getString("diagnosis"), rst.getString("appointment_id"));
+        }
+        return null;
     }
 
     public String getNextId() throws ClassNotFoundException, SQLException {

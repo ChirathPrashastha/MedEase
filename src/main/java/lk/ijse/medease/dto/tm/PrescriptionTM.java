@@ -4,13 +4,13 @@ public class PrescriptionTM {
     private String prescriptionId;
     private String patientId;
     private String diagnosis;
-    private String notes;
+    private String appointmentId;
 
-    public PrescriptionTM(String prescriptionId, String patientId, String diagnosis, String notes) {
+    public PrescriptionTM(String prescriptionId, String patientId, String diagnosis, String appointmentId) {
         this.prescriptionId = prescriptionId;
         this.patientId = patientId;
         this.diagnosis = diagnosis;
-        this.notes = notes;
+        this.appointmentId = appointmentId;
     }
 
     public String getPrescriptionId() {
@@ -37,11 +37,11 @@ public class PrescriptionTM {
         this.diagnosis = diagnosis;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getAppointmentId() {
+        return appointmentId;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setAppointmentId(String appointmentId) {
+        this.appointmentId = appointmentId;
     }
 }

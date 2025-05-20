@@ -123,6 +123,21 @@ public class PatientOrderModel {
         return totalPrice;
     }
 
+    public double getSubAmountByPrescriptionId(String prescriptionId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT sub_total FROM patient_order WHERE prescription_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, prescriptionId);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return rst.getDouble("sub_total");
+        }
+        return 0.0;
+    }
+
     public String getNextId() throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 

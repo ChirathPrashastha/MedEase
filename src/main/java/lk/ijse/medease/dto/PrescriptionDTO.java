@@ -6,23 +6,23 @@ public class PrescriptionDTO {
     private String patientId;
     private int age;
     private String diagnosis;
-    private String notes;
+    private String appointmentId;
 
-    public PrescriptionDTO(String prescriptionId, String doctorId, String patientId, int age, String diagnosis, String notes) {
+    public PrescriptionDTO(String prescriptionId, String doctorId, String patientId, int age, String diagnosis, String appointmentId) {
         this.prescriptionId = prescriptionId;
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.age = age;
         this.diagnosis = diagnosis;
-        this.notes = notes;
+        this.appointmentId = appointmentId;
     }
 
-    public PrescriptionDTO(String doctorId, String patientId, int age, String diagnosis, String notes) {
+    public PrescriptionDTO(String doctorId, String patientId, int age, String diagnosis, String appointmentId) {
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.age = age;
         this.diagnosis = diagnosis;
-        this.notes = notes;
+        this.appointmentId = appointmentId;
     }
 
     public String getPrescriptionId() {
@@ -65,11 +65,11 @@ public class PrescriptionDTO {
         this.diagnosis = diagnosis;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getAppointmentId() {
+        return appointmentId;
     }
 
     public void setNotes(String notes) {
-        this.notes = notes;
+        this.appointmentId = appointmentId;
     }
 }

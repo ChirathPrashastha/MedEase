@@ -98,9 +98,6 @@ public class DoctorPrescriptionController implements Initializable {
     private TextField txtName;
 
     @FXML
-    private TextField txtNotes;
-
-    @FXML
     public TextField txtPID;
 
 
@@ -275,7 +272,7 @@ public class DoctorPrescriptionController implements Initializable {
         String doctorId = DoctorAppointmentController.doctorAppointmentController.doctorId;
         int checkInNo = DoctorAppointmentController.doctorAppointmentController.checkInNo;
 
-        PrescriptionDTO prescriptionDTO = new PrescriptionDTO(txtPrescriptionId.getText(), doctorId, txtPID.getText(), Integer.parseInt(txtAge.getText()), txtDiagnosis.getText(), txtNotes.getText());
+        PrescriptionDTO prescriptionDTO = new PrescriptionDTO(txtPrescriptionId.getText(), doctorId, txtPID.getText(), Integer.parseInt(txtAge.getText()), txtDiagnosis.getText(), txtAID.getText());
 
         try {
             String response = prescriptionController.addPrescription(prescriptionDTO, presMedDtoArray, checkInNo, doctorId);
@@ -300,7 +297,6 @@ public class DoctorPrescriptionController implements Initializable {
         txtDosage.clear();
         txtFrequency.clear();
         txtDuration.clear();
-        txtNotes.clear();
         txtAvailability.setText("");
         imgAvailability.setImage(null);
     }
@@ -314,7 +310,6 @@ public class DoctorPrescriptionController implements Initializable {
         txtDosage.clear();
         txtFrequency.clear();
         txtDuration.clear();
-        txtNotes.clear();
         txtPatientName.setText("Empty");
         txtAge.setText("Empty");
         txtAllergies.setText("Empty");

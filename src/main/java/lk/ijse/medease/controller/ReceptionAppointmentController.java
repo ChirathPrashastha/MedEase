@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -15,6 +18,7 @@ import lk.ijse.medease.dto.tm.AppointmentTM;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -104,7 +108,18 @@ public class ReceptionAppointmentController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        deleteAppointment();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setContentText("Are you sure you want to delete this appointment?");
+
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        alert.getButtonTypes().setAll(yesButton, noButton);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == yesButton) {
+            deleteAppointment();
+        }
     }
 
     @FXML

@@ -100,11 +100,6 @@
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="220.0" prefHeight="25.0" prefWidth="203.0" text="NOTES" textFill="WHITE">
-               <font>
-                  <Font name="Cambria Math" size="14.0" />
-               </font>
-            </Label>
          </children>
       </VBox>
       <VBox layoutX="166.0" layoutY="22.0" prefHeight="218.0" prefWidth="369.0" spacing="3.0">
@@ -144,11 +139,6 @@
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtNotes" layoutX="10.0" layoutY="165.0" prefHeight="25.0" prefWidth="389.0" styleClass="input-fields" stylesheets="@../css/DoctorDashboardStyle.css">
-               <font>
-                  <Font name="Cambria Math" size="14.0" />
-               </font>
-            </TextField>
          </children>
       </VBox>
       <Label fx:id="txtAvailability" layoutX="571.0" layoutY="116.0" prefHeight="25.0" prefWidth="77.0" textFill="#ab0000">
@@ -165,7 +155,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="tblPresMed" layoutX="32.0" layoutY="389.0" prefHeight="200.0" prefWidth="614.0">
+      <TableView fx:id="tblPresMed" layoutX="32.0" layoutY="383.0" prefHeight="200.0" prefWidth="614.0">
         <columns>
           <TableColumn fx:id="colPresId" prefWidth="75.0" text="Prescription ID" />
           <TableColumn fx:id="colMedId" prefWidth="75.0" text="Medicine ID" />
@@ -178,7 +168,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Pane layoutX="32.0" layoutY="275.0" prefHeight="104.0" prefWidth="614.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
+      <Pane layoutX="32.0" layoutY="257.0" prefHeight="104.0" prefWidth="614.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css">
          <children>
             <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="21.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>

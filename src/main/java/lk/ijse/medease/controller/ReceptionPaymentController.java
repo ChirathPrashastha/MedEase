@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import lk.ijse.medease.dto.PaymentDTO;
+import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.tm.PaymentTM;
 
 import java.net.URL;
@@ -21,10 +22,15 @@ import java.util.ResourceBundle;
 public class ReceptionPaymentController implements Initializable {
 
     private PaymentController paymentController;
+    private PrescriptionController prescriptionController;
+    private PatientOrderController patientOrderController;
+
     private String paymentMethod;
 
     private final String appointmentIdPattern = "^A\\d{4}$";
     private final String amountPattern = "^\\d+(\\.\\d{1,2})?$";
+
+    private double bookingAmount = 1500.0;
 
     @FXML
     private CheckBox checkCard;
@@ -65,6 +71,17 @@ public class ReceptionPaymentController implements Initializable {
         txtAppointmentId.setStyle(txtAppointmentId.getStyle() + "-fx-text-fill: white;");
         if (!(txtAppointmentId.getText().matches(appointmentIdPattern))){
             txtAppointmentId.setStyle(txtAppointmentId.getStyle() + "-fx-text-fill: red;");
+        }else {
+            try {
+                PrescriptionDTO prescriptionDTO = prescriptionController.getPrescriptionByAppointmentId(txtAppointmentId.getText());
+                if (prescriptionDTO == null) {
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong", ButtonType.OK).showAndWait();
+                }else {
+                    setAmount(prescriptionDTO.getPrescriptionId());
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -126,6 +143,8 @@ public class ReceptionPaymentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         paymentController = new PaymentController();
+        prescriptionController = new PrescriptionController();
+        patientOrderController = new PatientOrderController();
 
         try {
             String paymentId = paymentController.getNextId();
@@ -161,6 +180,15 @@ public class ReceptionPaymentController implements Initializable {
             tblPayment.setItems(paymentTMObList);
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setAmount(String prescriptionId) {
+        try {
+            double OrderAmount = patientOrderController.getAmountByPrescriptionId(prescriptionId);
+            txtAmount.setText(String.valueOf(OrderAmount + bookingAmount));
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

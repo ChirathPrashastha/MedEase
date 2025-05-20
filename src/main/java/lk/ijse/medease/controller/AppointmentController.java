@@ -16,23 +16,19 @@ public class AppointmentController {
     }
 
     public int checkNo(String doctorId, Date date) throws ClassNotFoundException, SQLException {
-        int num = appointmentModel.checkNo(doctorId,date);
-        return num;
+        return appointmentModel.checkNo(doctorId,date);
     }
 
     public String getTime(String doctorId) throws ClassNotFoundException, SQLException {
-        String response = appointmentModel.getTime(doctorId);
-        return response;
+        return appointmentModel.getTime(doctorId);
     }
 
     public String addAppointment(AppointmentDTO appointmentDTO) throws ClassNotFoundException, SQLException {
-        String response = appointmentModel.addAppointment(appointmentDTO);
-        return response;
+        return appointmentModel.addAppointment(appointmentDTO);
     }
 
     public String updateAppointment(AppointmentDTO appointmentDTO) throws ClassNotFoundException, SQLException {
-        String response = appointmentModel.updateAppointment(appointmentDTO);
-        return response;
+        return appointmentModel.updateAppointment(appointmentDTO);
     }
 
     public String deleteAppointment(AppointmentDTO appointmentDTO) throws SQLException {
@@ -40,8 +36,7 @@ public class AppointmentController {
     }
 
     public AppointmentDTO searchAppointment(String appointmentId) throws ClassNotFoundException, SQLException {
-        AppointmentDTO appointmentDTO = appointmentModel.searchAppointment(appointmentId);
-        return appointmentDTO;
+        return appointmentModel.searchAppointment(appointmentId);
     }
 
     public String getNextId() throws ClassNotFoundException, SQLException {
@@ -49,13 +44,11 @@ public class AppointmentController {
     }
 
     public ArrayList<AppointmentDTO> getAllAppointments() throws ClassNotFoundException, SQLException {
-        ArrayList<AppointmentDTO> appointmentDTOs = appointmentModel.getAllAppointments();
-        return appointmentDTOs;
+        return appointmentModel.getAllAppointments();
     }
 
     public ArrayList<AppointmentDTO> getAppointmentsByDoctor(String doctorId) throws ClassNotFoundException, SQLException {
-        ArrayList<AppointmentDTO> appointmentDTOs = appointmentModel.getAppointmentsByDoctor(doctorId);
-        return appointmentDTOs;
+        return appointmentModel.getAppointmentsByDoctor(doctorId);
     }
 
     public int getTodayAppointmentCount() throws SQLException {

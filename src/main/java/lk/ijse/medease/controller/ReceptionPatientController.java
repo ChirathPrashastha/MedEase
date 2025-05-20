@@ -17,6 +17,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ReceptionPatientController implements Initializable {
@@ -150,7 +151,18 @@ public class ReceptionPatientController implements Initializable {
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
 
-        deletePatient();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setContentText("Are you sure you want to remove this patient?");
+
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No");
+        alert.getButtonTypes().setAll(yesButton, noButton);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == yesButton) {
+            deletePatient();
+        }
     }
 
     @FXML

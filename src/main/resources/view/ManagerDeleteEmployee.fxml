@@ -38,7 +38,7 @@
       </VBox>
       <VBox layoutX="206.0" layoutY="98.0" prefHeight="51.0" prefWidth="343.0" spacing="5.0">
          <children>
-            <TextField fx:id="txtEmployeeId" layoutX="10.0" layoutY="10.0" onAction="#employeeInfoOnAction" prefHeight="37.0" prefWidth="369.0" promptText="press enter after filling for employee info" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtEmployeeId" layoutX="10.0" layoutY="10.0" onKeyReleased="#employeeInfoOnKeyReleased" prefHeight="37.0" prefWidth="369.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>

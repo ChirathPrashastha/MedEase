@@ -62,7 +62,7 @@ public class PatientHistoryController implements Initializable {
         colPresID.setCellValueFactory(new PropertyValueFactory<>("prescriptionId"));
         colPID.setCellValueFactory(new PropertyValueFactory<>("patientId"));
         colDiagnosis.setCellValueFactory(new PropertyValueFactory<>("diagnosis"));
-        colNotes.setCellValueFactory(new PropertyValueFactory<>("notes"));
+        colNotes.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
 
         String patientId = DoctorPrescriptionController.controller.txtPID.getText();
 
@@ -72,7 +72,7 @@ public class PatientHistoryController implements Initializable {
             ObservableList<PrescriptionTM> historyObList = FXCollections.observableArrayList();
 
             for (PrescriptionDTO dto : prescriptionDTOs){
-                PrescriptionTM prescriptionTM = new PrescriptionTM(dto.getPrescriptionId(),dto.getPatientId(),dto.getDiagnosis(), dto.getNotes());
+                PrescriptionTM prescriptionTM = new PrescriptionTM(dto.getPrescriptionId(),dto.getPatientId(),dto.getDiagnosis(), dto.getAppointmentId());
                 historyObList.add(prescriptionTM);
             }
 
