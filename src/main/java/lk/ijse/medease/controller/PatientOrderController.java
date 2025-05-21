@@ -29,6 +29,14 @@ public class PatientOrderController {
         return patientOrderModel.getSubAmountByPrescriptionId(prescriptionId);
     }
 
+    public String getOrderIdByPrescriptionId(String prescriptionId) throws SQLException {
+        return patientOrderModel.getOrderIdByPrescriptionId(prescriptionId);
+    }
+
+    public double getSubTotalByOrderId(String orderId) throws SQLException {
+        return patientOrderModel.getSubTotalByOrderId(orderId);
+    }
+
     public String getNextId() throws SQLException, ClassNotFoundException {
         return patientOrderModel.getNextId();
     }

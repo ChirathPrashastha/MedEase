@@ -38,6 +38,10 @@ public class PrescriptionController {
         return prescriptionModel.getPrescriptionByAppointmentId(appointmentId);
     }
 
+    public String getPatientNameByPrescriptionId(String prescriptionId) throws SQLException {
+        return prescriptionModel.getPatientNameByPrescriptionId(prescriptionId);
+    }
+
     public String getNextId() throws ClassNotFoundException, SQLException {
         return prescriptionModel.getNextId();
     }

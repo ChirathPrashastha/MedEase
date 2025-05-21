@@ -9,14 +9,26 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.PaymentDTO;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.tm.PaymentTM;
+//import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ReceptionPaymentController implements Initializable {
@@ -26,6 +38,10 @@ public class ReceptionPaymentController implements Initializable {
     private PatientOrderController patientOrderController;
 
     private String paymentMethod;
+    private String prescriptionId;
+    private String orderId;
+    private String patientName;
+    private double subTotal;
 
     private final String appointmentIdPattern = "^A\\d{4}$";
     private final String amountPattern = "^\\d+(\\.\\d{1,2})?$";
@@ -78,6 +94,10 @@ public class ReceptionPaymentController implements Initializable {
                     new Alert(Alert.AlertType.ERROR, "Something went wrong", ButtonType.OK).showAndWait();
                 }else {
                     setAmount(prescriptionDTO.getPrescriptionId());
+                    prescriptionId = prescriptionDTO.getPrescriptionId();
+                    patientName = prescriptionController.getPatientNameByPrescriptionId(prescriptionId);
+
+                    orderId = patientOrderController.getOrderIdByPrescriptionId(prescriptionId);
                 }
             }catch (SQLException e){
                 e.printStackTrace();
@@ -124,11 +144,12 @@ public class ReceptionPaymentController implements Initializable {
             loadData();
             clearFields();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Add Payment");
-            alert.setHeaderText("PAYMENT");
-            alert.setContentText(response);
-            alert.showAndWait();
+            if (response.equals("success")){
+                new Alert(Alert.AlertType.INFORMATION, "Payment Added Successfully").showAndWait();
+                generateBill();
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Failed to Add the Payment").showAndWait();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -186,11 +207,39 @@ public class ReceptionPaymentController implements Initializable {
 
     private void setAmount(String prescriptionId) {
         try {
-            double OrderAmount = patientOrderController.getAmountByPrescriptionId(prescriptionId);
-            txtAmount.setText(String.valueOf(OrderAmount + bookingAmount));
+            double orderAmount = patientOrderController.getAmountByPrescriptionId(prescriptionId);
+            subTotal = orderAmount + bookingAmount;
+            txtAmount.setText(String.valueOf(subTotal));
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void generateBill() {
+        try {
+            JasperReport bill = JasperCompileManager.compileReport(getClass().getResourceAsStream("/billing/PatientInvoice.jrxml"));
+
+            Connection connection = DBConnection.getInstance().getConnection();
+
+            Map<String, Object> parameters = new HashMap<>();
+
+            parameters.put("pPrescriptionId", prescriptionId);
+            parameters.put("pDate", LocalDate.now().toString());
+            parameters.put("pOrderId", orderId);
+            parameters.put("pName", patientName);
+            parameters.put("pSubTotal", String.valueOf(subTotal));
+
+            InputStream logoStream = getClass().getResourceAsStream("/images/billLogo.png");
+
+            parameters.put("pLogo", logoStream);
+
+            JasperPrint print = JasperFillManager.fillReport(bill, parameters, connection);
+            JasperViewer.viewReport(print, false );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void clearFields(){

@@ -22,7 +22,7 @@ public class PaymentModel {
         statement.setDouble(3, paymentDTO.getAmount());
         statement.setString(4, paymentDTO.getPaymentMethod());
 
-        return statement.executeUpdate() > 0 ? "Payment Proceed Successfully" : "Payment Failed";
+        return statement.executeUpdate() > 0 ? "success" : "failed";
     }
 
     public String updatePayment(PaymentDTO paymentDTO) throws SQLException {

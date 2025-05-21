@@ -154,6 +154,21 @@ public class PrescriptionModel {
         return null;
     }
 
+    public String getPatientNameByPrescriptionId(String prescriptionId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT name FROM patient JOIN prescription ON patient.patient_id = prescription.patient_id WHERE prescription_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, prescriptionId);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()){
+            return rst.getString("name");
+        }
+        return null;
+    }
+
     public String getNextId() throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 
