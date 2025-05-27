@@ -1,13 +1,14 @@
 package lk.ijse.medease.model;
 
 import lk.ijse.medease.db.DBConnection;
-import lk.ijse.medease.dto.AttendStatus;
-import lk.ijse.medease.dto.AttendanceDTO;
-import lk.ijse.medease.dto.JobRole;
+import lk.ijse.medease.dto.*;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class AttendanceModel {
 
@@ -184,5 +185,39 @@ public class AttendanceModel {
             return Integer.parseInt(rst.getString("count"));
         }
         return -1;
+    }
+
+    public Map<String, Integer> getAttendanceCountOfEachEmployee(Date date) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        LocalDate localDate = date.toLocalDate();
+        int month = localDate.getMonthValue();
+        int year = localDate.getYear();
+
+        ArrayList<String> employeeIdList = new ArrayList<>();
+        Map<String, Integer> map = new TreeMap<>();
+
+        String employeeSql = "SELECT employee_id FROM employee";
+        PreparedStatement employeeStatement = connection.prepareStatement(employeeSql);
+        ResultSet employeeRst = employeeStatement.executeQuery();
+
+        while (employeeRst.next()) {
+            employeeIdList.add(employeeRst.getString("employee_id"));
+        }
+
+        String sql = "SELECT employee_id, COUNT(attendance.attend_date) AS count FROM attendance WHERE employee_id = ? AND attendance.status = 'PRESENT' AND MONTH(attend_date) = ? AND YEAR(attend_date) = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        for(int i = 0; i < employeeIdList.size(); i++) {
+            statement.setString(1, employeeIdList.get(i));
+            statement.setInt(2, month);
+            statement.setInt(3, year);
+
+            ResultSet rst = statement.executeQuery();
+            if (rst.next()) {
+                map.put(employeeIdList.get(i), Integer.parseInt(rst.getString("count")));
+            }
+        }
+        return map;
     }
 }

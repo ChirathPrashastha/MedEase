@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="768.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.ManagerSalaryController">
+   <children>
+      <Label alignment="CENTER" layoutX="31.0" layoutY="22.0" prefHeight="40.0" prefWidth="234.0" styleClass="details-panel" stylesheets="@../css/DoctorDashboardStyle.css" text="MANAGE SALARY" textFill="WHITE">
+         <font>
+            <Font name="Cambria Math" size="14.0" />
+         </font>
+      </Label>
+      <VBox layoutX="46.0" layoutY="89.0" prefHeight="134.0" prefWidth="153.0" spacing="5.0">
+         <children>
+            <Label layoutX="10.0" layoutY="47.0" prefHeight="37.0" prefWidth="122.0" text="JOB ROLE" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="84.0" prefHeight="37.0" prefWidth="122.0" text="BASIC SALARY" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="136.0" prefHeight="37.0" prefWidth="122.0" text="BONUS" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="217.0" layoutY="88.0" prefHeight="134.0" prefWidth="394.0" spacing="5.0">
+         <children>
+            <Pane prefHeight="37.0" prefWidth="200.0">
+               <children>
+                  <RadioButton fx:id="btnDoctor" layoutX="2.0" layoutY="9.0" mnemonicParsing="false" onAction="#radioBtnDoctorOnAction" />
+                  <RadioButton fx:id="btnNurse" layoutX="121.0" layoutY="9.0" mnemonicParsing="false" onAction="#radioBtnNurseOnAction" />
+                  <RadioButton fx:id="btnReceptionist" layoutX="233.0" layoutY="9.0" mnemonicParsing="false" onAction="#radioBtnReceptionistOnAction" />
+                  <RadioButton fx:id="btnManager" layoutX="340.0" layoutY="9.0" mnemonicParsing="false" onAction="#radioBtnManagerOnAction" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="25.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/doctorR.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="144.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/nurseR.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="256.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/receptionist%20R.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="362.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/managerR.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <TextField fx:id="txtBasicSalary" layoutX="10.0" layoutY="90.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="txtBonus" layoutX="10.0" layoutY="136.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+               <font>
+                  <Font name="Cambria Math" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+         </children>
+      </VBox>
+      <Pane layoutX="489.0" layoutY="223.0" prefHeight="37.0" prefWidth="122.0" styleClass="add-btn" stylesheets="@../css/DoctorDashboardStyle.css">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/salary.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="48.0" layoutY="6.0" prefHeight="25.0" prefWidth="61.0" text="PROCEED">
+               <font>
+                  <Font name="Cambria Bold" size="13.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#btnProceedOnAction" prefHeight="37.0" prefWidth="122.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <TableView fx:id="tblSalary" layoutX="31.0" layoutY="278.0" prefHeight="303.0" prefWidth="707.0">
+        <columns>
+          <TableColumn fx:id="colEmployeeId" prefWidth="75.0" text="Employee ID" />
+          <TableColumn fx:id="colBasicSalary" prefWidth="75.0" text="Basic Salary" />
+            <TableColumn fx:id="colBonus" prefWidth="75.0" text="Bonus" />
+            <TableColumn fx:id="colNetSalary" prefWidth="75.0" text="Net Salary" />
+            <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>

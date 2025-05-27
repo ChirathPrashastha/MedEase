@@ -8,6 +8,7 @@ import lk.ijse.medease.model.AttendanceModel;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AttendanceController {
     private AttendanceModel attendanceModel;
@@ -58,5 +59,9 @@ public class AttendanceController {
 
     public int getTodayAttendanceCountByJobRole(JobRole jobRole) throws SQLException{
         return attendanceModel.getTodayAttendanceCountByJobRole(jobRole);
+    }
+
+    public Map<String, Integer> getAttendanceCountOfEachEmployee(Date date) throws SQLException{
+        return attendanceModel.getAttendanceCountOfEachEmployee(date);
     }
 }

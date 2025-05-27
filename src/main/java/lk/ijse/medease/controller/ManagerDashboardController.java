@@ -27,6 +27,9 @@ public class ManagerDashboardController implements Initializable {
     private Button btnInventory;
 
     @FXML
+    private Button btnSalary;
+
+    @FXML
     private Button btnLogout;
 
     @FXML
@@ -41,6 +44,7 @@ public class ManagerDashboardController implements Initializable {
         btnEmployee.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
         btnHome.setStyle("-fx-border-color: transparent");
         btnInventory.setStyle("-fx-border-color: transparent");
+        btnSalary.setStyle("-fx-border-color: transparent");
         btnLogout.setStyle("-fx-border-color: transparent");
     }
 
@@ -50,6 +54,17 @@ public class ManagerDashboardController implements Initializable {
         btnHome.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
         btnEmployee.setStyle("-fx-border-color: transparent");
         btnInventory.setStyle("-fx-border-color: transparent");
+        btnSalary.setStyle("-fx-border-color: transparent");
+        btnLogout.setStyle("-fx-border-color: transparent");
+    }
+
+    @FXML
+    void btnSalaryOnAction(ActionEvent event) {
+        navigateTo("/view/ManagerSalary.fxml");
+        btnSalary.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
+        btnHome.setStyle("-fx-border-color: transparent");
+        btnInventory.setStyle("-fx-border-color: transparent");
+        btnEmployee.setStyle("-fx-border-color: transparent");
         btnLogout.setStyle("-fx-border-color: transparent");
     }
 
@@ -59,6 +74,7 @@ public class ManagerDashboardController implements Initializable {
         btnInventory.setStyle("-fx-background-color: rgba(208,198,198, 0.2)");
         btnHome.setStyle("-fx-border-color: transparent");
         btnEmployee.setStyle("-fx-border-color: transparent");
+        btnSalary.setStyle("-fx-border-color: transparent");
         btnLogout.setStyle("-fx-border-color: transparent");
     }
 
