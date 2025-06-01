@@ -168,6 +168,34 @@ public class PatientOrderModel {
         return -1;
     }
 
+    public double getTodayTotal() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT SUM(patient_order.sub_total) AS total FROM patient_order WHERE issued_date = CURDATE()";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return rst.getDouble("total");
+        }
+        return -1;
+    }
+
+    public int getTodayOrderCount() throws SQLException{
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT COUNT(order_id) AS count FROM patient_order WHERE issued_date = CURDATE()";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+
+        if (rst.next()) {
+            return rst.getInt("count");
+        }
+        return -1;
+    }
+
     public String getNextId() throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 

@@ -47,7 +47,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtReqQty" layoutX="10.0" layoutY="10.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
+            <TextField fx:id="txtReqQty" layoutX="10.0" layoutY="10.0" onKeyReleased="#quantityOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>

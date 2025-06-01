@@ -235,6 +235,20 @@ public class AppointmentModel {
         return emails;
     }
 
+    public int getLastDayAppointmentCount() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT COUNT(appointment_id) AS count FROM appointment WHERE DATE(date) = CURDATE() - INTERVAL 1 DAY ";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return rst.getInt("count");
+        }
+        return -1;
+    }
+
     public String getNextId() throws ClassNotFoundException, SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 

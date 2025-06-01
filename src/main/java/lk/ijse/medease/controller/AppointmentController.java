@@ -59,4 +59,8 @@ public class AppointmentController {
     public Map<String, String> getEmailsOfRemainingPatients(int number) throws SQLException {
         return appointmentModel.getEmailsOfRemainingPatients(number);
     }
+
+    public int getLastDayAppointmentCount() throws SQLException {
+        return appointmentModel.getLastDayAppointmentCount();
+    }
 }

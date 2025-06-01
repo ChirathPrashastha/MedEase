@@ -19,6 +19,9 @@ import java.util.ResourceBundle;
 
 public class NurseRequestRestockController implements Initializable {
 
+    private final String medicineIdPattern = "^M\\d{4}$";
+    private final String quantityPattern = "^[0-9]+$";
+
     private MedicineController medicineController;
     private RestockController restockController;
     private InventoryController inventoryController;
@@ -53,7 +56,20 @@ public class NurseRequestRestockController implements Initializable {
 
     @FXML
     void medicineDetailsOnKeyReleased(KeyEvent event) {
-        loadMedicineDetails();
+        txtMedId.setStyle(txtMedId.getStyle() + "-fx-text-fill: white;");
+        if (!(txtMedId.getText().matches(medicineIdPattern))){
+            txtMedId.setStyle(txtMedId.getStyle() + "-fx-text-fill: red;");
+        }else {
+            loadMedicineDetails();
+        }
+    }
+
+    @FXML
+    void quantityOnKeyReleased(KeyEvent event) {
+        txtReqQty.setStyle(txtReqQty.getStyle() + "-fx-text-fill: white;");
+        if (!(txtReqQty.getText().matches(quantityPattern))){
+            txtReqQty.setStyle(txtReqQty.getStyle() + "-fx-text-fill: red;");
+        }
     }
 
     private void loadMedicineDetails() {

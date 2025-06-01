@@ -69,6 +69,22 @@ public class RestockModel {
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, restockId);
 
-        return statement.executeUpdate() > 0 ? "Stock Ordered from Suppliers Successfully" : "Failed to Order Stock";
+        return statement.executeUpdate() > 0 ? "success" : "failed";
+    }
+
+    public String getSupplierEmail(String medicineId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT supplier.email FROM restock JOIN medicine ON restock.medicine_id = medicine.medicine_id JOIN inventory ON medicine.inventory_id = inventory.inventory_id JOIN supplier ON inventory.supplier_id = supplier.supplier_id WHERE restock.medicine_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, medicineId);
+
+        ResultSet rst = statement.executeQuery();
+
+        if (rst.next()) {
+            return rst.getString("email");
+        }
+        return null;
     }
 }

@@ -11,6 +11,7 @@ import lk.ijse.medease.dto.MedicineDTO;
 import lk.ijse.medease.dto.RestockDTO;
 import lk.ijse.medease.dto.RestockStatus;
 import lk.ijse.medease.dto.tm.RestockTM;
+import lk.ijse.medease.util.RestockEmailSender;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -19,8 +20,12 @@ import java.util.ResourceBundle;
 
 public class ManagerStockRequestController implements Initializable {
 
+    private final RestockEmailSender restockEmailSender = new RestockEmailSender();
+
     private RestockController restockController;
     private MedicineController medicineController;
+
+    String medicineId = null;
 
     private String orderingRestockId;
 
@@ -69,7 +74,7 @@ public class ManagerStockRequestController implements Initializable {
             TableRow<RestockTM> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getClickCount() == 1) {
-                    String medicineId = row.getItem().getMedicineId();
+                    medicineId = row.getItem().getMedicineId();
                     String restockId = row.getItem().getRestockId();
 
                     loadMedicineDetails(medicineId);
@@ -83,11 +88,12 @@ public class ManagerStockRequestController implements Initializable {
     private void orderFromSuppliers() {
         try {
             String response = restockController.orderStock(orderingRestockId);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ORDERING STOCK");
-            alert.setHeaderText(null);
-            alert.setContentText(response);
-            alert.showAndWait();
+
+            if (response.equals("success")) {
+                restockEmailSender.restockEmail(medicineId);
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Failed to Order Restock").showAndWait();
+            }
 
             loadTable();
             clearFields();

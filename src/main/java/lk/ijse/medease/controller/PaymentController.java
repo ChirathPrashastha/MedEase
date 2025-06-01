@@ -38,6 +38,10 @@ public class PaymentController {
         return paymentDTOs;
     }
 
+    public double getTodayPaymentAmount() throws SQLException {
+        return paymentModel.getTodayPaymentAmount();
+    }
+
     public String getNextId() throws SQLException {
         return paymentModel.getNextId();
     }

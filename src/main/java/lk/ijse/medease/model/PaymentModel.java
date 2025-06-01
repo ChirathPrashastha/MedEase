@@ -85,6 +85,19 @@ public class PaymentModel {
         return paymentDTOs;
     }
 
+    public double getTodayPaymentAmount() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT SUM(payment.amount) AS amount FROM payment WHERE paid_date = CURDATE()";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return rst.getDouble("amount");
+        }
+        return -1;
+    }
+
     public String getNextId() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 

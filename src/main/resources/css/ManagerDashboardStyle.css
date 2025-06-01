@@ -64,3 +64,33 @@
     -fx-background-radius: 30;
     -fx-text-fill: white;
 }
+
+.home-box {
+    -fx-background-color: #74c476;
+    -fx-background-radius: 30;
+}
+
+.income-box {
+    -fx-background-color: #238b45;
+    -fx-background-radius: 30;
+}
+
+.order-box{
+    -fx-background-color: #a16f37;
+    -fx-background-radius: 30;
+}
+
+.order-lbl {
+    -fx-background-color: #d0985e;
+    -fx-background-radius: 30;
+}
+
+.appointment-box {
+    -fx-background-color: 	#381f33;
+    -fx-background-radius: 30;
+}
+
+.appointment-lbl {
+    -fx-background-color: #67256a;
+    -fx-background-radius: 30;
+}

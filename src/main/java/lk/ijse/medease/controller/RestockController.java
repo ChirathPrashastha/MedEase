@@ -29,4 +29,8 @@ public class RestockController {
     public String orderStock(String restockId) throws SQLException {
         return restockModel.orderStock(restockId);
     }
+
+    public String getSupplierEmail(String medicineId) throws SQLException {
+        return restockModel.getSupplierEmail(medicineId);
+    }
 }

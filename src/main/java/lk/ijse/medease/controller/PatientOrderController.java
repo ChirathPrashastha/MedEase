@@ -37,6 +37,14 @@ public class PatientOrderController {
         return patientOrderModel.getSubTotalByOrderId(orderId);
     }
 
+    public double getTodayTotal() throws SQLException {
+        return patientOrderModel.getTodayTotal();
+    }
+
+    public int getTodayOrderCount() throws SQLException {
+        return patientOrderModel.getTodayOrderCount();
+    }
+
     public String getNextId() throws SQLException, ClassNotFoundException {
         return patientOrderModel.getNextId();
     }
