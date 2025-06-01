@@ -6,6 +6,9 @@ import lk.ijse.medease.dto.CheckInDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class AppointmentModel {
 
@@ -212,6 +215,24 @@ public class AppointmentModel {
             return Integer.parseInt(rst.getString("count"));
         }
         return -1;
+    }
+
+    public Map<String, String> getEmailsOfRemainingPatients(int number) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT appointment.patient_id, patient.email FROM appointment JOIN patient ON appointment.patient_id = patient.patient_id WHERE appointment.check_in_no > ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, number);
+
+        ResultSet rst = statement.executeQuery();
+
+        Map<String, String> emails = new TreeMap<>();
+
+        while (rst.next()) {
+            emails.put(rst.getString("patient_id"), rst.getString("email"));
+        }
+        return emails;
     }
 
     public String getNextId() throws ClassNotFoundException, SQLException {

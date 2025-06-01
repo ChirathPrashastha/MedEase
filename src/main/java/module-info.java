@@ -3,6 +3,7 @@ module lk.ijse.medease {
     requires javafx.fxml;
     requires java.sql;
     requires net.sf.jasperreports.core;
+    requires java.mail;
 
     opens lk.ijse.medease.controller to javafx.fxml;
     opens lk.ijse.medease.dto to javafx.base;

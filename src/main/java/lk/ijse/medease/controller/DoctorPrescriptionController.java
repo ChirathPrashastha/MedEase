@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 import lk.ijse.medease.dto.tm.PrescriptionMedicineTM;
+import lk.ijse.medease.util.EmailSender;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DoctorPrescriptionController implements Initializable {
+
+    private final EmailSender emailSender = new EmailSender();
 
     public static DoctorPrescriptionController controller;
 
@@ -281,6 +284,8 @@ public class DoctorPrescriptionController implements Initializable {
             alert.setHeaderText("SUCCESS");
             alert.setContentText(response);
             alert.showAndWait();
+
+            emailSender.sendCheckOutEmail(doctorId); //Sending emails for rest of the patients
 
         } catch (Exception e) {
             e.printStackTrace();

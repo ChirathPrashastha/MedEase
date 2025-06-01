@@ -17,4 +17,8 @@ public class CheckInController {
         ArrayList<CheckInDTO> doctorCheckInList = checkInModel.getDoctorCheckInList(doctorId);
         return doctorCheckInList;
     }
+
+    public int getCheckOutCount(String doctorId) throws SQLException {
+        return checkInModel.getCheckOutCount(doctorId);
+    }
 }

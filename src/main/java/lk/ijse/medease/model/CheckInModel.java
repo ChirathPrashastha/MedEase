@@ -30,6 +30,21 @@ public class CheckInModel {
         return checkInList;
     }
 
+    public int getCheckOutCount(String doctorId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT COUNT(check_in_id) AS count FROM check_in WHERE status = 'OUT' AND date = CURDATE() AND doctor_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, doctorId);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()) {
+            return rst.getInt("count");
+        }
+        return -1;
+    }
+
 //    public ArrayList<CheckInDTO> getAllCheckIn() throws ClassNotFoundException, SQLException {
 //        Connection connection = DBConnection.getInstance().getConnection();
 //

@@ -6,6 +6,7 @@ import lk.ijse.medease.model.AppointmentModel;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AppointmentController {
 
@@ -53,5 +54,9 @@ public class AppointmentController {
 
     public int getTodayAppointmentCount() throws SQLException {
         return appointmentModel.getTodayAppointmentCount();
+    }
+
+    public Map<String, String> getEmailsOfRemainingPatients(int number) throws SQLException {
+        return appointmentModel.getEmailsOfRemainingPatients(number);
     }
 }
