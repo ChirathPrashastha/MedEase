@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.medease.dto.MedicineDTO;
 
 import java.net.URL;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NurseRestockController implements Initializable {
+
+    private final String medicineIdPattern = "^M\\d{4}$";
 
     private MedicineController medicineController;
     private InventoryController inventoryController;
@@ -24,6 +27,21 @@ public class NurseRestockController implements Initializable {
 
     @FXML
     private TextField txtQuantity;
+
+    @FXML
+    void medicineIdOnKeyReleased(KeyEvent event) {
+        txtMedId.setStyle(txtMedId.getStyle() + "-fx-text-fill: white;");
+        if(!(txtMedId.getText().matches(medicineIdPattern))) {
+            txtMedId.setStyle(txtMedId.getStyle() + "-fx-text-fill: red;");
+        }else {
+            try {
+                ArrayList<MedicineDTO> medicineDTOs = medicineController.searchMedicine(txtMedId.getText());
+                txtInventoryId.setText(medicineDTOs.get(0).getInventoryId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @FXML
     void btnProceedOnAction(ActionEvent event) {
@@ -50,16 +68,6 @@ public class NurseRestockController implements Initializable {
 
                 clearFields();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void getInventoryIdOnAction(ActionEvent event) {
-        try {
-            ArrayList<MedicineDTO> medicineDTOs = medicineController.searchMedicine(txtMedId.getText());
-            txtInventoryId.setText(medicineDTOs.get(0).getInventoryId());
         } catch (Exception e) {
             e.printStackTrace();
         }

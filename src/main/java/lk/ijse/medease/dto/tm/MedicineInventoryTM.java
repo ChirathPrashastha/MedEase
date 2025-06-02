@@ -1,12 +1,14 @@
 package lk.ijse.medease.dto.tm;
 
+import lk.ijse.medease.dto.MedicineCategory;
+
 import java.sql.Date;
 
 public class MedicineInventoryTM {
     private String medicineId;
     private String genericName;
     private String brand;
-    private String category;
+    private MedicineCategory category;
     private double price;
     private Date expirationDate;
     private String inventoryId;
@@ -49,11 +51,11 @@ public class MedicineInventoryTM {
         this.brand = brand;
     }
 
-    public String getCategory() {
+    public MedicineCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(MedicineCategory category) {
         this.category = category;
     }
 

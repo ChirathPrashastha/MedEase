@@ -16,6 +16,10 @@ import java.util.ResourceBundle;
 
 public class NurseDeleteMedController implements Initializable {
 
+    private final String medicineIdPattern = "^M\\d{4}$";
+
+    private boolean isMedicineIdValid = false;
+
     private MedicineController medicineController;
 
     @FXML
@@ -53,14 +57,22 @@ public class NurseDeleteMedController implements Initializable {
 
     @FXML
     void medicineDetailsOnKeyReleased(KeyEvent event) {
-        try {
-            ArrayList<MedicineDTO> medicineDTOs = medicineController.searchMedicine(txtMedId.getText());
-            MedicineDTO medicineDTO = medicineDTOs.get(0);
-            lblMedName.setText(medicineDTO.getGenericName());
-            lblBrand.setText(medicineDTO.getBrand());
-            lblInventoryId.setText(medicineDTO.getInventoryId());
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        txtMedId.setStyle(txtMedId.getStyle() + "-fx-text-fill: white;");
+        if(!(txtMedId.getText().matches(medicineIdPattern))) {
+            txtMedId.setStyle(txtMedId.getStyle() + "-fx-text-fill: red;");
+        }else {
+            isMedicineIdValid = true;
+
+            try {
+                ArrayList<MedicineDTO> medicineDTOs = medicineController.searchMedicine(txtMedId.getText());
+                MedicineDTO medicineDTO = medicineDTOs.get(0);
+                lblMedName.setText(medicineDTO.getGenericName());
+                lblBrand.setText(medicineDTO.getBrand());
+                lblInventoryId.setText(medicineDTO.getInventoryId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

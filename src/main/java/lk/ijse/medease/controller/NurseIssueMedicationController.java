@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.ijse.medease.dto.MedicineDTO;
 import lk.ijse.medease.dto.PatientOrderDTO;
@@ -25,6 +26,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NurseIssueMedicationController implements Initializable {
+
+    private final String prescriptionIdPattern = "^RX\\d{4}$";
+
+    private boolean isRXIdValid = true;
+
     public static NurseIssueMedicationController nurseIssueMedicationController;
 
     private PrescriptionController prescriptionController;
@@ -105,6 +111,17 @@ public class NurseIssueMedicationController implements Initializable {
 
     @FXML
     private RadioButton radioBtnForWeeks;
+
+    @FXML
+    void presIdOnKeyReleased(KeyEvent event) {
+        txtPrescriptionId.setStyle(txtPrescriptionId.getStyle() + "-fx-text-fill: white;");
+        if (!(txtPrescriptionId.getText().matches(prescriptionIdPattern))) {
+            txtPrescriptionId.setStyle(txtPrescriptionId.getStyle() + "-fx-text-fill: red;");
+            isRXIdValid = false;
+        }else {
+            isRXIdValid = true;
+        }
+    }
 
     @FXML
     void btnAddToOrderOnAction(ActionEvent event) {
@@ -236,7 +253,11 @@ public class NurseIssueMedicationController implements Initializable {
 
     @FXML
     void searchPrescriptionOnAction(ActionEvent event) {
-        loadPrescriptionTable(txtPrescriptionId.getText());
+        if (isRXIdValid){
+            loadPrescriptionTable(txtPrescriptionId.getText());
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Invalid Prescription ID").showAndWait();
+        }
     }
 
     @Override

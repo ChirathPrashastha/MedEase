@@ -2,6 +2,7 @@ package lk.ijse.medease.model;
 
 import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.InventoryDTO;
+import lk.ijse.medease.dto.MedicineCategory;
 import lk.ijse.medease.dto.MedicineDTO;
 
 import java.sql.Connection;
@@ -36,7 +37,7 @@ public class MedicineModel {
                 medicineAddingStatement.setString(1, medicineDTO.getMedicineId());
                 medicineAddingStatement.setString(2, medicineDTO.getGenericName());
                 medicineAddingStatement.setString(3, medicineDTO.getBrand());
-                medicineAddingStatement.setString(4, medicineDTO.getCategory());
+                medicineAddingStatement.setString(4, medicineDTO.getCategory().name());
                 medicineAddingStatement.setDouble(5, medicineDTO.getPrice());
                 medicineAddingStatement.setDate(6, medicineDTO.getExpirationDate());
                 medicineAddingStatement.setString(7, medicineDTO.getInventoryId());
@@ -72,7 +73,7 @@ public class MedicineModel {
             PreparedStatement updateMedicineStatement = connection.prepareStatement(updateMedicineSql);
             updateMedicineStatement.setString(1, medicineDTO.getGenericName());
             updateMedicineStatement.setString(2, medicineDTO.getBrand());
-            updateMedicineStatement.setString(3, medicineDTO.getCategory());
+            updateMedicineStatement.setString(3, medicineDTO.getCategory().name());
             updateMedicineStatement.setDouble(4, medicineDTO.getPrice());
             updateMedicineStatement.setDate(5, medicineDTO.getExpirationDate());
             updateMedicineStatement.setString(6, medicineDTO.getMedicineId());
@@ -176,7 +177,7 @@ public class MedicineModel {
 
         ArrayList<MedicineDTO> medicineList = new ArrayList<>();
         while (rst.next()) {
-            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"));
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("generic_name"), rst.getString("brand"), MedicineCategory.valueOf(rst.getString("category")));
             medicineList.add(medicineDTO);
         }
         return medicineList;
@@ -219,7 +220,7 @@ public class MedicineModel {
         MedicineDTO medicineDTO = null;
 
         while (rst.next()){
-            medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id"));
+            medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), MedicineCategory.valueOf(rst.getString("category")), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id"));
         }
 
         if (medicineDTO != null){
@@ -248,7 +249,7 @@ public class MedicineModel {
         }
 
         while (rst.next()) {
-            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), MedicineCategory.valueOf(rst.getString("category")), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
             medicineList.add(medicineDTO);
         }
         return medicineList;
@@ -264,7 +265,7 @@ public class MedicineModel {
 
         ArrayList<MedicineDTO> medicineList = new ArrayList<>();
         while (rst.next()) {
-            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), MedicineCategory.valueOf(rst.getString("category")), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
             medicineList.add(medicineDTO);
         }
         return medicineList;
@@ -280,7 +281,7 @@ public class MedicineModel {
 
         ArrayList<MedicineDTO> medicineList = new ArrayList<>();
         while (rst.next()) {
-            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), MedicineCategory.valueOf(rst.getString("category")), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
             medicineList.add(medicineDTO);
         }
         return medicineList;
@@ -296,7 +297,7 @@ public class MedicineModel {
 
         ArrayList<MedicineDTO> medicineList = new ArrayList<>();
         while (rst.next()) {
-            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), rst.getString("category"), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
+            MedicineDTO medicineDTO = new MedicineDTO(rst.getString("medicine_id"), rst.getString("generic_name"), rst.getString("brand"), MedicineCategory.valueOf(rst.getString("category")), rst.getDouble("price"), rst.getDate("expiration_date"), rst.getString("inventory_id") );
             medicineList.add(medicineDTO);
         }
         return medicineList;

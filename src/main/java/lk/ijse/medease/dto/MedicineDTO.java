@@ -6,12 +6,12 @@ public class MedicineDTO {
     private String medicineId;
     private String genericName;
     private String brand;
-    private String category;
+    private MedicineCategory category;
     private double price;
     private Date expirationDate;
     private String inventoryId;
 
-    public MedicineDTO(String medicineId, String genericName, String brand, String category, double price, Date expirationDate, String inventoryId) {
+    public MedicineDTO(String medicineId, String genericName, String brand, MedicineCategory category, double price, Date expirationDate, String inventoryId) {
         this.medicineId = medicineId;
         this.genericName = genericName;
         this.brand = brand;
@@ -21,7 +21,7 @@ public class MedicineDTO {
         this.inventoryId = inventoryId;
     }
 
-    public MedicineDTO(String genericName, String brand, String category, double price, Date expirationDate, String inventoryId) {
+    public MedicineDTO(String genericName, String brand, MedicineCategory category, double price, Date expirationDate, String inventoryId) {
         this.genericName = genericName;
         this.brand = brand;
         this.category = category;
@@ -30,7 +30,7 @@ public class MedicineDTO {
         this.inventoryId = inventoryId;
     }
 
-    public MedicineDTO(String genericName, String brand, String category) {
+    public MedicineDTO(String genericName, String brand, MedicineCategory category) {
         this.genericName = genericName;
         this.brand = brand;
         this.category = category;
@@ -60,11 +60,11 @@ public class MedicineDTO {
         this.brand = brand;
     }
 
-    public String getCategory() {
+    public MedicineCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(MedicineCategory category) {
         this.category = category;
     }
 

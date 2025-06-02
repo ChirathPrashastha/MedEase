@@ -8,6 +8,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import lk.ijse.medease.dto.InventoryDTO;
+import lk.ijse.medease.dto.MedicineCategory;
 import lk.ijse.medease.dto.MedicineDTO;
 
 import java.net.URL;
@@ -62,6 +63,8 @@ public class NurseAddMedController implements Initializable {
         if (!(txtEXP.getText().matches(datePattern))) {
             txtEXP.setStyle(txtEXP.getStyle() + "-fx-text-fill: red;");
             isInputsValid = false;
+        }else {
+            isInputsValid = true;
         }
     }
 
@@ -71,6 +74,8 @@ public class NurseAddMedController implements Initializable {
         if (!(txtQuantity.getText().matches(quantityPattern))) {
             txtQuantity.setStyle(txtQuantity.getStyle() + "-fx-text-fill: red;");
             isInputsValid = false;
+        }else {
+            isInputsValid = true;
         }
     }
 
@@ -80,6 +85,8 @@ public class NurseAddMedController implements Initializable {
         if (!(txtMedId.getText().matches(medicineIdPattern))) {
             txtMedId.setStyle(txtMedId.getStyle() + "-fx-text-fill: red;");
             isInputsValid = false;
+        }else {
+            isInputsValid = true;
         }
     }
 
@@ -89,6 +96,8 @@ public class NurseAddMedController implements Initializable {
         if(!(txtPrice.getText().matches(pricePattern))) {
             txtPrice.setStyle(txtPrice.getStyle() + "-fx-text-fill: red;");
             isInputsValid = false;
+        }else {
+            isInputsValid = true;
         }
     }
 
@@ -104,7 +113,7 @@ public class NurseAddMedController implements Initializable {
     private void addMedicine() {
 
         InventoryDTO inventoryDTO = new InventoryDTO(txtInventoryId.getText(), Integer.parseInt(txtQuantity.getText()), txtSupplier.getText(), txtSection.getText());
-        MedicineDTO medicineDTO = new MedicineDTO(txtMedId.getText(), txtGenericName.getText(), txtBrand.getText(), txtCategory.getText(), Double.parseDouble(txtPrice.getText()), Date.valueOf(txtEXP.getText()), txtInventoryId.getText());
+        MedicineDTO medicineDTO = new MedicineDTO(txtMedId.getText(), txtGenericName.getText(), txtBrand.getText(), MedicineCategory.valueOf(txtCategory.getText()), Double.parseDouble(txtPrice.getText()), Date.valueOf(txtEXP.getText()), txtInventoryId.getText());
 
         try {
             String response = medicineController.addMedicine(medicineDTO, inventoryDTO);

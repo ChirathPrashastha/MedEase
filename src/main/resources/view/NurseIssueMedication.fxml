@@ -36,7 +36,7 @@
                   <Font name="Cambria Math" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txtPrescriptionId" prefHeight="27.0" prefWidth="160.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css" />
+            <TextField fx:id="txtPrescriptionId" onKeyReleased="#presIdOnKeyReleased" prefHeight="27.0" prefWidth="160.0" styleClass="input-fields" stylesheets="@../css/NurseDashboardStyle.css" />
          </children>
       </HBox>
       <TableView fx:id="tblPresMed" layoutX="362.0" layoutY="215.0" prefHeight="228.0" prefWidth="387.0">
