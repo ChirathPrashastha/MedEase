@@ -57,7 +57,7 @@
       </VBox>
       <VBox layoutX="207.0" layoutY="90.0" prefHeight="179.0" prefWidth="283.0" spacing="5.0">
          <children>
-            <TextField fx:id="txtSupplierId" prefHeight="30.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtSupplierId" onKeyReleased="#supplierIdOnKeyReleased" prefHeight="30.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -65,7 +65,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtName" layoutX="10.0" layoutY="10.0" prefHeight="30.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtName" layoutX="10.0" layoutY="10.0" onKeyReleased="#nameOnKeyReleased" prefHeight="30.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -81,7 +81,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtContact" layoutX="10.0" layoutY="90.0" prefHeight="30.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtContact" layoutX="10.0" layoutY="90.0" onKeyReleased="#contactOnKeyReleased" prefHeight="30.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -89,7 +89,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtEmail" layoutX="10.0" layoutY="130.0" prefHeight="30.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtEmail" layoutX="10.0" layoutY="130.0" onKeyReleased="#emailOnKeyReleased" prefHeight="30.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>

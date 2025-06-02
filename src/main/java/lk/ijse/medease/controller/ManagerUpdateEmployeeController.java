@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.ijse.medease.dto.DoctorDTO;
 import lk.ijse.medease.dto.EmployeeDTO;
@@ -22,6 +23,16 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ManagerUpdateEmployeeController implements Initializable {
+
+    private final String employeeIdPattern = "^E\\d{4}$";
+    private final String contactPattern = "^[0-9]{10}$";
+    private final String datePattern = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$";
+    private final String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+    private final String namePattern = "^[A-Za-z ]+$";
+    private final String usernamePattern = "^[A-Za-z0-9]{8}$";
+    private final String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])[A-Za-z\\d@#$%^&+=!]{8}$";
+
+    private boolean isFieldsValid = true;
 
     private DoctorController doctorController;
     private EmployeeController employeeController;
@@ -64,9 +75,91 @@ public class ManagerUpdateEmployeeController implements Initializable {
     @FXML
     private TextField txtUsername;
 
+
+    @FXML
+    void employeeIdOnKeyReleased(KeyEvent event) {
+        txtEmployeeId.setStyle(txtEmployeeId.getStyle() + "-fx-text-fill: white;");
+        if (!(txtEmployeeId.getText().matches(employeeIdPattern))) {
+            txtEmployeeId.setStyle(txtEmployeeId.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void contactOnKeyReleased(KeyEvent event) {
+        txtContact.setStyle(txtContact.getStyle() + "-fx-text-fill: white;");
+        if (!(txtContact.getText().matches(contactPattern))) {
+            txtContact.setStyle(txtContact.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void emailOnKeyReleased(KeyEvent event) {
+        txtEmail.setStyle(txtEmail.getStyle() + "-fx-text-fill: white;");
+        if (!(txtEmail.getText().matches(emailPattern))) {
+            txtEmail.setStyle(txtEmail.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void nameOnKeyReleased(KeyEvent event) {
+        txtName.setStyle(txtName.getStyle() + "-fx-text-fill: white;");
+        if (!(txtName.getText().matches(namePattern))) {
+            txtName.setStyle(txtName.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void recruitedDateOnKeyReleased(KeyEvent event) {
+        txtRecruitedDate.setStyle(txtRecruitedDate.getStyle() + "-fx-text-fill: white;");
+        if (!(txtRecruitedDate.getText().matches(datePattern))) {
+            txtRecruitedDate.setStyle(txtRecruitedDate.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void usernameOnKeyReleased(KeyEvent event) {
+        txtUsername.setStyle(txtUsername.getStyle() + "-fx-text-fill: white;");
+        if (!(txtUsername.getText().matches(usernamePattern))) {
+            txtUsername.setStyle(txtUsername.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void passwordOnKeyReleased(KeyEvent event) {
+        txtPassword.setStyle(txtPassword.getStyle() + "-fx-text-fill: white;");
+        if (!(txtPassword.getText().matches(passwordPattern))) {
+            txtPassword.setStyle(txtPassword.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        updateEmployee();
+        if (isFieldsValid) {
+            updateEmployee();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Please check the fields").showAndWait();
+        }
     }
 
     @FXML

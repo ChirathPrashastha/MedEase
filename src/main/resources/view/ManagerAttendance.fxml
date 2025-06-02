@@ -46,7 +46,7 @@
       </VBox>
       <VBox layoutX="206.0" layoutY="98.0" prefHeight="96.0" prefWidth="257.0" spacing="7.0">
          <children>
-            <TextField fx:id="txtEmployeeId" layoutX="10.0" layoutY="10.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtEmployeeId" layoutX="10.0" layoutY="10.0" onKeyReleased="#employeeIdOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>

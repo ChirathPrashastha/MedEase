@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.medease.dto.EmployeeDTO;
 import lk.ijse.medease.dto.JobRole;
 import lk.ijse.medease.dto.SalaryDTO;
@@ -22,6 +23,10 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 public class ManagerSalaryController implements Initializable {
+
+    private final String amountPattern = "^\\d+(\\.\\d{1,2})?$";
+
+    private boolean isFieldsValid = true;
 
     private final AttendanceController attendanceController = new AttendanceController();
     private final EmployeeController employeeController = new EmployeeController();
@@ -77,8 +82,30 @@ public class ManagerSalaryController implements Initializable {
     private TextField txtBonus;
 
     @FXML
+    void basicSalaryOnKeyReleased(KeyEvent event) {
+        txtBasicSalary.setStyle(txtBasicSalary.getStyle() + "-fx-text-fill: white;");
+        if (!(txtBasicSalary.getText().matches(amountPattern))) {
+            txtBasicSalary.setStyle(txtBasicSalary.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void bonusOnKeyReleased(KeyEvent event) {
+        txtBonus.setStyle(txtBonus.getStyle() + "-fx-text-fill: white;");
+        if (!(txtBonus.getText().matches(amountPattern))) {
+            txtBonus.setStyle(txtBonus.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
     void btnProceedOnAction(ActionEvent event) {
-        if (txtBasicSalary.getText() != null) {
+        if (txtBasicSalary.getText() != null && isFieldsValid) {
             try {
                 if (btnDoctor.isSelected()) {
                     String response = salaryController.setSalaryPerDay(JobRole.DOCTOR, Double.parseDouble(txtBasicSalary.getText()));
@@ -97,7 +124,7 @@ public class ManagerSalaryController implements Initializable {
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        }else if (txtBonus.getText() != null) {
+        }else if (txtBonus.getText() != null && isFieldsValid) {
             bonus = Double.parseDouble(txtBonus.getText());
         }else {
             new Alert(Alert.AlertType.ERROR, "Please check the fields").show();

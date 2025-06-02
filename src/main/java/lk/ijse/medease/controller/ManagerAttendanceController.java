@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import lk.ijse.medease.dto.AttendStatus;
 import lk.ijse.medease.dto.AttendanceDTO;
@@ -25,6 +26,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManagerAttendanceController implements Initializable {
+
+    private final String employeeIdPattern = "^E\\d{4}$";
+
+    private boolean isFieldsValid = true;
 
     private AttendanceController attendanceController;
 
@@ -59,13 +64,32 @@ public class ManagerAttendanceController implements Initializable {
     private TextField txtEmployeeId;
 
     @FXML
+    void employeeIdOnKeyReleased(KeyEvent event) {
+        txtEmployeeId.setStyle(txtEmployeeId.getStyle() + "-fx-text-fill: white;");
+        if (!(txtEmployeeId.getText().matches(employeeIdPattern))) {
+            txtEmployeeId.setStyle(txtEmployeeId.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
     void btnPresentOnAction(ActionEvent event) {
-        markAttendance();
+        if (isFieldsValid){
+            markAttendance();
+        }else {
+          new Alert(Alert.AlertType.ERROR, "Please check the employee ID").showAndWait();
+        }
     }
 
     @FXML
     void btnDayOffOnAction(ActionEvent event) {
-        addDayOff();
+        if (isFieldsValid){
+            addDayOff();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Please check the employee ID").showAndWait();
+        }
     }
 
     @FXML

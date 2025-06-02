@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.medease.dto.SupplierDTO;
 import lk.ijse.medease.dto.tm.SupplierTM;
@@ -20,6 +21,13 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManagerSuppliersController implements Initializable {
+
+    private final String supplierIdPattern = "^S\\d{4}$";
+    private final String contactPattern = "^[0-9]{10}$";
+    private final String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+    private final String namePattern = "^[A-Za-z ]+$";
+
+    private boolean isFieldsValid = true;
 
     private SupplierController supplierController;
 
@@ -57,18 +65,74 @@ public class ManagerSuppliersController implements Initializable {
     private TextField txtSupplierId;
 
     @FXML
+    void contactOnKeyReleased(KeyEvent event) {
+        txtContact.setStyle(txtContact.getStyle() + "-fx-text-fill: white;");
+        if (!(txtContact.getText().matches(contactPattern))) {
+            txtContact.setStyle(txtContact.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void emailOnKeyReleased(KeyEvent event) {
+        txtEmail.setStyle(txtEmail.getStyle() + "-fx-text-fill: white;");
+        if (!(txtEmail.getText().matches(emailPattern))) {
+            txtEmail.setStyle(txtEmail.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void nameOnKeyReleased(KeyEvent event) {
+        txtName.setStyle(txtName.getStyle() + "-fx-text-fill: white;");
+        if (!(txtName.getText().matches(namePattern))) {
+            txtName.setStyle(txtName.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
+    void supplierIdOnKeyReleased(KeyEvent event) {
+        txtSupplierId.setStyle(txtSupplierId.getStyle() + "-fx-text-fill: white;");
+        if (!(txtSupplierId.getText().matches(supplierIdPattern))) {
+            txtSupplierId.setStyle(txtSupplierId.getStyle() + "-fx-text-fill: red;");
+            isFieldsValid = false;
+        }else {
+            isFieldsValid = true;
+        }
+    }
+
+    @FXML
     void btnAddOnAction(ActionEvent event) {
-        addSupplier();
+        if (isFieldsValid) {
+            addSupplier();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Please check the fields").showAndWait();
+        }
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        deleteSupplier();
+        if (isFieldsValid) {
+            deleteSupplier();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Please check the fields").showAndWait();
+        }
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        updateSupplier();
+        if (isFieldsValid) {
+            updateSupplier();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Please check the fields").showAndWait();
+        }
     }
 
     @FXML

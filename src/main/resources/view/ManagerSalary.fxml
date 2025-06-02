@@ -70,7 +70,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <TextField fx:id="txtBasicSalary" layoutX="10.0" layoutY="90.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtBasicSalary" layoutX="10.0" layoutY="90.0" onKeyReleased="#basicSalaryOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
@@ -78,7 +78,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtBonus" layoutX="10.0" layoutY="136.0" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
+            <TextField fx:id="txtBonus" layoutX="10.0" layoutY="136.0" onKeyReleased="#bonusOnKeyReleased" prefHeight="37.0" styleClass="input-fields" stylesheets="@../css/ManagerDashboardStyle.css">
                <font>
                   <Font name="Cambria Math" size="14.0" />
                </font>
