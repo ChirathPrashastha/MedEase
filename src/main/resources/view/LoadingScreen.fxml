@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="1024.0" styleClass="container-anc" stylesheets="@../css/ManagerDashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.medease.controller.LoadingScreenController">
+   <children>
+      <ProgressIndicator layoutX="483.0" layoutY="271.0" prefHeight="65.0" prefWidth="60.0" />
+   </children>
+</AnchorPane>
