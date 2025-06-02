@@ -181,23 +181,26 @@ WHERE
 		</band>
 	</detail>
 	<columnFooter height="135" splitType="Stretch">
-		<element kind="staticText" uuid="bc723f52-ee17-4a40-ab1a-789406a714af" x="34" y="2" width="76" height="20" fontSize="12.0" italic="true" bold="true" vTextAlign="Middle">
+		<element kind="staticText" uuid="bc723f52-ee17-4a40-ab1a-789406a714af" x="34" y="2" width="76" height="20" fontSize="12.0" bold="true" italic="true" vTextAlign="Middle">
 			<text><![CDATA[Sub Total]]></text>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</element>
-		<element kind="staticText" uuid="74d4b69a-79b6-4a44-be02-affdd84ee7b7" x="34" y="89" width="520" height="45" fontName="Gadugi" fontSize="10.0" italic="false" bold="false" vTextAlign="Middle">
+		<element kind="staticText" uuid="74d4b69a-79b6-4a44-be02-affdd84ee7b7" x="34" y="89" width="520" height="45" fontName="Gadugi" fontSize="10.0" bold="false" italic="false" vTextAlign="Middle">
 			<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
 			<text><![CDATA[This bill is generated based on the prescribed medications and quantities issued as per your recent consultation. Please retain this invoice for future reference or reimbursement purposes.
 
 If you have any questions regarding your prescription or medication, kindly contact our helpdesk or your consulting physician.]]></text>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</element>
-		<element kind="textField" uuid="999dffe2-6b69-4fa1-a637-e7e857ed9f09" x="110" y="2" width="100" height="20" fontSize="12.0" italic="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="textField" uuid="999dffe2-6b69-4fa1-a637-e7e857ed9f09" x="110" y="2" width="100" height="20" fontSize="12.0" bold="true" italic="true" hTextAlign="Center" vTextAlign="Middle">
 			<expression><![CDATA[$P{pSubTotal}]]></expression>
+		</element>
+		<element kind="staticText" uuid="c2366847-c870-4d54-ab81-e163f855a182" x="34" y="23" width="187" height="16">
+			<text><![CDATA[(Rs. 1500.00 check-in charge included)]]></text>
 		</element>
 	</columnFooter>
 	<pageFooter height="42" splitType="Stretch">
-		<element kind="staticText" uuid="e427eff6-cb09-414f-8afd-2e81cde0644b" x="36" y="10" width="509" height="20" fontName="Serif" fontSize="9.0" italic="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="e427eff6-cb09-414f-8afd-2e81cde0644b" x="36" y="10" width="509" height="20" fontName="Serif" fontSize="9.0" bold="true" italic="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[THANK YOU FOR CHOOSING FAMILY MEDI CLINIC. WE WISH YOU A SPEEDY RECOVERY.]]></text>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</element>

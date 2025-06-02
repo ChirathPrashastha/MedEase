@@ -13,6 +13,7 @@ import lk.ijse.medease.dto.MedicineDTO;
 
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NurseUpdateMedController implements Initializable {
@@ -25,6 +26,7 @@ public class NurseUpdateMedController implements Initializable {
     private boolean isInputsValid = true;
 
     private MedicineController medicineController;
+    private InventoryController inventoryController;
 
     @FXML
     private TextField txtBrand;
@@ -90,6 +92,19 @@ public class NurseUpdateMedController implements Initializable {
             try {
                 String inventoryId = medicineController.getInventoryIdByMedicineId(txtMedId.getText());
                 txtInventoryId.setText(inventoryId);
+
+                ArrayList<MedicineDTO> medicineDTOS = medicineController.searchMedicine(txtMedId.getText());
+                txtGenericName.setText(medicineDTOS.getFirst().getGenericName());
+                txtBrand.setText(medicineDTOS.getFirst().getBrand());
+                txtCategory.setText(medicineDTOS.getFirst().getCategory().name());
+                txtPrice.setText(String.valueOf(medicineDTOS.getFirst().getPrice()));
+                txtEXP.setText(String.valueOf(medicineDTOS.getFirst().getExpirationDate()));
+
+                InventoryDTO inventoryDTO = inventoryController.searchInventory(txtInventoryId.getText());
+                txtSupplier.setText(inventoryDTO.getSupplierId());
+                txtQuantity.setText(String.valueOf(inventoryDTO.getQuantity()));
+                txtSection.setText(inventoryDTO.getSection());
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -158,6 +173,7 @@ public class NurseUpdateMedController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         medicineController = new MedicineController();
+        inventoryController = new InventoryController();
     }
 
     private void clearFields() {

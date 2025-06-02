@@ -32,41 +32,41 @@
             </Label>
             <VBox alignment="TOP_CENTER" prefHeight="389.0" prefWidth="255.0">
                <children>
-                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Home" textFill="WHITE">
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="HOME" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnAppointment" mnemonicParsing="false" onAction="#btnAppointmentOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Appointment" textFill="WHITE">
+                  <Button fx:id="btnAppointment" mnemonicParsing="false" onAction="#btnAppointmentOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="APPOINTMENTS" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnPatient" mnemonicParsing="false" onAction="#btnPatientOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Patient" textFill="WHITE">
+                  <Button fx:id="btnPatient" mnemonicParsing="false" onAction="#btnPatientOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="PATIENTS" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnPayment" mnemonicParsing="false" onAction="#btnPaymentOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Payment" textFill="WHITE">
+                  <Button fx:id="btnPayment" mnemonicParsing="false" onAction="#btnPaymentOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="PAYMENT" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnLogout" layoutX="10.0" layoutY="177.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../css/ReceptionDashboardStyle.css" text="Logout" textFill="WHITE">
+                  <Button fx:id="btnLogout" layoutX="10.0" layoutY="177.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../css/ReceptionDashboardStyle.css" text="LOGOUT" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />

@@ -35,41 +35,41 @@
             </Label>
             <VBox alignment="TOP_CENTER" prefHeight="433.0" prefWidth="255.0">
                <children>
-                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="49.0" prefWidth="254.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Home" textFill="WHITE">
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="49.0" prefWidth="254.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="HOME" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnEmployee" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnEmployeeOnAction" prefHeight="49.0" prefWidth="254.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Employee" textFill="WHITE">
+                  <Button fx:id="btnEmployee" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnEmployeeOnAction" prefHeight="49.0" prefWidth="254.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="EMPLOYEE" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnSalary" layoutX="11.0" layoutY="128.0" mnemonicParsing="false" onAction="#btnSalaryOnAction" prefHeight="49.0" prefWidth="254.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Salary" textFill="WHITE">
+                  <Button fx:id="btnSalary" layoutX="11.0" layoutY="128.0" mnemonicParsing="false" onAction="#btnSalaryOnAction" prefHeight="49.0" prefWidth="254.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="SALARY" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnInventory" layoutX="10.0" layoutY="106.0" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="49.0" prefWidth="254.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Inventory" textFill="WHITE">
+                  <Button fx:id="btnInventory" layoutX="10.0" layoutY="106.0" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="49.0" prefWidth="254.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="INVENTORY" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnLogout" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../css/ReceptionDashboardStyle.css" text="Logout" textFill="WHITE">
+                  <Button fx:id="btnLogout" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../css/ReceptionDashboardStyle.css" text="LOGOUT" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />

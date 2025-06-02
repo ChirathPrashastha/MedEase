@@ -35,33 +35,33 @@
             </Label>
             <VBox alignment="TOP_CENTER" prefHeight="389.0" prefWidth="255.0">
                <children>
-                  <Button fx:id="btnIssueMedication" mnemonicParsing="false" onAction="#btnIssueMedicationOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Issue Medication" textFill="WHITE">
+                  <Button fx:id="btnIssueMedication" mnemonicParsing="false" onAction="#btnIssueMedicationOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="ISSUE MEDICATION" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnManageInventory" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnManageInventoryOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Manage Inventory" textFill="WHITE">
+                  <Button fx:id="btnManageInventory" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnManageInventoryOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="MANAGE INVENTORY" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnRequestStocks" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnRequestStocksOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="Request Stocks" textFill="WHITE">
+                  <Button fx:id="btnRequestStocks" layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnRequestStocksOnAction" prefHeight="49.0" prefWidth="257.0" styleClass="panel-buttons" stylesheets="@../css/ReceptionDashboardStyle.css" text="REQUEST STOCK" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnLogout" layoutX="10.0" layoutY="177.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../css/ReceptionDashboardStyle.css" text="Logout" textFill="WHITE">
+                  <Button fx:id="btnLogout" layoutX="10.0" layoutY="177.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../css/ReceptionDashboardStyle.css" text="LOGOUT" textFill="WHITE">
                      <font>
-                        <Font name="Corbel" size="17.0" />
+                        <Font name="Corbel Bold" size="17.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
