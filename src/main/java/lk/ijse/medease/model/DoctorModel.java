@@ -119,6 +119,21 @@ public class DoctorModel {
         return doctorDTOs;
     }
 
+    public String getNameByDoctorId(String doctorId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT name FROM employee JOIN doctor ON employee.employee_id = doctor.employee_id WHERE doctor_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, doctorId);
+
+        ResultSet rst = statement.executeQuery();
+        if (rst.next()){
+            return rst.getString("name");
+        }
+        return null;
+    }
+
     public String getNextId() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
 

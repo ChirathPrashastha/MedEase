@@ -14,15 +14,26 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import lk.ijse.medease.db.DBConnection;
 import lk.ijse.medease.dto.PrescriptionDTO;
 import lk.ijse.medease.dto.PrescriptionMedicineDTO;
 import lk.ijse.medease.dto.tm.PrescriptionMedicineTM;
 import lk.ijse.medease.util.EmailSender;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class DoctorPrescriptionController implements Initializable {
@@ -32,6 +43,7 @@ public class DoctorPrescriptionController implements Initializable {
     public static DoctorPrescriptionController controller;
 
     private MedicineController medicineController;
+    private DoctorController doctorController;
     private String medicineId;
 
     private PrescriptionController prescriptionController;
@@ -43,6 +55,9 @@ public class DoctorPrescriptionController implements Initializable {
     private ObservableList<PrescriptionMedicineTM> presMedList ;
 
     private final String patientIdPattern = "^P\\d{4}$";
+
+    private String prescriptionID = null;
+    private String doctorID = null;
 
     @FXML
     private TableColumn<PrescriptionMedicineTM, String> colDosage;
@@ -202,6 +217,7 @@ public class DoctorPrescriptionController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Unable to add the prescription").showAndWait();
         }else {
             addPrescription();
+            generatePrescription();
             fullyClearFields();
         }
     }
@@ -245,10 +261,12 @@ public class DoctorPrescriptionController implements Initializable {
         controller = this;
         prescriptionController = new PrescriptionController();
         patientController = new PatientController();
+        doctorController = new DoctorController();
 
         try {
             String prescriptionId = prescriptionController.getNextId();
             txtPrescriptionId.setText(prescriptionId);
+            prescriptionID = prescriptionId;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -275,6 +293,8 @@ public class DoctorPrescriptionController implements Initializable {
         String doctorId = DoctorAppointmentController.doctorAppointmentController.doctorId;
         int checkInNo = DoctorAppointmentController.doctorAppointmentController.checkInNo;
 
+        doctorID = doctorId; // for the printing prescription
+
         PrescriptionDTO prescriptionDTO = new PrescriptionDTO(txtPrescriptionId.getText(), doctorId, txtPID.getText(), Integer.parseInt(txtAge.getText()), txtDiagnosis.getText(), txtAID.getText());
 
         try {
@@ -295,6 +315,34 @@ public class DoctorPrescriptionController implements Initializable {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }
+
+    private void generatePrescription() {
+        try {
+
+            String doctorName = doctorController.getNameByDoctorId(doctorID);
+
+            JasperReport bill = JasperCompileManager.compileReport(getClass().getResourceAsStream("/billing/Prescription.jrxml"));
+
+            Connection connection = DBConnection.getInstance().getConnection();
+
+            Map<String, Object> parameters = new HashMap<>();
+
+            parameters.put("pPrescriptionId", prescriptionID);
+            parameters.put("pDate", LocalDate.now().toString());
+            parameters.put("paraDoctorName" , doctorName);
+
+            InputStream logoStream = getClass().getResourceAsStream("/images/billLogo.png");
+
+            parameters.put("pLogo", logoStream);
+
+            JasperPrint print = JasperFillManager.fillReport(bill, parameters, connection);
+            JasperViewer.viewReport(print, false );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void clearFields(){
