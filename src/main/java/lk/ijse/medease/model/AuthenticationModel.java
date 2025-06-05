@@ -39,4 +39,20 @@ public class AuthenticationModel {
         }
         return null;
     }
+
+    public static UserDTO getUser(String employeeId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM authentication WHERE employee_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, employeeId);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            UserDTO userDto = new UserDTO(resultSet.getString("employee_id"), resultSet.getString("password"), resultSet.getString("username"));
+            return userDto;
+        }
+        return null;
+    }
 }

@@ -17,6 +17,7 @@ import lk.ijse.medease.dto.tm.AppointmentTM;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -134,7 +135,13 @@ public class ReceptionAppointmentController implements Initializable {
         if (!(txtDate.getText().matches(datePattern))) {
             txtDate.setStyle(txtDate.getStyle() + "-fx-text-fill: red;");
         }else {
-            checkNumber();
+            LocalDate today = LocalDate.now();
+            LocalDate enteredDate = LocalDate.parse(txtDate.getText());
+            if (enteredDate.isAfter(today) || enteredDate.isEqual(today)) {
+                checkNumber();
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Please check the date").showAndWait();
+            }
         }
     }
 

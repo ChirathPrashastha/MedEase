@@ -15,6 +15,7 @@ import lk.ijse.medease.dto.DoctorDTO;
 import lk.ijse.medease.dto.EmployeeDTO;
 import lk.ijse.medease.dto.JobRole;
 import lk.ijse.medease.dto.UserDTO;
+import lk.ijse.medease.model.AuthenticationModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -84,6 +85,35 @@ public class ManagerUpdateEmployeeController implements Initializable {
             isFieldsValid = false;
         }else {
             isFieldsValid = true;
+            try {
+                EmployeeDTO employeeDTO = employeeController.searchEmployee(txtEmployeeId.getText());
+                if (employeeDTO == null) {
+                    new Alert(Alert.AlertType.ERROR, "Employee Not Found").show();
+                    return;
+                }
+                UserDTO userDTO = AuthenticationModel.getUser(txtEmployeeId.getText());
+
+                txtName.setText(employeeDTO.getName());
+                JobRole job = employeeDTO.getJobRole();
+                if (job == JobRole.DOCTOR) {
+                    btnDoctor.setSelected(true);
+                }else if (job == JobRole.MANAGER) {
+                    btnManager.setSelected(true);
+                }else if (job == JobRole.NURSE) {
+                    btnNurse.setSelected(true);
+                }else if (job == JobRole.RECEPTIONIST) {
+                    btnReceptionist.setSelected(true);
+                }
+                txtAddress.setText(employeeDTO.getAddress());
+                txtRecruitedDate.setText(String.valueOf(employeeDTO.getRecruitedDate()));
+                txtContact.setText(employeeDTO.getContact());
+                txtEmail.setText(employeeDTO.getEmail());
+                txtUsername.setText(userDTO.getUsername());
+                txtPassword.setText(userDTO.getPassword());
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR,"Database error").showAndWait();
+            }
         }
     }
 
